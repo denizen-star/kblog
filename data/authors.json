@@ -1,0 +1,37 @@
+{
+  "authors": [
+    {
+      "id": "data-crusader",
+      "name": "Data Crusader",
+      "avatar": "🦸‍♂️",
+      "role": "Head of Data Strategy",
+      "company": "Kerv Talks-Data",
+      "bio": "A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.",
+      "expertise": ["Data Architecture", "Information Asymmetry", "Enterprise Strategy"],
+      "articles": 15,
+      "followers": 1247
+    },
+    {
+      "id": "cosmic-analyst",
+      "name": "Cosmic Analyst",
+      "avatar": "🌌",
+      "role": "Data Architecture Lead",
+      "company": "Kerv Talks-Data",
+      "bio": "Specializing in building scalable data universes that connect disparate enterprise systems across organizational boundaries.",
+      "expertise": ["Data Architecture", "Enterprise Systems", "Scalability"],
+      "articles": 12,
+      "followers": 892
+    },
+    {
+      "id": "web-weaver",
+      "name": "Web Weaver",
+      "avatar": "🕷️",
+      "role": "Analytics Specialist",
+      "company": "Kerv Talks-Data",
+      "bio": "Expert in crafting compelling data narratives that transform complex information into actionable insights.",
+      "expertise": ["Data Storytelling", "Analytics", "Visualization"],
+      "articles": 18,
+      "followers": 1156
+    }
+  ]
+}

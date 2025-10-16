@@ -1,0 +1,60 @@
+{
+  "comments": [
+    {
+      "id": "comment-1",
+      "articleId": "data-crusader-journey",
+      "author": {
+        "name": "John Doe",
+        "avatar": "JD"
+      },
+      "content": "Great article! This really resonates with my experience in enterprise data management. The concept of information asymmetry is often overlooked but crucial for success.",
+      "timestamp": "2024-03-16T10:30:00Z",
+      "likes": 3,
+      "replies": [
+        {
+          "id": "reply-1",
+          "author": {
+            "name": "Data Crusader",
+            "avatar": "🦸‍♂️"
+          },
+          "content": "Thank you for the feedback! I'm glad the article resonated with your experience. Information asymmetry is indeed a critical factor that many organizations underestimate.",
+          "timestamp": "2024-03-16T11:15:00Z"
+        }
+      ]
+    },
+    {
+      "id": "comment-2",
+      "articleId": "data-crusader-journey",
+      "author": {
+        "name": "Sarah Chen",
+        "avatar": "SC"
+      },
+      "content": "Excellent insights on navigating data challenges. Would love to see more content on practical implementation strategies.",
+      "timestamp": "2024-03-16T14:22:00Z",
+      "likes": 1,
+      "replies": []
+    },
+    {
+      "id": "comment-3",
+      "articleId": "cosmic-data-flux",
+      "author": {
+        "name": "Mike Rodriguez",
+        "avatar": "MR"
+      },
+      "content": "The cosmic data flux concept is fascinating! How do you handle data consistency across different organizational boundaries?",
+      "timestamp": "2024-03-13T09:45:00Z",
+      "likes": 5,
+      "replies": [
+        {
+          "id": "reply-2",
+          "author": {
+            "name": "Cosmic Analyst",
+            "avatar": "🌌"
+          },
+          "content": "Great question! Data consistency across boundaries requires careful design of data contracts and API standards. I'll be covering this in an upcoming article.",
+          "timestamp": "2024-03-13T10:30:00Z"
+        }
+      ]
+    }
+  ]
+}
