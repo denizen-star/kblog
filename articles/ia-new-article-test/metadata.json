@@ -1,0 +1,48 @@
+{
+  "id": "ia-new-article-test",
+  "slug": "ia-new-article-test",
+  "title": "IA New Article Test",
+  "excerpt": "A test article created to demonstrate the article creation system and showcase the professional blog platform capabilities.",
+  "author": {
+    "id": "data-crusader",
+    "name": "Data Crusader",
+    "avatar": "🦸‍♂️",
+    "role": "Head of Data Strategy",
+    "bio": "A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies."
+  },
+  "published": "2024-10-16T19:54:00Z",
+  "updated": "2024-10-16T19:54:00Z",
+  "status": "published",
+  "readTime": 3,
+  "category": "Technology",
+  "tags": ["test", "demonstration", "blog", "ia-test"],
+  "image": {
+    "featured": null,
+    "alt": "IA New Article Test featured image"
+  },
+  "stats": {
+    "views": 0,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0
+  },
+  "seo": {
+    "metaTitle": "IA New Article Test - Kerv Talks-Data Blog",
+    "metaDescription": "A test article created to demonstrate the article creation system and showcase the professional blog platform capabilities.",
+    "keywords": ["test", "demonstration", "blog", "ia-test"],
+    "canonical": "https://kervtalksdata.com/articles/ia-new-article-test/"
+  },
+  "settings": {
+    "featured": false,
+    "allowComments": true,
+    "notifySubscribers": false,
+    "archived": false
+  },
+  "content": {
+    "wordCount": 300,
+    "characterCount": 1800,
+    "hasImages": false,
+    "hasCode": false,
+    "readingLevel": "beginner"
+  }
+}

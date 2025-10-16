@@ -1,6 +1,25 @@
 {
   "articles": [
     {
+      "id": "ia-new-article-test",
+      "title": "IA New Article Test",
+      "excerpt": "A test article created to demonstrate the article creation system and showcase the professional blog platform capabilities.",
+      "author": {
+        "name": "Data Crusader",
+        "avatar": "🦸‍♂️",
+        "role": "Head of Data Strategy"
+      },
+      "published": "2024-10-16",
+      "readTime": 3,
+      "category": "Technology",
+      "tags": ["test", "demonstration", "blog", "ia-test"],
+      "image": "ia-new-article-test.jpg",
+      "content": "ia-new-article-test-content.html",
+      "likes": 0,
+      "comments": 0,
+      "views": 0
+    },
+    {
       "id": "kerv-test-1",
       "title": "Kerv Test Article 1",
       "excerpt": "A test article created to demonstrate the article creation system and showcase the professional blog platform capabilities.",
