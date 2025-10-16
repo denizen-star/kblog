@@ -79,6 +79,52 @@
     .news-headline {
         font-size: var(--font-size-xs);
     }
+    
+    /* Articles page mobile styles */
+    .articles-header h1 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .articles-subtitle {
+        font-size: var(--font-size-md);
+    }
+    
+    .articles-filters {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .filter-group {
+        justify-content: center;
+    }
+    
+    .articles-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .article-card-grid {
+        margin: 0 var(--spacing-sm);
+    }
+    
+    .article-image-container {
+        height: 150px;
+        font-size: 36px;
+    }
+    
+    .article-title-grid {
+        font-size: var(--font-size-md);
+    }
+    
+    .pagination-container {
+        flex-wrap: wrap;
+        gap: var(--spacing-xs);
+    }
+    
+    .pagination-btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-xs);
+    }
 }
 
 /* Tablet Styles */
