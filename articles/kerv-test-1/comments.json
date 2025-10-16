@@ -1,0 +1,14 @@
+{
+  "articleId": "kerv-test-1",
+  "comments": [],
+  "stats": {
+    "totalComments": 0,
+    "totalReplies": 0,
+    "lastComment": null
+  },
+  "moderation": {
+    "allowAnonymous": true,
+    "requireApproval": false,
+    "maxLength": 1000
+  }
+}
