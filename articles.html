@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles - Kerv Talks-Data Blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background-color: #f3f2ef;
+            color: #000000;
+            line-height: 1.4;
+        }
+
+        .header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0dfdc;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1128px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 52px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #6A7B9A;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+            background-color: #6A7B9A;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #666666;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-menu a:hover {
+            background-color: #f3f2ef;
+            color: #000000;
+        }
+
+        .nav-menu a.active {
+            color: #6A7B9A;
+            border-bottom: 2px solid #6A7B9A;
+            background-color: transparent;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #f3f2ef;
+            border-radius: 4px;
+            padding: 8px 12px;
+            min-width: 280px;
+            border: 1px solid #e0dfdc;
+        }
+
+        .search-bar input {
+            border: none;
+            background: none;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+            color: #000000;
+        }
+
+        .search-bar input::placeholder {
+            color: #666666;
+        }
+
+        .main-container {
+            max-width: 1128px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .page-header {
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e0dfdc;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: #666666;
+        }
+
+        .filters {
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e0dfdc;
+            padding: 16px 24px;
+            margin-bottom: 24px;
+        }
+
+        .filters-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 12px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid #e0dfdc;
+            border-radius: 20px;
+            background-color: #ffffff;
+            color: #666666;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            background-color: #f3f2ef;
+        }
+
+        .filter-btn.active {
+            background-color: #6A7B9A;
+            color: #ffffff;
+            border-color: #6A7B9A;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .article-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e0dfdc;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .article-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #6A7B9A, #5A6B8A);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .article-content {
+            padding: 20px;
+        }
+
+        .article-category {
+            display: inline-block;
+            background-color: #f3f2ef;
+            color: #6A7B9A;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .article-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .article-excerpt {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .article-author {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .author-avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #6A7B9A, #5A6B8A);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .read-more {
+            color: #6A7B9A;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 40px;
+        }
+
+        .pagination a {
+            padding: 8px 12px;
+            border: 1px solid #e0dfdc;
+            border-radius: 4px;
+            background-color: #ffffff;
+            color: #666666;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .pagination a:hover {
+            background-color: #f3f2ef;
+        }
+
+        .pagination a.active {
+            background-color: #6A7B9A;
+            color: #ffffff;
+            border-color: #6A7B9A;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            border-top: 1px solid #e0dfdc;
+            padding: 24px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1128px;
+            margin: 0 auto;
+            text-align: center;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 16px;
+            }
+            
+            .nav-container {
+                padding: 0 16px;
+            }
+            
+            .search-bar {
+                display: none;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">KT</div>
+                Kerv Talks-Data
+            </a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search articles, authors, topics...">
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="articles.html" class="active">Articles</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">All Articles</h1>
+            <p class="page-subtitle">Explore insights from data professionals around the world</p>
+        </div>
+
+        <div class="filters">
+            <h3 class="filters-title">Filter by category</h3>
+            <div class="filter-buttons">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Data Architecture</button>
+                <button class="filter-btn">Enterprise</button>
+                <button class="filter-btn">Analytics</button>
+                <button class="filter-btn">Strategy</button>
+                <button class="filter-btn">Governance</button>
+            </div>
+        </div>
+
+        <div class="articles-grid">
+            <article class="article-card">
+                <div class="article-image">🦸‍♂️</div>
+                <div class="article-content">
+                    <span class="article-category">Strategy</span>
+                    <h2 class="article-title">The Data Crusader's Journey: Navigating Information Asymmetry</h2>
+                    <p class="article-excerpt">Discover how information asymmetry shapes our digital world and learn the secrets of data heroes who navigate this complex landscape with courage and wisdom.</p>
+                    <div class="article-meta">
+                        <div class="article-author">
+                            <div class="author-avatar">DC</div>
+                            <span>Data Crusader • 5 min read</span>
+                        </div>
+                        <a href="article-1.html" class="read-more">Read more</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-image">🌌</div>
+                <div class="article-content">
+                    <span class="article-category">Data Architecture</span>
+                    <h2 class="article-title">Cosmic Data Flux: Building Enterprise Data Universes</h2>
+                    <p class="article-excerpt">Explore the infinite possibilities of data architecture and how enterprise systems create their own universe of information that spans across dimensions.</p>
+                    <div class="article-meta">
+                        <div class="article-author">
+                            <div class="author-avatar">CA</div>
+                            <span>Cosmic Analyst • 7 min read</span>
+                        </div>
+                        <a href="article-2.html" class="read-more">Read more</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-image">🕷️</div>
+                <div class="article-content">
+                    <span class="article-category">Analytics</span>
+                    <h2 class="article-title">Spinning the Data Narrative: Connecting Disparate Sources</h2>
+                    <p class="article-excerpt">Learn how to weave compelling data stories that connect disparate information sources into a cohesive web of knowledge that captures attention.</p>
+                    <div class="article-meta">
+                        <div class="article-author">
+                            <div class="author-avatar">WW</div>
+                            <span>Web Weaver • 6 min read</span>
+                        </div>
+                        <a href="article-3.html" class="read-more">Read more</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-image">⚡</div>
+                <div class="article-content">
+                    <span class="article-category">Enterprise</span>
+                    <h2 class="article-title">Unlocking Hidden Data: Enterprise Discovery Strategies</h2>
+                    <p class="article-excerpt">Master the art of data discovery and learn how to unlock the secrets hidden within enterprise information vaults using advanced techniques.</p>
+                    <div class="article-meta">
+                        <div class="article-author">
+                            <div class="author-avatar">VM</div>
+                            <span>Vault Master • 8 min read</span>
+                        </div>
+                        <a href="article-4.html" class="read-more">Read more</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-image">💥</div>
+                <div class="article-content">
+                    <span class="article-category">Strategy</span>
+                    <h2 class="article-title">Enterprise Dynamo: Powering Data-Driven Organizations</h2>
+                    <p class="article-excerpt">Power up your organization with dynamic data strategies that transform information asymmetry into competitive advantage in the marketplace.</p>
+                    <div class="article-meta">
+                        <div class="article-author">
+                            <div class="author-avatar">PA</div>
+                            <span>Power Analyst • 9 min read</span>
+                        </div>
+                        <a href="article-5.html" class="read-more">Read more</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-image">🦸‍♀️</div>
+                <div class="article-content">
+                    <span class="article-category">Data Architecture</span>
+                    <h2 class="article-title">The Asymmetry Crucible: Managing Information Imbalances</h2>
+                    <p class="article-excerpt">Dive deep into the crucible where information imbalances are forged and discover how to manage data architecture in the enterprise microcosm.</p>
+                    <div class="article-meta">
+                        <div class="article-author">
+                            <div class="author-avatar">CM</div>
+                            <span>Crucible Master • 10 min read</span>
+                        </div>
+                        <a href="article-6.html" class="read-more">Read more</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-image">🛡️</div>
+                <div class="article-content">
+                    <span class="article-category">Governance</span>
+                    <h2 class="article-title">Data Defense Strategies: Protecting Enterprise Assets</h2>
+                    <p class="article-excerpt">Build impenetrable data defenses and learn how to protect your organization's most valuable information assets from modern threats.</p>
+                    <div class="article-meta">
+                        <div class="article-author">
+                            <div class="author-avatar">SG</div>
+                            <span>Shield Guardian • 6 min read</span>
+                        </div>
+                        <a href="article-7.html" class="read-more">Read more</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-image">🚀</div>
+                <div class="article-content">
+                    <span class="article-category">Analytics</span>
+                    <h2 class="article-title">Launching Data Rockets: Accelerating Analytics Initiatives</h2>
+                    <p class="article-excerpt">Accelerate your data initiatives to new heights with rocket-powered analytics that break through traditional limitations and drive innovation.</p>
+                    <div class="article-meta">
+                        <div class="article-author">
+                            <div class="author-avatar">RS</div>
+                            <span>Rocket Scientist • 5 min read</span>
+                        </div>
+                        <a href="article-8.html" class="read-more">Read more</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="pagination">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">Next →</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Kerv Talks-Data Blog. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

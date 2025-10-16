@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Kerv Talks-Data Blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background-color: #f3f2ef;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0dfdc;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1128px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 52px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #6A7B9A;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+            background-color: #6A7B9A;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #666666;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-menu a:hover {
+            background-color: #f3f2ef;
+            color: #000000;
+        }
+
+        .nav-menu a.active {
+            color: #6A7B9A;
+            border-bottom: 2px solid #6A7B9A;
+            background-color: transparent;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #f3f2ef;
+            border-radius: 4px;
+            padding: 8px 12px;
+            min-width: 280px;
+            border: 1px solid #e0dfdc;
+        }
+
+        .search-bar input {
+            border: none;
+            background: none;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+            color: #000000;
+        }
+
+        .search-bar input::placeholder {
+            color: #666666;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .page-header {
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e0dfdc;
+            padding: 32px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 12px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: #666666;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .contact-form {
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e0dfdc;
+            padding: 32px;
+        }
+
+        .form-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #000000;
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e0dfdc;
+            border-radius: 4px;
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #6A7B9A;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: #6A7B9A;
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #004182;
+        }
+
+        .contact-info {
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e0dfdc;
+            padding: 32px;
+        }
+
+        .info-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 16px;
+            background-color: #f3f2ef;
+            border-radius: 8px;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background-color: #6A7B9A;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #ffffff;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .contact-details h4 {
+            color: #000000;
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        .contact-details p {
+            color: #666666;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .social-links {
+            margin-top: 24px;
+        }
+
+        .social-links h4 {
+            color: #000000;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .social-grid {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: #6A7B9A;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 18px;
+            transition: background-color 0.2s ease;
+        }
+
+        .social-link:hover {
+            background-color: #004182;
+        }
+
+        .faq-section {
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e0dfdc;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .faq-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 24px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f3f2ef;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            color: #000000;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .faq-answer {
+            color: #666666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            border-top: 1px solid #e0dfdc;
+            padding: 24px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1128px;
+            margin: 0 auto;
+            text-align: center;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 16px;
+            }
+            
+            .nav-container {
+                padding: 0 16px;
+            }
+            
+            .search-bar {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 24px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-grid {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">KT</div>
+                Kerv Talks-Data
+            </a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search articles, authors, topics...">
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">Contact Us</h1>
+            <p class="page-subtitle">Ready to begin your professional journey?</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-form">
+                <h2 class="form-title">Send us a message</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Your name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="organization">Organization</label>
+                        <input type="text" id="organization" name="organization">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="role">Your role</label>
+                        <select id="role" name="role">
+                            <option value="">Select your role</option>
+                            <option value="data-analyst">Data Analyst</option>
+                            <option value="data-scientist">Data Scientist</option>
+                            <option value="data-engineer">Data Engineer</option>
+                            <option value="data-architect">Data Architect</option>
+                            <option value="business-analyst">Business Analyst</option>
+                            <option value="cto">CTO</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject">
+                            <option value="">Select a subject</option>
+                            <option value="collaboration">Collaboration Opportunity</option>
+                            <option value="speaking">Speaking Engagement</option>
+                            <option value="consulting">Consulting Services</option>
+                            <option value="article-idea">Article Idea</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your message</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your professional journey or how we can help you become a data hero..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+
+            <div class="contact-info">
+                <h2 class="info-title">Get in touch</h2>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p>heroes@dataheroes.blog</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-details">
+                        <h4>Phone</h4>
+                        <p>+1 (555) DATA-HERO</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">🏢</div>
+                    <div class="contact-details">
+                        <h4>Office</h4>
+                        <p>Kerv Talks-Data Headquarters<br>123 Information Street<br>Digital City, DC 12345</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">⏰</div>
+                    <div class="contact-details">
+                        <h4>Business Hours</h4>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <h4>Follow our journey</h4>
+                    <div class="social-grid">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">🐦</a>
+                        <a href="#" class="social-link">💼</a>
+                        <a href="#" class="social-link">📺</a>
+                        <a href="#" class="social-link">📷</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="faq-section">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">How can I contribute to the Kerv Talks-Data Blog?</div>
+                <div class="faq-answer">We welcome contributions from data professionals who want to share their professional journeys. Contact us with your article ideas, and we'll help you craft compelling stories that inspire other data professionals.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Do you offer consulting services?</div>
+                <div class="faq-answer">Yes! Our team of data experts provides consulting services in data architecture, analytics strategy, and information governance. We help organizations transform their data challenges into competitive advantages.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I request a specific topic for an article?</div>
+                <div class="faq-answer">Absolutely! We love hearing from our community about topics they'd like to see covered. Send us your suggestions, and we'll consider them for future articles.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How often do you publish new articles?</div>
+                <div class="faq-answer">We publish new articles weekly, featuring insights from our team of data experts and guest contributors. Subscribe to our newsletter to never miss an update.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Do you offer speaking engagements?</div>
+                <div class="faq-answer">Yes! Our data experts are available for speaking engagements at conferences, workshops, and corporate events. Contact us to discuss your event needs.</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Kerv Talks-Data Blog. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Kerv Talks-Data Blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background-color: #f3f2ef;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0dfdc;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1128px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 52px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #6A7B9A;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+            background-color: #6A7B9A;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #666666;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-menu a:hover {
+            background-color: #f3f2ef;
+            color: #000000;
+        }
+
+        .nav-menu a.active {
+            color: #6A7B9A;
+            border-bottom: 2px solid #6A7B9A;
+            background-color: transparent;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #f3f2ef;
+            border-radius: 4px;
+            padding: 8px 12px;
+            min-width: 280px;
+            border: 1px solid #e0dfdc;
+        }
+
+        .search-bar input {
+            border: none;
+            background: none;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+            color: #000000;
+        }
+
+        .search-bar input::placeholder {
+            color: #666666;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .page-header {
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e0dfdc;
+            padding: 32px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 12px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: #666666;
+        }
+
+        .content-section {
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e0dfdc;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .content-section h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 16px;
+        }
+
+        .content-section h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000000;
+            margin: 24px 0 12px 0;
+        }
+
+        .content-section p {
+            margin-bottom: 16px;
+            color: #000000;
+        }
+
+        .content-section ul {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+
+        .content-section li {
+            margin-bottom: 8px;
+            color: #000000;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .hero-card {
+            background-color: #ffffff;
+            border: 1px solid #e0dfdc;
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .hero-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #6A7B9A, #5A6B8A);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 16px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .hero-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 8px;
+        }
+
+        .hero-role {
+            color: #6A7B9A;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .hero-bio {
+            color: #666666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .stat-card {
+            background-color: #f3f2ef;
+            border: 1px solid #e0dfdc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 600;
+            color: #6A7B9A;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: #666666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .highlight-box {
+            background-color: #f3f2ef;
+            border-left: 4px solid #6A7B9A;
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box p {
+            color: #000000;
+            font-weight: 500;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            border-top: 1px solid #e0dfdc;
+            padding: 24px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1128px;
+            margin: 0 auto;
+            text-align: center;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 16px;
+            }
+            
+            .nav-container {
+                padding: 0 16px;
+            }
+            
+            .search-bar {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 24px;
+            }
+            
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">KT</div>
+                Kerv Talks-Data
+            </a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search articles, authors, topics...">
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">About Kerv Talks-Data</h1>
+            <p class="page-subtitle">Professional insights for data professionals</p>
+        </div>
+
+        <section class="content-section">
+            <h2>Our Mission</h2>
+            <p>In the vast digital landscape of modern enterprise, information asymmetry reigns supreme. Kerv Talks-Data Blog was born from a simple yet powerful belief: that data professionals are the unsung heroes of the digital age, navigating complex information landscapes to unlock the true potential of enterprise data.</p>
+
+            <div class="highlight-box">
+                <p>"We believe that every data professional has the potential to become a hero in their organization, transforming information asymmetry from a challenge into a competitive advantage."</p>
+            </div>
+
+            <p>Our mission is to empower data professionals with the knowledge, tools, and inspiration they need to become true data heroes. We explore the complex world of information asymmetry, data architecture, and enterprise analytics through practical insights and real-world experience.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>Our Story</h2>
+            <p>The Kerv Talks-Data Blog began as a quest to understand the fundamental challenges facing modern data professionals. In a world where data is abundant but insights are scarce, where systems are complex but understanding is simple, we saw the need for a new kind of narrative.</p>
+
+            <p>Drawing inspiration from professional development and enterprise best practices, we've created a unique approach to data education that combines:</p>
+
+            <ul>
+                <li><strong>Practical Insights:</strong> Real-world solutions for real-world problems</li>
+                <li><strong>Professional Wisdom:</strong> Experience-driven guidance from industry experts</li>
+                <li><strong>Clean Design:</strong> Clear, accessible content that respects your time</li>
+                <li><strong>Community Building:</strong> Connecting data professionals across organizations</li>
+            </ul>
+
+            <h3>The Asymmetry Challenge</h3>
+            <p>Our core concept, "The Asymmetry Challenge," represents the fundamental reality that data professionals face. Like professionals in any field, they must navigate complex environments where information is distributed unevenly, and success depends on understanding and managing these imbalances effectively.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>Meet Our Data Experts</h2>
+            <div class="hero-grid">
+                <div class="hero-card">
+                    <div class="hero-avatar">🦸‍♂️</div>
+                    <h3 class="hero-name">Data Crusader</h3>
+                    <p class="hero-role">Chief Strategy Officer</p>
+                    <p class="hero-bio">A veteran of the data wars, the Data Crusader has spent decades navigating the treacherous terrain of enterprise information systems. Known for turning information asymmetry into strategic advantage.</p>
+                </div>
+
+                <div class="hero-card">
+                    <div class="hero-avatar">🌌</div>
+                    <h3 class="hero-name">Cosmic Analyst</h3>
+                    <p class="hero-role">Data Architecture Lead</p>
+                    <p class="hero-bio">The Cosmic Analyst sees patterns in the data cosmos that others miss. Specializing in enterprise data architecture and the infinite possibilities of information flow.</p>
+                </div>
+
+                <div class="hero-card">
+                    <div class="hero-avatar">🕷️</div>
+                    <h3 class="hero-name">Web Weaver</h3>
+                    <p class="hero-role">Analytics Specialist</p>
+                    <p class="hero-bio">The Web Weaver connects disparate data sources into cohesive narratives. Expert in data storytelling and creating compelling visualizations that drive action.</p>
+                </div>
+
+                <div class="hero-card">
+                    <div class="hero-avatar">⚡</div>
+                    <h3 class="hero-name">Vault Master</h3>
+                    <p class="hero-role">Data Governance Expert</p>
+                    <p class="hero-bio">The Vault Master guards the secrets of enterprise data vaults. Specializing in data discovery, quality management, and unlocking hidden insights.</p>
+                </div>
+
+                <div class="hero-card">
+                    <div class="hero-avatar">💥</div>
+                    <h3 class="hero-name">Power Analyst</h3>
+                    <p class="hero-role">Enterprise Dynamo</p>
+                    <p class="hero-bio">The Power Analyst transforms organizations with dynamic data strategies. Known for creating competitive advantages through superior data management.</p>
+                </div>
+
+                <div class="hero-card">
+                    <div class="hero-avatar">🦸‍♀️</div>
+                    <h3 class="hero-name">Crucible Master</h3>
+                    <p class="hero-role">Transformation Leader</p>
+                    <p class="hero-bio">The Crucible Master guides data professionals through their transformation journey. Expert in managing information imbalances and enterprise microcosms.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Our Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">50+</span>
+                    <div class="stat-label">Articles Published</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">10K+</span>
+                    <div class="stat-label">Data Professionals Reached</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">25+</span>
+                    <div class="stat-label">Enterprise Case Studies</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <div class="stat-label">Professional Focus</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Our Values</h2>
+            <h3>Professional Integrity</h3>
+            <p>We believe in the power of data to create positive change. Every article, every insight, every recommendation is guided by the principle that data should serve the greater good of organizations and society.</p>
+
+            <h3>Practical Innovation</h3>
+            <p>We focus on practical solutions that work in real enterprise environments. Through clear communication, actionable insights, and proven methodologies, we make complex concepts accessible and implementable.</p>
+
+            <h3>Community Connection</h3>
+            <p>Data professionals are stronger together. We foster a community where professionals can share experiences, learn from each other, and support one another on their professional journeys.</p>
+
+            <h3>Continuous Learning</h3>
+            <p>We don't just provide information; we facilitate growth. Our goal is to help every reader evolve from data consumer to data strategist, from report generator to business advisor.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>Join Kerv Talks-Data</h2>
+            <p>Are you ready to begin your own professional journey? Whether you're a data analyst just starting out or a seasoned data architect looking for new challenges, the Kerv Talks-Data Blog has something for you.</p>
+
+            <div class="highlight-box">
+                <p>"Every data professional has the potential to become a hero in their organization. The question is: are you ready to answer the call?"</p>
+            </div>
+
+            <p>Subscribe to our newsletter, follow us on social media, and join the community of data professionals who are transforming the world, one insight at a time.</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Kerv Talks-Data Blog. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
