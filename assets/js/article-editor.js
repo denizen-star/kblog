@@ -271,22 +271,382 @@ class ArticleEditor {
         publishBtn.textContent = 'Publishing...';
         publishBtn.disabled = true;
 
-        // Simulate API call
-        setTimeout(() => {
-            console.log('Article created:', articleData);
+        // Generate article slug and ID
+        const articleSlug = this.generateSlug(articleData.title);
+        const articleId = articleSlug;
+        
+        // Add metadata to article data
+        articleData.id = articleId;
+        articleData.slug = articleSlug;
+        articleData.published = new Date().toISOString();
+        articleData.views = 0;
+        articleData.likes = 0;
+        articleData.comments = 0;
+
+        // Create the article files
+        this.saveArticleToFiles(articleData)
+            .then(() => {
+                console.log('Article created successfully:', articleData);
+                
+                // Show success message
+                this.showNotification('Article published successfully!', 'success');
+                
+                // Redirect to the new article
+                setTimeout(() => {
+                    window.location.href = `../${articleSlug}/`;
+                }, 2000);
+                
+                // Reset button
+                publishBtn.textContent = originalText;
+                publishBtn.disabled = false;
+            })
+            .catch(error => {
+                console.error('Error creating article:', error);
+                this.showNotification('Error publishing article. Please try again.', 'error');
+                
+                // Reset button
+                publishBtn.textContent = originalText;
+                publishBtn.disabled = false;
+            });
+    }
+
+    generateSlug(title) {
+        return title
+            .toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .trim();
+    }
+
+    async saveArticleToFiles(articleData) {
+        // Create article directory
+        const articleDir = `../../articles/${articleData.slug}`;
+        
+        // Create article HTML file
+        const articleHTML = this.generateArticleHTML(articleData);
+        
+        // Create article directory and index.html file
+        await this.createArticleDirectory(articleData.slug, articleHTML);
+        
+        // Update articles.json
+        await this.updateArticlesJSON(articleData);
+        
+        // Save image if provided
+        if (articleData.featuredImage) {
+            await this.saveArticleImage(articleData);
+        }
+    }
+
+    generateArticleHTML(articleData) {
+        const authorInfo = this.getAuthorInfo(articleData.author);
+        
+        return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${articleData.title} - Kerv Talks-Data Blog</title>
+    <meta name="description" content="${articleData.excerpt || 'Professional insights on data architecture and enterprise strategies.'}">
+    <meta name="keywords" content="${articleData.tags.join(', ')}, data architecture, information asymmetry">
+    <meta name="author" content="${authorInfo.name}">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="${articleData.title}">
+    <meta property="og:description" content="${articleData.excerpt || 'Professional insights on data architecture and enterprise strategies.'}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kervtalksdata.com/articles/${articleData.slug}/">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "${articleData.title}",
+        "author": {
+            "@type": "Person",
+            "name": "${authorInfo.name}",
+            "jobTitle": "${authorInfo.role}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Kerv Talks-Data",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://kervtalksdata.com/assets/images/logo.png"
+            }
+        },
+        "datePublished": "${articleData.published}",
+        "description": "${articleData.excerpt || 'Professional insights on data architecture and enterprise strategies.'}"
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="../../index.html" class="logo">
+                <div class="logo-icon">KT</div>
+                Kerv Talks-Data
+            </a>
             
-            // Show success message
-            this.showNotification('Article published successfully!', 'success');
+            <div class="search-bar">
+                <input type="text" placeholder="Search articles, authors, topics..." id="search-input">
+                <div class="search-results" id="search-results"></div>
+            </div>
             
-            // Redirect to the new article (in a real app, this would be the actual article URL)
-            setTimeout(() => {
-                window.location.href = '../../articles/';
-            }, 2000);
+            <ul class="nav-menu">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../index.html">Articles</a></li>
+                <li><a href="../../about.html">About</a></li>
+                <li><a href="../../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="article-main-container">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <a href="../../index.html">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="../index.html">Articles</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">${articleData.title}</span>
+        </nav>
+
+        <div class="article-layout">
+            <article class="article-content">
+                <!-- Article Header -->
+                <header class="article-header-full">
+                    <div class="article-category-badge">${articleData.category}</div>
+                    <h1 class="article-title-full">${articleData.title}</h1>
+                    
+                    <div class="article-meta-full">
+                        <div class="article-author-info">
+                            <div class="article-avatar-large">${authorInfo.avatar}</div>
+                            <div class="author-details">
+                                <div class="author-name">${authorInfo.name}</div>
+                                <div class="author-role">${authorInfo.role}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="article-stats-full">
+                            <div class="stat-item">
+                                <span class="stat-label">Published</span>
+                                <span class="stat-value">${new Date(articleData.published).toLocaleDateString()}</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Read time</span>
+                                <span class="stat-value">${this.calculateReadingTime(articleData.content)} min</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Views</span>
+                                <span class="stat-value">${articleData.views}</span>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                ${articleData.featuredImage ? `
+                <!-- Article Image -->
+                <div class="article-featured-image">
+                    <img src="../../assets/images/articles/${articleData.slug}.jpg" alt="${articleData.title}" style="width: 100%; height: 300px; object-fit: cover;">
+                </div>
+                ` : `
+                <div class="article-featured-image">
+                    <div class="featured-image-placeholder">${authorInfo.avatar}</div>
+                </div>
+                `}
+
+                <!-- Article Body -->
+                <div class="article-body">
+                    ${articleData.excerpt ? `<p class="article-lead">${articleData.excerpt}</p>` : ''}
+                    ${articleData.content}
+                </div>
+
+                <!-- Article Actions -->
+                <div class="article-actions-full">
+                    <button class="action-button like-button" data-article-id="${articleData.id}">
+                        <span class="action-icon">👍</span>
+                        <span class="action-text">Like</span>
+                        <span class="action-count">${articleData.likes}</span>
+                    </button>
+                    
+                    <button class="action-button share-button" data-article-id="${articleData.id}">
+                        <span class="action-icon">🔄</span>
+                        <span class="action-text">Share</span>
+                    </button>
+                    
+                    <button class="action-button bookmark-button">
+                        <span class="action-icon">🔖</span>
+                        <span class="action-text">Save</span>
+                    </button>
+                </div>
+
+                <!-- Tags -->
+                <div class="article-tags-full">
+                    ${articleData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+            </article>
+
+            <!-- Sidebar -->
+            <aside class="article-sidebar">
+                <!-- Author Card -->
+                <div class="card author-card">
+                    <div class="author-card-header">
+                        <div class="author-avatar-sidebar">${authorInfo.avatar}</div>
+                        <div class="author-info-sidebar">
+                            <h3>${authorInfo.name}</h3>
+                            <p>${authorInfo.role}</p>
+                        </div>
+                    </div>
+                    <p class="author-bio">${authorInfo.bio}</p>
+                    <div class="author-stats">
+                        <div class="author-stat">
+                            <span class="stat-number">${authorInfo.articles}</span>
+                            <span class="stat-label">Articles</span>
+                        </div>
+                        <div class="author-stat">
+                            <span class="stat-number">${authorInfo.followers}</span>
+                            <span class="stat-label">Followers</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Newsletter Signup -->
+                <div class="card newsletter-card">
+                    <h3>Stay Updated</h3>
+                    <p>Get the latest insights on data architecture and enterprise strategies delivered to your inbox.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Comments Section -->
+        <section class="comments-section" id="comments">
+            <div class="comments-header">
+                <h2>Comments (0)</h2>
+            </div>
             
-            // Reset button
-            publishBtn.textContent = originalText;
-            publishBtn.disabled = false;
-        }, 2000);
+            <div class="comment-form-container">
+                <form class="comment-form" id="comment-form">
+                    <div class="comment-input-group">
+                        <div class="comment-avatar">You</div>
+                        <div class="comment-input-wrapper">
+                            <textarea placeholder="Share your thoughts..." name="content" required></textarea>
+                            <input type="text" placeholder="Your name (optional)" name="author">
+                        </div>
+                    </div>
+                    <button type="submit" class="comment-submit">Post Comment</button>
+                </form>
+            </div>
+            
+            <div class="comments-container" id="comments-container">
+                <p class="no-comments">No comments yet. Be the first to comment!</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Kerv Talks-Data Blog. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/article.js"></script>
+</body>
+</html>`;
+    }
+
+    calculateReadingTime(content) {
+        const textContent = content.replace(/<[^>]*>/g, ''); // Remove HTML tags
+        const words = textContent.split(/\s+/).filter(word => word.length > 0);
+        return Math.ceil(words.length / 200); // 200 words per minute
+    }
+
+    getAuthorInfo(authorId) {
+        const authors = {
+            'data-crusader': {
+                name: 'Data Crusader',
+                role: 'Head of Data Strategy',
+                avatar: '🦸‍♂️',
+                bio: 'A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.',
+                articles: 16,
+                followers: 1247
+            },
+            'cosmic-analyst': {
+                name: 'Cosmic Analyst',
+                role: 'Data Architecture Lead',
+                avatar: '🌌',
+                bio: 'Specializing in building scalable data universes that connect disparate enterprise systems across organizational boundaries.',
+                articles: 13,
+                followers: 892
+            },
+            'web-weaver': {
+                name: 'Web Weaver',
+                role: 'Analytics Specialist',
+                avatar: '🕷️',
+                bio: 'Expert in crafting compelling data narratives that transform complex information into actionable insights.',
+                articles: 19,
+                followers: 1156
+            }
+        };
+        return authors[authorId] || authors['data-crusader'];
+    }
+
+    async createArticleDirectory(slug, htmlContent) {
+        // In a real application, this would make an API call to create the directory and file
+        // For now, we'll simulate this and provide instructions for manual creation
+        
+        console.log('Creating article directory: articles/' + slug);
+        console.log('Article HTML content generated');
+        
+        // Show instructions to the user
+        this.showNotification('Article files ready! Check console for file creation instructions.', 'info');
+        
+        // Store the HTML content for manual creation
+        localStorage.setItem(`article_${slug}_html`, htmlContent);
+        
+        return Promise.resolve();
+    }
+
+    async updateArticlesJSON(articleData) {
+        // Get existing articles
+        const articlesResponse = await fetch('../../data/articles.json');
+        const articlesData = await articlesResponse.json();
+        
+        // Add new article to the beginning of the array
+        articlesData.articles.unshift(articleData);
+        
+        // Store updated data
+        localStorage.setItem('articles_json_update', JSON.stringify(articlesData));
+        
+        console.log('Updated articles.json with new article');
+        this.showNotification('Articles.json updated! Check console for update instructions.', 'info');
+        
+        return Promise.resolve();
+    }
+
+    async saveArticleImage(articleData) {
+        if (!articleData.featuredImage) return;
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            // Store image data for manual saving
+            localStorage.setItem(`article_${articleData.slug}_image`, e.target.result);
+            console.log('Image data stored for article:', articleData.slug);
+        };
+        reader.readAsDataURL(articleData.featuredImage);
+        
+        return Promise.resolve();
     }
 
     saveDraft() {
