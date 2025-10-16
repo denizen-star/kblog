@@ -12,6 +12,7 @@ class ArticlePageManager {
         this.setupEventListeners();
         this.updateArticleStats();
         this.loadComments();
+        this.handleFeaturedImage();
     }
 
     getArticleId() {
@@ -307,6 +308,27 @@ class ArticlePageManager {
 
     generateAvatar(name) {
         return name.substring(0, 2).toUpperCase();
+    }
+
+    handleFeaturedImage() {
+        const featuredImage = document.getElementById('featured-image');
+        const imagePlaceholder = document.getElementById('image-placeholder');
+        
+        if (featuredImage && imagePlaceholder) {
+            // Check if image exists
+            const img = new Image();
+            img.onload = () => {
+                // Image exists, show it
+                featuredImage.style.display = 'block';
+                imagePlaceholder.style.display = 'none';
+            };
+            img.onerror = () => {
+                // Image doesn't exist, keep placeholder
+                featuredImage.style.display = 'none';
+                imagePlaceholder.style.display = 'block';
+            };
+            img.src = featuredImage.src;
+        }
     }
 
     showNotification(message) {

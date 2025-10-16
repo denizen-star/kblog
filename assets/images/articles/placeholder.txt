@@ -1,0 +1,11 @@
+# Article Images Directory
+
+This directory contains featured images for articles.
+
+To add an image to an article:
+1. Upload your image to this directory
+2. Name it with the article slug (e.g., kerv-test-1.jpg)
+3. The article will automatically display the image
+
+Supported formats: JPG, PNG, WebP
+Recommended size: 800x400px or similar aspect ratio

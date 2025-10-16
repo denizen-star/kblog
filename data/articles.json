@@ -1,6 +1,44 @@
 {
   "articles": [
     {
+      "id": "kerv-test-1",
+      "title": "Kerv Test Article 1",
+      "excerpt": "A test article created to demonstrate the article creation system and showcase the professional blog platform capabilities.",
+      "author": {
+        "name": "Data Crusader",
+        "avatar": "🦸‍♂️",
+        "role": "Head of Data Strategy"
+      },
+      "published": "2024-10-16",
+      "readTime": 3,
+      "category": "Technology",
+      "tags": ["test", "demonstration", "blog", "kerv-test"],
+      "image": "kerv-test-1.jpg",
+      "content": "kerv-test-1-content.html",
+      "likes": 0,
+      "comments": 0,
+      "views": 0
+    },
+    {
+      "id": "data-architecture-patterns",
+      "title": "Essential Data Architecture Patterns for Enterprise Success",
+      "excerpt": "Discover the fundamental patterns that drive successful data architecture in modern enterprises. From microservices to data lakes, learn how to build scalable, maintainable systems.",
+      "author": {
+        "name": "Data Crusader",
+        "avatar": "🦸‍♂️",
+        "role": "Head of Data Strategy"
+      },
+      "published": "2024-10-16",
+      "readTime": 8,
+      "category": "Architecture",
+      "tags": ["data-architecture", "patterns", "enterprise", "microservices", "scalability"],
+      "image": "data-architecture-patterns.jpg",
+      "content": "data-architecture-patterns-content.html",
+      "likes": 0,
+      "comments": 0,
+      "views": 0
+    },
+    {
       "id": "kblog-test",
       "title": "Kblog Test Article",
       "excerpt": "A test article demonstrating the article creation system and showcasing the professional blog platform capabilities.",
