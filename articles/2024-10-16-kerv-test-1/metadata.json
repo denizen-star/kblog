@@ -1,0 +1,48 @@
+{
+  "id": "kerv-test-1",
+  "slug": "kerv-test-1",
+  "title": "Kerv Test Article 1",
+  "excerpt": "A test article created to demonstrate the article creation system and showcase the professional blog platform capabilities.",
+  "author": {
+    "id": "data-crusader",
+    "name": "Data Crusader",
+    "avatar": "🦸‍♂️",
+    "role": "Head of Data Strategy",
+    "bio": "A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies."
+  },
+  "published": "2024-10-16T19:36:00Z",
+  "updated": "2024-10-16T19:36:00Z",
+  "status": "published",
+  "readTime": 3,
+  "category": "Technology",
+  "tags": ["test", "demonstration", "blog", "kerv-test"],
+  "image": {
+    "featured": null,
+    "alt": "Kerv Test Article 1 featured image"
+  },
+  "stats": {
+    "views": 0,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0
+  },
+  "seo": {
+    "metaTitle": "Kerv Test Article 1 - Kerv Talks-Data Blog",
+    "metaDescription": "A test article created to demonstrate the article creation system and showcase the professional blog platform capabilities.",
+    "keywords": ["test", "demonstration", "blog", "kerv-test"],
+    "canonical": "https://kervtalksdata.com/articles/kerv-test-1/"
+  },
+  "settings": {
+    "featured": false,
+    "allowComments": true,
+    "notifySubscribers": false,
+    "archived": false
+  },
+  "content": {
+    "wordCount": 300,
+    "characterCount": 1800,
+    "hasImages": false,
+    "hasCode": false,
+    "readingLevel": "beginner"
+  }
+}
