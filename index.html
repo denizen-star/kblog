@@ -4,563 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kerv Talks-Data Blog - Professional Insights</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-            background-color: #f3f2ef;
-            color: #000000;
-            line-height: 1.4;
-        }
-
-        .header {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e0dfdc;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1128px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 52px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: #6A7B9A;
-            font-weight: 600;
-            font-size: 20px;
-        }
-
-        .logo-icon {
-            width: 34px;
-            height: 34px;
-            background-color: #6A7B9A;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .nav-menu a {
-            color: #666666;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .nav-menu a:hover {
-            background-color: #f3f2ef;
-            color: #000000;
-        }
-
-        .nav-menu a.active {
-            color: #6A7B9A;
-            border-bottom: 2px solid #6A7B9A;
-            background-color: transparent;
-        }
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-            background-color: #f3f2ef;
-            border-radius: 4px;
-            padding: 8px 12px;
-            min-width: 280px;
-            border: 1px solid #e0dfdc;
-        }
-
-        .search-bar input {
-            border: none;
-            background: none;
-            outline: none;
-            flex: 1;
-            font-size: 14px;
-            color: #000000;
-        }
-
-        .search-bar input::placeholder {
-            color: #666666;
-        }
-
-        .main-container {
-            max-width: 1128px;
-            margin: 0 auto;
-            padding: 24px;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 24px;
-        }
-
-        .left-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .card {
-            background-color: #ffffff;
-            border-radius: 8px;
-            border: 1px solid #e0dfdc;
-            overflow: hidden;
-        }
-
-        .profile-card {
-            text-align: center;
-            padding: 20px 16px 16px;
-        }
-
-        .profile-banner {
-            height: 60px;
-            background: linear-gradient(90deg, #6A7B9A, #5A6B8A);
-            margin: -20px -16px 16px;
-            position: relative;
-        }
-
-        .profile-avatar {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            border: 2px solid #ffffff;
-            margin: -36px auto 12px;
-            background: linear-gradient(45deg, #6A7B9A, #5A6B8A);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .profile-name {
-            font-size: 16px;
-            font-weight: 600;
-            color: #000000;
-            margin-bottom: 4px;
-        }
-
-        .profile-title {
-            font-size: 14px;
-            color: #666666;
-            margin-bottom: 8px;
-        }
-
-        .profile-company {
-            font-size: 14px;
-            color: #6A7B9A;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .stats-card {
-            padding: 16px;
-        }
-
-        .stats-title {
-            font-size: 14px;
-            color: #666666;
-            margin-bottom: 12px;
-        }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: #666666;
-        }
-
-        .stat-value {
-            font-size: 14px;
-            color: #6A7B9A;
-            font-weight: 600;
-        }
-
-        .premium-card {
-            padding: 16px;
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border: 1px solid #f59e0b;
-        }
-
-        .premium-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #92400e;
-            margin-bottom: 8px;
-        }
-
-        .premium-text {
-            font-size: 12px;
-            color: #92400e;
-        }
-
-        .quick-links {
-            padding: 16px;
-        }
-
-        .quick-links-title {
-            font-size: 14px;
-            color: #666666;
-            margin-bottom: 12px;
-        }
-
-        .quick-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 0;
-            text-decoration: none;
-            color: #666666;
-            font-size: 14px;
-            transition: color 0.2s ease;
-        }
-
-        .quick-link:hover {
-            color: #6A7B9A;
-        }
-
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .create-post {
-            background-color: #ffffff;
-            border-radius: 8px;
-            border: 1px solid #e0dfdc;
-            padding: 16px;
-        }
-
-        .post-input {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .post-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #6A7B9A, #5A6B8A);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .post-textarea {
-            flex: 1;
-            border: 1px solid #e0dfdc;
-            border-radius: 24px;
-            padding: 12px 16px;
-            font-size: 14px;
-            resize: none;
-            outline: none;
-            background-color: #f3f2ef;
-        }
-
-        .post-textarea::placeholder {
-            color: #666666;
-        }
-
-        .post-actions {
-            display: flex;
-            gap: 16px;
-            padding-left: 60px;
-        }
-
-        .post-action {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            border-radius: 4px;
-            text-decoration: none;
-            color: #666666;
-            font-size: 14px;
-            font-weight: 500;
-            transition: background-color 0.2s ease;
-        }
-
-        .post-action:hover {
-            background-color: #f3f2ef;
-        }
-
-        .article-card {
-            background-color: #ffffff;
-            border-radius: 8px;
-            border: 1px solid #e0dfdc;
-            overflow: hidden;
-        }
-
-        .article-header {
-            padding: 16px 16px 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .article-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #6A7B9A, #5A6B8A);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .article-info {
-            flex: 1;
-        }
-
-        .article-author {
-            font-size: 14px;
-            font-weight: 600;
-            color: #000000;
-            margin-bottom: 2px;
-        }
-
-        .article-meta {
-            font-size: 12px;
-            color: #666666;
-        }
-
-        .article-content {
-            padding: 16px;
-        }
-
-        .article-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #000000;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        .article-excerpt {
-            font-size: 14px;
-            color: #666666;
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
-
-        .article-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, #6A7B9A, #5A6B8A);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 48px;
-            margin-bottom: 12px;
-        }
-
-        .article-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 16px 16px;
-            border-top: 1px solid #f3f2ef;
-        }
-
-        .action-button {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 12px;
-            border-radius: 4px;
-            text-decoration: none;
-            color: #666666;
-            font-size: 14px;
-            font-weight: 500;
-            transition: background-color 0.2s ease;
-        }
-
-        .action-button:hover {
-            background-color: #f3f2ef;
-        }
-
-        .right-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .news-card {
-            padding: 16px;
-        }
-
-        .news-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #000000;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .news-item {
-            padding: 8px 0;
-            border-bottom: 1px solid #f3f2ef;
-        }
-
-        .news-item:last-child {
-            border-bottom: none;
-        }
-
-        .news-headline {
-            font-size: 14px;
-            color: #000000;
-            margin-bottom: 4px;
-            line-height: 1.4;
-        }
-
-        .news-meta {
-            font-size: 12px;
-            color: #666666;
-        }
-
-        .show-more {
-            color: #6A7B9A;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            margin-top: 8px;
-            display: block;
-        }
-
-        .show-more:hover {
-            text-decoration: underline;
-        }
-
-        .puzzles-card {
-            padding: 16px;
-        }
-
-        .puzzle-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 0;
-            border-bottom: 1px solid #f3f2ef;
-        }
-
-        .puzzle-item:last-child {
-            border-bottom: none;
-        }
-
-        .puzzle-icon {
-            width: 24px;
-            height: 24px;
-            background-color: #6A7B9A;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 12px;
-        }
-
-        .puzzle-info {
-            flex: 1;
-        }
-
-        .puzzle-name {
-            font-size: 14px;
-            color: #000000;
-            font-weight: 500;
-        }
-
-        .puzzle-players {
-            font-size: 12px;
-            color: #666666;
-        }
-
-        .footer {
-            background-color: #ffffff;
-            border-top: 1px solid #e0dfdc;
-            padding: 24px;
-            margin-top: 40px;
-        }
-
-        .footer-content {
-            max-width: 1128px;
-            margin: 0 auto;
-            text-align: center;
-            color: #666666;
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .main-container {
-                grid-template-columns: 1fr;
-                padding: 16px;
-            }
-            
-            .nav-container {
-                padding: 0 16px;
-            }
-            
-            .search-bar {
-                display: none;
-            }
-            
-            .nav-menu {
-                gap: 4px;
-            }
-            
-            .nav-menu a {
-                padding: 8px;
-                font-size: 12px;
+    <meta name="description" content="Professional insights on data architecture, information asymmetry, and enterprise data strategies from Kerv Talks-Data experts.">
+    <meta name="keywords" content="data architecture, information asymmetry, enterprise data, data strategy, analytics">
+    <meta name="author" content="Kerv Talks-Data">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Kerv Talks-Data Blog - Professional Insights">
+    <meta property="og:description" content="Professional insights on data architecture, information asymmetry, and enterprise data strategies.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kervtalksdata.com">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kerv Talks-Data Blog">
+    <meta name="twitter:description" content="Professional insights on data architecture and enterprise strategies.">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Kerv Talks-Data Blog",
+        "description": "Professional insights on data architecture, information asymmetry, and enterprise data strategies",
+        "url": "https://kervtalksdata.com",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Kerv Talks-Data",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://kervtalksdata.com/assets/images/logo.png"
             }
         }
-    </style>
+    }
+    </script>
 </head>
 <body>
     <header class="header">
@@ -571,12 +51,13 @@
             </a>
             
             <div class="search-bar">
-                <input type="text" placeholder="Search articles, authors, topics...">
+                <input type="text" placeholder="Search articles, authors, topics..." id="search-input">
+                <div class="search-results" id="search-results"></div>
             </div>
             
             <ul class="nav-menu">
                 <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="articles.html">Articles</a></li>
+                <li><a href="articles/">Articles</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -587,18 +68,25 @@
 
         <main class="main-content">
             <div class="card create-post">
-                <div class="post-input">
-                    <div class="post-avatar">KT</div>
-                    <textarea class="post-textarea" placeholder="Share an insight about data architecture..."></textarea>
-                </div>
-                <div class="post-actions">
-                    <a href="#" class="post-action">📹 Video</a>
-                    <a href="#" class="post-action">📷 Photo</a>
-                    <a href="#" class="post-action">📝 Article</a>
-                </div>
+                <form class="post-form" id="post-form">
+                    <div class="post-input">
+                        <div class="post-avatar">KT</div>
+                        <textarea class="post-textarea" placeholder="Share an insight about data architecture..." name="content" required></textarea>
+                    </div>
+                    <div class="post-actions">
+                        <button type="button" class="post-action" data-type="video">📹 Video</button>
+                        <button type="button" class="post-action" data-type="photo">📷 Photo</button>
+                        <button type="button" class="post-action" data-type="article">📝 Article</button>
+                        <button type="submit" class="post-submit">Post</button>
+                    </div>
+                    <div class="image-upload-container" style="display: none;">
+                        <input type="file" class="image-upload" accept="image/*" name="image">
+                        <div class="image-preview"></div>
+                    </div>
+                </form>
             </div>
 
-            <article class="card article-card">
+            <article class="card article-card" data-article-id="data-crusader-journey">
                 <div class="article-header">
                     <div class="article-avatar">🦸‍♂️</div>
                     <div class="article-info">
@@ -607,19 +95,19 @@
                     </div>
                 </div>
                 <div class="article-content">
-                    <h3 class="article-title">The Data Crusader's Journey: Navigating Information Asymmetry</h3>
+                    <h3 class="article-title"><a href="articles/data-crusader-journey/">The Data Crusader's Journey: Navigating Information Asymmetry</a></h3>
                     <p class="article-excerpt">In the vast digital landscape of modern enterprise, information asymmetry reigns supreme. Like a crusader embarking on an epic quest, data professionals must navigate treacherous terrain where knowledge is power...</p>
                     <div class="article-image">🦸‍♂️</div>
                 </div>
                 <div class="article-actions">
-                    <a href="#" class="action-button">👍 Like</a>
-                    <a href="#" class="action-button">💬 Comment</a>
-                    <a href="#" class="action-button">🔄 Repost</a>
-                    <a href="#" class="action-button">📤 Send</a>
+                    <button class="action-button like-button" data-article-id="data-crusader-journey">👍 Like</button>
+                    <a href="articles/data-crusader-journey/#comments" class="action-button">💬 Comment</a>
+                    <button class="action-button share-button" data-article-id="data-crusader-journey">🔄 Repost</button>
+                    <button class="action-button">📤 Send</button>
                 </div>
             </article>
 
-            <article class="card article-card">
+            <article class="card article-card" data-article-id="cosmic-data-flux">
                 <div class="article-header">
                     <div class="article-avatar">🌌</div>
                     <div class="article-info">
@@ -628,19 +116,19 @@
                     </div>
                 </div>
                 <div class="article-content">
-                    <h3 class="article-title">Cosmic Data Flux: Building Enterprise Data Universes</h3>
+                    <h3 class="article-title"><a href="articles/cosmic-data-flux/">Cosmic Data Flux: Building Enterprise Data Universes</a></h3>
                     <p class="article-excerpt">Explore the infinite possibilities of data architecture and how enterprise systems create their own universe of information that spans across dimensions and organizational boundaries...</p>
                     <div class="article-image">🌌</div>
                 </div>
                 <div class="article-actions">
-                    <a href="#" class="action-button">👍 Like</a>
-                    <a href="#" class="action-button">💬 Comment</a>
-                    <a href="#" class="action-button">🔄 Repost</a>
-                    <a href="#" class="action-button">📤 Send</a>
+                    <button class="action-button like-button" data-article-id="cosmic-data-flux">👍 Like</button>
+                    <a href="articles/cosmic-data-flux/#comments" class="action-button">💬 Comment</a>
+                    <button class="action-button share-button" data-article-id="cosmic-data-flux">🔄 Repost</button>
+                    <button class="action-button">📤 Send</button>
                 </div>
             </article>
 
-            <article class="card article-card">
+            <article class="card article-card" data-article-id="spinning-data-narrative">
                 <div class="article-header">
                     <div class="article-avatar">🕷️</div>
                     <div class="article-info">
@@ -649,15 +137,15 @@
                     </div>
                 </div>
                 <div class="article-content">
-                    <h3 class="article-title">Spinning the Data Narrative: Connecting Disparate Sources</h3>
+                    <h3 class="article-title"><a href="articles/spinning-data-narrative/">Spinning the Data Narrative: Connecting Disparate Sources</a></h3>
                     <p class="article-excerpt">Learn how to weave compelling data stories that connect disparate information sources into a cohesive web of knowledge that captures attention and drives action...</p>
                     <div class="article-image">🕷️</div>
                 </div>
                 <div class="article-actions">
-                    <a href="#" class="action-button">👍 Like</a>
-                    <a href="#" class="action-button">💬 Comment</a>
-                    <a href="#" class="action-button">🔄 Repost</a>
-                    <a href="#" class="action-button">📤 Send</a>
+                    <button class="action-button like-button" data-article-id="spinning-data-narrative">👍 Like</button>
+                    <a href="articles/spinning-data-narrative/#comments" class="action-button">💬 Comment</a>
+                    <button class="action-button share-button" data-article-id="spinning-data-narrative">🔄 Repost</button>
+                    <button class="action-button">📤 Send</button>
                 </div>
             </article>
         </main>
@@ -746,5 +234,8 @@
             <p>&copy; 2024 Kerv Talks-Data Blog. All rights reserved.</p>
         </div>
     </footer>
+    
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

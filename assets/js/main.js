@@ -42,6 +42,7 @@ class BlogManager {
         this.commentsManager = new CommentsManager(this.comments);
         this.articleManager = new ArticleManager(this.articles);
         this.imageUploadManager = new ImageUploadManager();
+        this.postManager = new PostManager();
     }
 
     setupEventListeners() {
@@ -401,7 +402,76 @@ function calculateReadTime(content) {
     return Math.ceil(wordCount / wordsPerMinute);
 }
 
+// Post creation functionality
+class PostManager {
+    constructor() {
+        this.postForm = document.querySelector('#post-form');
+        this.postActions = document.querySelectorAll('.post-action[data-type]');
+        this.imageUploadContainer = document.querySelector('.image-upload-container');
+        this.init();
+    }
+
+    init() {
+        if (this.postForm) {
+            this.postForm.addEventListener('submit', this.handleSubmit.bind(this));
+        }
+
+        this.postActions.forEach(action => {
+            action.addEventListener('click', this.handleActionClick.bind(this));
+        });
+    }
+
+    handleActionClick(event) {
+        const type = event.currentTarget.dataset.type;
+        
+        if (type === 'photo') {
+            this.toggleImageUpload();
+        } else if (type === 'article') {
+            // Redirect to article creation page
+            window.location.href = 'articles/create/';
+        } else if (type === 'video') {
+            // Handle video upload
+            alert('Video upload functionality coming soon!');
+        }
+    }
+
+    toggleImageUpload() {
+        if (this.imageUploadContainer) {
+            const isVisible = this.imageUploadContainer.style.display !== 'none';
+            this.imageUploadContainer.style.display = isVisible ? 'none' : 'block';
+        }
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const content = formData.get('content');
+        
+        if (!content.trim()) {
+            alert('Please enter some content before posting.');
+            return;
+        }
+
+        // Simulate post creation
+        this.createPost(content, formData.get('image'));
+    }
+
+    createPost(content, image) {
+        // In a real application, this would send data to a server
+        console.log('Creating post:', { content, image });
+        
+        // Show success message
+        alert('Post created successfully!');
+        
+        // Reset form
+        this.postForm.reset();
+        if (this.imageUploadContainer) {
+            this.imageUploadContainer.style.display = 'none';
+        }
+    }
+}
+
 // Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { BlogManager, SearchManager, CommentsManager, ArticleManager, ImageUploadManager };
+    module.exports = { BlogManager, SearchManager, CommentsManager, ArticleManager, ImageUploadManager, PostManager };
 }
