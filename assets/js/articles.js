@@ -19,7 +19,7 @@ class ArticlesPageManager {
 
     async loadArticles() {
         try {
-            const response = await fetch('../data/articles.json');
+            const response = await fetch('../../data/articles.json');
             const data = await response.json();
             this.articles = data.articles;
             this.filteredArticles = [...this.articles];

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Article - Kerv Talks-Data Blog</title>
+    <meta name="description" content="Create and publish new articles on data architecture, information asymmetry, and enterprise strategies.">
+    <meta name="keywords" content="create article, write post, publish content, data architecture">
+    <meta name="author" content="Kerv Talks-Data">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Create Article - Kerv Talks-Data Blog">
+    <meta property="og:description" content="Create and publish new articles on data architecture and enterprise strategies.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kervtalksdata.com/articles/create/">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Create Article - Kerv Talks-Data Blog",
+        "description": "Create and publish new articles on data architecture and enterprise strategies",
+        "url": "https://kervtalksdata.com/articles/create/"
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="../../index.html" class="logo">
+                <div class="logo-icon">KT</div>
+                Kerv Talks-Data
+            </a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search articles, authors, topics..." id="search-input">
+                <div class="search-results" id="search-results"></div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../index.html">Articles</a></li>
+                <li><a href="../../about.html">About</a></li>
+                <li><a href="../../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="article-create-container">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <a href="../../index.html">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="../index.html">Articles</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Create Article</span>
+        </nav>
+
+        <div class="create-article-header">
+            <h1>Create New Article</h1>
+            <p>Share your insights on data architecture, information asymmetry, and enterprise strategies</p>
+        </div>
+
+        <div class="article-editor-layout">
+            <div class="editor-main">
+                <form class="article-editor-form" id="article-editor-form">
+                    <!-- Article Header -->
+                    <div class="editor-section">
+                        <h2>Article Details</h2>
+                        
+                        <div class="form-group">
+                            <label for="article-title">Title *</label>
+                            <input type="text" id="article-title" name="title" placeholder="Enter your article title..." required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="article-excerpt">Excerpt</label>
+                            <textarea id="article-excerpt" name="excerpt" placeholder="Brief description of your article..." rows="3"></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="article-category">Category *</label>
+                                <select id="article-category" name="category" required>
+                                    <option value="">Select a category</option>
+                                    <option value="Strategy">Strategy</option>
+                                    <option value="Architecture">Architecture</option>
+                                    <option value="Analytics">Analytics</option>
+                                    <option value="Technology">Technology</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="article-author">Author</label>
+                                <select id="article-author" name="author">
+                                    <option value="data-crusader">Data Crusader</option>
+                                    <option value="cosmic-analyst">Cosmic Analyst</option>
+                                    <option value="web-weaver">Web Weaver</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="article-tags">Tags</label>
+                            <input type="text" id="article-tags" name="tags" placeholder="Enter tags separated by commas (e.g., data-architecture, enterprise, strategy)">
+                        </div>
+                    </div>
+
+                    <!-- Featured Image -->
+                    <div class="editor-section">
+                        <h2>Featured Image</h2>
+                        <div class="image-upload-area" id="image-upload-area">
+                            <div class="upload-placeholder">
+                                <div class="upload-icon">📷</div>
+                                <p>Click to upload featured image</p>
+                                <span class="upload-hint">JPG, PNG, WebP up to 5MB</span>
+                            </div>
+                            <input type="file" id="featured-image" name="featured-image" accept="image/*" style="display: none;">
+                        </div>
+                        <div class="image-preview" id="image-preview" style="display: none;">
+                            <img id="preview-img" src="" alt="Preview">
+                            <button type="button" class="remove-image" id="remove-image">Remove</button>
+                        </div>
+                    </div>
+
+                    <!-- Article Content -->
+                    <div class="editor-section">
+                        <h2>Article Content</h2>
+                        <div class="content-editor">
+                            <div class="editor-toolbar">
+                                <button type="button" class="toolbar-btn" data-command="bold" title="Bold">
+                                    <strong>B</strong>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="italic" title="Italic">
+                                    <em>I</em>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="underline" title="Underline">
+                                    <u>U</u>
+                                </button>
+                                <div class="toolbar-separator"></div>
+                                <button type="button" class="toolbar-btn" data-command="insertUnorderedList" title="Bullet List">
+                                    • List
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="insertOrderedList" title="Numbered List">
+                                    1. List
+                                </button>
+                                <div class="toolbar-separator"></div>
+                                <button type="button" class="toolbar-btn" data-command="formatBlock" data-value="h2" title="Heading">
+                                    H2
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="formatBlock" data-value="h3" title="Subheading">
+                                    H3
+                                </button>
+                            </div>
+                            <div class="editor-content" id="editor-content" contenteditable="true" data-placeholder="Start writing your article here...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article Actions -->
+                    <div class="editor-actions">
+                        <button type="button" class="btn-secondary" id="save-draft">Save Draft</button>
+                        <button type="button" class="btn-secondary" id="preview-article">Preview</button>
+                        <button type="submit" class="btn-primary" id="publish-article">Publish Article</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Editor Sidebar -->
+            <aside class="editor-sidebar">
+                <!-- Article Stats -->
+                <div class="card editor-widget">
+                    <h3>Article Stats</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Word Count</span>
+                            <span class="stat-value" id="word-count">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Reading Time</span>
+                            <span class="stat-value" id="reading-time">0 min</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Characters</span>
+                            <span class="stat-value" id="char-count">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publishing Options -->
+                <div class="card editor-widget">
+                    <h3>Publishing Options</h3>
+                    <div class="publish-options">
+                        <div class="option-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="featured-article" name="featured">
+                                <span class="checkmark"></span>
+                                Feature this article
+                            </label>
+                        </div>
+                        <div class="option-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="allow-comments" name="comments" checked>
+                                <span class="checkmark"></span>
+                                Allow comments
+                            </label>
+                        </div>
+                        <div class="option-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="send-notification" name="notification">
+                                <span class="checkmark"></span>
+                                Notify subscribers
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEO Preview -->
+                <div class="card editor-widget">
+                    <h3>SEO Preview</h3>
+                    <div class="seo-preview">
+                        <div class="seo-title" id="seo-title">Your article title will appear here</div>
+                        <div class="seo-url">kervtalksdata.com/articles/your-article-slug/</div>
+                        <div class="seo-description" id="seo-description">Your article description will appear here</div>
+                    </div>
+                </div>
+
+                <!-- Help & Tips -->
+                <div class="card editor-widget">
+                    <h3>Writing Tips</h3>
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <strong>📝 Clear Structure:</strong> Use headings to organize your content
+                        </div>
+                        <div class="tip-item">
+                            <strong>🎯 Focused Topic:</strong> Keep your article focused on one main idea
+                        </div>
+                        <div class="tip-item">
+                            <strong>💡 Practical Examples:</strong> Include real-world examples and case studies
+                        </div>
+                        <div class="tip-item">
+                            <strong>📊 Data Insights:</strong> Support your points with data and research
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Kerv Talks-Data Blog. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/article-editor.js"></script>
+</body>
+</html>
