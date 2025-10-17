@@ -34,7 +34,7 @@ class BlogManager {
             const authorsData = await authorsResponse.json();
             this.authors = authorsData.authors;
 
-            console.log('✅ Data loaded successfully:', this.articles.length, 'articles');
+            console.log('✅ Data loaded successfully');
         } catch (error) {
             console.error('❌ Error loading data:', error);
         }
@@ -521,13 +521,7 @@ class PostManager {
 
     renderHomepageArticles() {
         const container = document.getElementById('articles-container');
-        console.log('🔍 Articles container found:', !!container);
-        console.log('🔍 Articles to render:', this.articles.length);
-        
-        if (!container) {
-            console.log('❌ Articles container not found!');
-            return;
-        }
+        if (!container) return;
 
         // Sort articles by published date (newest first)
         const sortedArticles = [...this.articles].sort((a, b) => {
@@ -536,14 +530,11 @@ class PostManager {
             return dateB - dateA; // Newest first
         });
 
-        console.log('🔍 Sorted articles:', sortedArticles.length);
-
         // Clear container
         container.innerHTML = '';
 
         // Render each article
-        sortedArticles.forEach((article, index) => {
-            console.log(`🔍 Rendering article ${index + 1}:`, article.title);
+        sortedArticles.forEach(article => {
             const articleElement = this.createArticleCard(article);
             container.appendChild(articleElement);
         });
