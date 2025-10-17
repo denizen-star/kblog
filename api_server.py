@@ -335,7 +335,8 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
         slug = re.sub(r'[^a-z0-9\s-]', '', slug)
         slug = re.sub(r'\s+', '-', slug)
         slug = re.sub(r'-+', '-', slug)
-        return slug.strip('-')
+        slug = slug.strip('-')  # Remove leading/trailing dashes
+        return slug
     
     def calculate_reading_time(self, content):
         """Calculate reading time in minutes"""

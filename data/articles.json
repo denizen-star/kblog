@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "test-real-articles",
+      "title": "Test Real Articles",
+      "excerpt": "Information Asymmetry - Managing Information Imbalances in the Enterprise Microcosm - Series (1/5)",
+      "author": {
+        "name": "Data Crusader",
+        "avatar": "🦸‍♂️",
+        "role": "Head of Data Strategy"
+      },
+      "published": "2025-10-17",
+      "readTime": 1,
+      "category": "Strategy",
+      "tags": [
+        "Budget",
+        "Data",
+        "Enterprise"
+      ],
+      "image": "test-real-articles.jpg",
+      "content": "test-real-articles-content.html",
+      "likes": 0,
+      "comments": 0,
+      "views": 0
+    },
+    {
       "id": "ia-new-article-test",
       "title": "IA New Article Test",
       "excerpt": "A test article created to demonstrate the article creation system and showcase the professional blog platform capabilities.",
@@ -12,7 +35,12 @@
       "published": "2024-10-16",
       "readTime": 3,
       "category": "Technology",
-      "tags": ["test", "demonstration", "blog", "ia-test"],
+      "tags": [
+        "test",
+        "demonstration",
+        "blog",
+        "ia-test"
+      ],
       "image": "ia-new-article-test.jpg",
       "content": "ia-new-article-test-content.html",
       "likes": 0,
@@ -31,7 +59,12 @@
       "published": "2024-10-16",
       "readTime": 3,
       "category": "Technology",
-      "tags": ["test", "demonstration", "blog", "kerv-test"],
+      "tags": [
+        "test",
+        "demonstration",
+        "blog",
+        "kerv-test"
+      ],
       "image": "kerv-test-1.jpg",
       "content": "kerv-test-1-content.html",
       "likes": 0,
@@ -50,7 +83,13 @@
       "published": "2024-10-16",
       "readTime": 8,
       "category": "Architecture",
-      "tags": ["data-architecture", "patterns", "enterprise", "microservices", "scalability"],
+      "tags": [
+        "data-architecture",
+        "patterns",
+        "enterprise",
+        "microservices",
+        "scalability"
+      ],
       "image": "data-architecture-patterns.jpg",
       "content": "data-architecture-patterns-content.html",
       "likes": 0,
@@ -69,7 +108,13 @@
       "published": "2024-10-16",
       "readTime": 3,
       "category": "Technology",
-      "tags": ["test", "demonstration", "blog", "data-architecture", "kblog"],
+      "tags": [
+        "test",
+        "demonstration",
+        "blog",
+        "data-architecture",
+        "kblog"
+      ],
       "image": "kblog-test.jpg",
       "content": "kblog-test-content.html",
       "likes": 0,
@@ -88,7 +133,11 @@
       "published": "2024-03-15",
       "readTime": 5,
       "category": "Strategy",
-      "tags": ["data-architecture", "information-asymmetry", "strategy"],
+      "tags": [
+        "data-architecture",
+        "information-asymmetry",
+        "strategy"
+      ],
       "image": "data-crusader.jpg",
       "content": "article-content.html",
       "likes": 24,
@@ -107,7 +156,11 @@
       "published": "2024-03-12",
       "readTime": 7,
       "category": "Architecture",
-      "tags": ["data-architecture", "enterprise", "cosmic-flux"],
+      "tags": [
+        "data-architecture",
+        "enterprise",
+        "cosmic-flux"
+      ],
       "image": "cosmic-data.jpg",
       "content": "cosmic-content.html",
       "likes": 18,
@@ -126,7 +179,11 @@
       "published": "2024-03-10",
       "readTime": 6,
       "category": "Analytics",
-      "tags": ["data-storytelling", "analytics", "narrative"],
+      "tags": [
+        "data-storytelling",
+        "analytics",
+        "narrative"
+      ],
       "image": "web-weaver.jpg",
       "content": "narrative-content.html",
       "likes": 31,
