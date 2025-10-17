@@ -108,14 +108,9 @@ class BlogManager {
     loadHomepageArticles() {
         // Only load articles on the homepage
         const pathname = window.location.pathname;
-        console.log('🔍 loadHomepageArticles called, pathname:', pathname);
-        console.log('🔍 Articles available:', this.articles.length);
         
         if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html')) {
-            console.log('✅ Homepage detected, calling renderHomepageArticles');
             this.renderHomepageArticles();
-        } else {
-            console.log('❌ Not homepage, skipping');
         }
     }
 
@@ -139,13 +134,8 @@ class BlogManager {
     }
 
     renderHomepageArticles() {
-        console.log('🔍 renderHomepageArticles called');
         const container = document.getElementById('articles-container');
-        console.log('🔍 Container found:', !!container);
-        if (!container) {
-            console.log('❌ Articles container not found!');
-            return;
-        }
+        if (!container) return;
 
         // Sort articles by published date (newest first)
         const sortedArticles = [...this.articles].sort((a, b) => {
@@ -170,7 +160,6 @@ class BlogManager {
         });
 
         console.log(`✅ Loaded ${sortedArticles.length} articles on homepage (newest to oldest)`);
-        console.log('📋 First article:', sortedArticles[0]?.title || 'No articles');
     }
 
     createArticleCard(article) {
@@ -232,20 +221,21 @@ class BlogManager {
     }
 
     getArticleImage(article) {
-        // Check if article has a featured image
-        if (article.image && article.image !== 'placeholder.jpg') {
-            return `<img src="assets/images/articles/${article.image}" alt="${article.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">`;
+        // Check if article has a featured image and it's not a placeholder
+        if (article.image && article.image !== 'placeholder.jpg' && article.image !== '') {
+            // Create image with error handling
+            return `<img src="assets/images/articles/${article.image}" alt="${article.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="display: none; width: 100%; height: 200px; background: linear-gradient(45deg, #6A7B9A, #8B9DC3); border-radius: 8px; align-items: center; justify-content: center; color: white; font-size: 3rem;">${article.author.avatar}</div>`;
         }
         
-        // Return author avatar as fallback
-        return article.author.avatar;
+        // Return author avatar as fallback with proper styling
+        return `<div style="width: 100%; height: 200px; background: linear-gradient(45deg, #6A7B9A, #8B9DC3); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">${article.author.avatar}</div>`;
     }
 
     checkForRefreshFlag() {
         // Check if we need to refresh due to new article creation
         const refreshFlag = localStorage.getItem('refreshHomepage');
         if (refreshFlag === 'true') {
-            console.log('🔄 New article detected, refreshing homepage...');
             localStorage.removeItem('refreshHomepage');
             this.refreshHomepageArticles();
         }
