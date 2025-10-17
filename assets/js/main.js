@@ -402,6 +402,7 @@ class ImageUploadManager {
 
 // Initialize the blog when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 DOM loaded, initializing BlogManager...');
     new BlogManager();
 });
 
