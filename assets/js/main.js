@@ -402,7 +402,6 @@ class ImageUploadManager {
 
 // Initialize the blog when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 DOM loaded, initializing BlogManager...');
     new BlogManager();
 });
 
@@ -493,14 +492,9 @@ class PostManager {
     loadHomepageArticles() {
         // Only load articles on the homepage
         const pathname = window.location.pathname;
-        console.log('🔍 Current pathname:', pathname);
-        console.log('🔍 Articles loaded:', this.articles.length);
         
         if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html')) {
-            console.log('✅ Homepage detected, rendering articles...');
             this.renderHomepageArticles();
-        } else {
-            console.log('❌ Not homepage, skipping article rendering');
         }
     }
 
@@ -525,11 +519,7 @@ class PostManager {
 
     renderHomepageArticles() {
         const container = document.getElementById('articles-container');
-        console.log('🔍 Articles container found:', !!container);
-        if (!container) {
-            console.log('❌ Articles container not found!');
-            return;
-        }
+        if (!container) return;
 
         // Sort articles by published date (newest first)
         const sortedArticles = [...this.articles].sort((a, b) => {
