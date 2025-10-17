@@ -1,0 +1,59 @@
+{
+  "id": "real-article-ii",
+  "slug": "real-article-ii",
+  "title": "Real Article II",
+  "excerpt": "Applications Requiring Follow-up",
+  "author": {
+    "id": "data-crusader",
+    "name": "Data Crusader",
+    "role": "Head of Data Strategy",
+    "avatar": "🦸‍♂️",
+    "bio": "A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.",
+    "articles": 16,
+    "followers": 1247
+  },
+  "published": "2025-10-17T10:06:58.242698",
+  "updated": "2025-10-17T10:06:58.242723",
+  "status": "published",
+  "readTime": 1,
+  "category": "Strategy",
+  "tags": [
+    "Budget",
+    "Data",
+    "Enterprise"
+  ],
+  "image": {
+    "featured": "real-article-ii.jpg",
+    "alt": "Real Article II featured image"
+  },
+  "stats": {
+    "views": 0,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0
+  },
+  "seo": {
+    "metaTitle": "Real Article II - Kerv Talks-Data Blog",
+    "metaDescription": "Applications Requiring Follow-up",
+    "keywords": [
+      "Budget",
+      "Data",
+      "Enterprise"
+    ],
+    "canonical": "https://kervtalksdata.com/articles/real-article-ii/"
+  },
+  "settings": {
+    "featured": false,
+    "allowComments": false,
+    "notifySubscribers": false,
+    "archived": false
+  },
+  "content": "<h2>Applications Requiring Follow-up</h2><p>This article discusses the critical aspects of managing information imbalances in enterprise environments. Information asymmetry occurs when one party has more or better information than another, creating power imbalances that can affect decision-making processes.</p><h3>Key Challenges</h3><ul><li><strong>Data Quality:</strong> Ensuring consistent and accurate information across all systems</li><li><strong>Access Control:</strong> Managing who has access to what information</li><li><strong>Timeliness:</strong> Delivering information when it's needed most</li><li><strong>Integration:</strong> Connecting disparate systems and data sources</li></ul><h3>Solutions and Best Practices</h3><p>To address information asymmetry, organizations must implement comprehensive data governance strategies that include:</p><ol><li>Establishing clear data ownership and stewardship roles</li><li>Implementing robust data quality monitoring</li><li>Creating transparent information sharing protocols</li><li>Developing real-time data integration capabilities</li></ol><p>By addressing these challenges proactively, organizations can reduce information imbalances and make more informed decisions that benefit all stakeholders.</p>",
+  "contentStats": {
+    "wordCount": 113,
+    "characterCount": 1016,
+    "hasImages": false,
+    "hasCode": false,
+    "readingLevel": "intermediate"
+  }
+}

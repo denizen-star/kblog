@@ -192,13 +192,14 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
                     'notifySubscribers': notification == 'true',
                     'archived': False
                 },
-                'content': {
-                    'wordCount': len(re.sub(r'<[^>]*>', '', content).split()),
-                    'characterCount': len(content),
-                    'hasImages': '<img' in content,
-                    'hasCode': '<code' in content or '<pre' in content,
-                    'readingLevel': 'intermediate'
-                }
+            'content': content,  # Store the actual content
+            'contentStats': {
+                'wordCount': len(re.sub(r'<[^>]*>', '', content).split()),
+                'characterCount': len(content),
+                'hasImages': '<img' in content,
+                'hasCode': '<code' in content or '<pre' in content,
+                'readingLevel': 'intermediate'
+            }
             }
             
             # Handle image upload
