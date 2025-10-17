@@ -544,7 +544,7 @@ class PostManager {
             return dateB - dateA; // Newest first
         });
 
-        // Clear container
+        // Clear container (including test element)
         container.innerHTML = '';
 
         // Add a test indicator
