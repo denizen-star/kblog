@@ -1,0 +1,57 @@
+{
+  "id": "test-after-a-while",
+  "slug": "test-after-a-while",
+  "title": "TEST After a while",
+  "excerpt": "sddsdsdsfdfsdsdfdsdfsd",
+  "author": {
+    "id": "data-crusader",
+    "name": "Data Crusader",
+    "role": "Head of Data Strategy",
+    "avatar": "🦸‍♂️",
+    "bio": "A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.",
+    "articles": 16,
+    "followers": 1247
+  },
+  "published": "2025-10-17T13:05:43.973313",
+  "updated": "2025-10-17T13:05:43.973365",
+  "status": "published",
+  "readTime": 1,
+  "category": "Technology",
+  "tags": [
+    "Budget",
+    "Data"
+  ],
+  "image": {
+    "featured": null,
+    "alt": "TEST After a while featured image"
+  },
+  "stats": {
+    "views": 0,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0
+  },
+  "seo": {
+    "metaTitle": "TEST After a while - Kerv Talks-Data Blog",
+    "metaDescription": "sddsdsdsfdfsdsdfdsdfsd",
+    "keywords": [
+      "Budget",
+      "Data"
+    ],
+    "canonical": "https://kervtalksdata.com/articles/test-after-a-while/"
+  },
+  "settings": {
+    "featured": false,
+    "allowComments": false,
+    "notifySubscribers": false,
+    "archived": false
+  },
+  "content": "sdfsdfsdfsdfdfsfd asdv32114EDFASGCNMVHJUT4532WQSAZXCVBGHY6543WASZXCVBGHJU7Y6T5R4EWSXCVBHSSDFGDEWQWSDFGBVFDSW",
+  "contentStats": {
+    "wordCount": 2,
+    "characterCount": 108,
+    "hasImages": false,
+    "hasCode": false,
+    "readingLevel": "intermediate"
+  }
+}

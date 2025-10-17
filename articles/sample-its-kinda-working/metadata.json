@@ -1,0 +1,59 @@
+{
+  "id": "sample-its-kinda-working",
+  "slug": "sample-its-kinda-working",
+  "title": "Sample Its kinda working",
+  "excerpt": "The methods used to make the simple seem complicated or to hide crucial details are varied and often sophisticated:",
+  "author": {
+    "id": "data-crusader",
+    "name": "Data Crusader",
+    "role": "Head of Data Strategy",
+    "avatar": "🦸‍♂️",
+    "bio": "A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.",
+    "articles": 16,
+    "followers": 1247
+  },
+  "published": "2025-10-17T16:46:02.104343",
+  "updated": "2025-10-17T16:46:02.104968",
+  "status": "published",
+  "readTime": 1,
+  "category": "Technology",
+  "tags": [
+    "Budget",
+    "Data",
+    "Enterprise"
+  ],
+  "image": {
+    "featured": "sample-its-kinda-working.jpg",
+    "alt": "Sample Its kinda working featured image"
+  },
+  "stats": {
+    "views": 0,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0
+  },
+  "seo": {
+    "metaTitle": "Sample Its kinda working - Kerv Talks-Data Blog",
+    "metaDescription": "The methods used to make the simple seem complicated or to hide crucial details are varied and often sophisticated:",
+    "keywords": [
+      "Budget",
+      "Data",
+      "Enterprise"
+    ],
+    "canonical": "https://kervtalksdata.com/articles/sample-its-kinda-working/"
+  },
+  "settings": {
+    "featured": false,
+    "allowComments": false,
+    "notifySubscribers": false,
+    "archived": false
+  },
+  "content": "<h2 data-pm-slice=\"1 1 []\">Common Tactics of Data and Technical Obfuscation</h2><p><br></p><h3>1. The Fog of Data Overload</h3><p>This tactic involves presenting an excessive volume of data, charts, and metrics without clear hierarchy or summation. The crucial information is intentionally buried among noise, making it appear as though thorough reporting has occurred, while actively overwhelming the reader into inaction.</p><h3>2. Strategic Jargon and Technical Lock-in</h3><p>The deliberate use of highly specialized terminology, acronyms, or proprietary methods, without adequate translation, serves to exclude non-experts from the conversation. This tactic establishes an intellectual barrier, ensuring that only the original source can interpret or validate the findings.</p><h3>3. Selective Reporting (Cherry-Picking)</h3><p>This involves presenting only the data points or metrics that support a pre-determined narrative while omitting contradictory evidence. For example, focusing only on year-over-year <em>percentage</em> growth while ignoring the lower absolute <em>volume</em> compared to competitors.</p><h3>4. Shifting Metrics and Goalposts</h3><p>When performance is poor, a common tactic is to subtly change the definition of success or the metrics used to measure it. The organization might transition from reporting on \"profit margin\" (low) to \"gross revenue\" (high), effectively diverting attention from the underlying problem</p>",
+  "contentStats": {
+    "wordCount": 178,
+    "characterCount": 1451,
+    "hasImages": false,
+    "hasCode": false,
+    "readingLevel": "intermediate"
+  }
+}

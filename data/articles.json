@@ -1,6 +1,95 @@
 {
   "articles": [
     {
+      "id": "sample-its-kinda-working",
+      "title": "Sample Its kinda working",
+      "excerpt": "The methods used to make the simple seem complicated or to hide crucial details are varied and often sophisticated:",
+      "author": {
+        "name": "Data Crusader",
+        "avatar": "🦸‍♂️",
+        "role": "Head of Data Strategy"
+      },
+      "published": "2025-10-17",
+      "readTime": 1,
+      "category": "Technology",
+      "tags": [
+        "Budget",
+        "Data",
+        "Enterprise"
+      ],
+      "image": "sample-its-kinda-working.jpg",
+      "content": "sample-its-kinda-working-content.html",
+      "likes": 0,
+      "comments": 0,
+      "views": 0
+    },
+    {
+      "id": "sdsdd",
+      "title": "sdsdd",
+      "excerpt": "sdsd",
+      "author": {
+        "name": "Cosmic Analyst",
+        "avatar": "🌌",
+        "role": "Data Architecture Lead"
+      },
+      "published": "2025-10-17",
+      "readTime": 1,
+      "category": "Analytics",
+      "tags": [
+        "Budget",
+        "Data"
+      ],
+      "image": "sdsdd.jpg",
+      "content": "sdsdd-content.html",
+      "likes": 0,
+      "comments": 0,
+      "views": 0
+    },
+    {
+      "id": "test-after-a-while",
+      "title": "TEST After a while",
+      "excerpt": "sddsdsdsfdfsdsdfdsdfsd",
+      "author": {
+        "name": "Data Crusader",
+        "avatar": "🦸‍♂️",
+        "role": "Head of Data Strategy"
+      },
+      "published": "2025-10-17",
+      "readTime": 1,
+      "category": "Technology",
+      "tags": [
+        "Budget",
+        "Data"
+      ],
+      "image": "test-after-a-while.jpg",
+      "content": "test-after-a-while-content.html",
+      "likes": 0,
+      "comments": 0,
+      "views": 0
+    },
+    {
+      "id": "dsd",
+      "title": "dsd",
+      "excerpt": "sdfds",
+      "author": {
+        "name": "Data Crusader",
+        "avatar": "🦸‍♂️",
+        "role": "Head of Data Strategy"
+      },
+      "published": "2025-10-17",
+      "readTime": 1,
+      "category": "Architecture",
+      "tags": [
+        "Budget",
+        "Data"
+      ],
+      "image": "dsd.jpg",
+      "content": "dsd-content.html",
+      "likes": 0,
+      "comments": 0,
+      "views": 0
+    },
+    {
       "id": "test",
       "title": "TEST",
       "excerpt": "Information Asymmetry - Managing Information Imbalances in the Enterprise Microcosm - Series (1/5)",

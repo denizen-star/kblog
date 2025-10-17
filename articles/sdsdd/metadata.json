@@ -1,0 +1,57 @@
+{
+  "id": "sdsdd",
+  "slug": "sdsdd",
+  "title": "sdsdd",
+  "excerpt": "sdsd",
+  "author": {
+    "id": "cosmic-analyst",
+    "name": "Cosmic Analyst",
+    "role": "Data Architecture Lead",
+    "avatar": "🌌",
+    "bio": "Specializing in building scalable data universes that connect disparate enterprise systems across organizational boundaries.",
+    "articles": 13,
+    "followers": 892
+  },
+  "published": "2025-10-17T14:29:49.459506",
+  "updated": "2025-10-17T14:29:49.459616",
+  "status": "published",
+  "readTime": 1,
+  "category": "Analytics",
+  "tags": [
+    "Budget",
+    "Data"
+  ],
+  "image": {
+    "featured": "sdsdd.jpg",
+    "alt": "sdsdd featured image"
+  },
+  "stats": {
+    "views": 0,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0
+  },
+  "seo": {
+    "metaTitle": "sdsdd - Kerv Talks-Data Blog",
+    "metaDescription": "sdsd",
+    "keywords": [
+      "Budget",
+      "Data"
+    ],
+    "canonical": "https://kervtalksdata.com/articles/sdsdd/"
+  },
+  "settings": {
+    "featured": false,
+    "allowComments": false,
+    "notifySubscribers": false,
+    "archived": false
+  },
+  "content": "<h2>12534684134134</h2><div>4545343</div><div><br></div><div><br></div><div>sddaasdaa</div>",
+  "contentStats": {
+    "wordCount": 1,
+    "characterCount": 91,
+    "hasImages": false,
+    "hasCode": false,
+    "readingLevel": "intermediate"
+  }
+}
