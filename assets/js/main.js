@@ -12,6 +12,9 @@ class BlogManager {
         await this.loadData();
         this.initializeComponents();
         this.setupEventListeners();
+        
+        // Load homepage articles after everything is initialized
+        this.loadHomepageArticles();
     }
 
     async loadData() {
@@ -44,8 +47,7 @@ class BlogManager {
         this.imageUploadManager = new ImageUploadManager();
         this.postManager = new PostManager();
         
-        // Load and display articles on homepage
-        this.loadHomepageArticles();
+        // Homepage articles will be loaded in init() after data is ready
         
         // Set up auto-refresh for homepage (every 30 seconds)
         const pathname = window.location.pathname;
