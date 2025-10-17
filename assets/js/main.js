@@ -15,6 +15,9 @@ class BlogManager {
         
         // Load homepage articles after everything is initialized
         this.loadHomepageArticles();
+        
+        // Check if we need to refresh due to new article creation
+        this.checkForRefreshFlag();
     }
 
     async loadData() {
@@ -626,6 +629,16 @@ class PostManager {
         
         // Return author avatar as fallback
         return article.author.avatar;
+    }
+
+    checkForRefreshFlag() {
+        // Check if we need to refresh due to new article creation
+        const refreshFlag = localStorage.getItem('refreshHomepage');
+        if (refreshFlag === 'true') {
+            console.log('🔄 New article detected, refreshing homepage...');
+            localStorage.removeItem('refreshHomepage');
+            this.refreshHomepageArticles();
+        }
     }
 }
 

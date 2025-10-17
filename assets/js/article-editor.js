@@ -291,6 +291,9 @@ class ArticleEditor {
                 // Show success message
                 this.showNotification('Article published successfully!', 'success');
                 
+                // Set flag to refresh homepage
+                localStorage.setItem('refreshHomepage', 'true');
+                
                 // Redirect to the new article
                 setTimeout(() => {
                     window.location.href = `../${articleSlug}/`;
