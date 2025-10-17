@@ -534,6 +534,12 @@ class PostManager {
         // Clear container
         container.innerHTML = '';
 
+        // Add a test indicator
+        if (sortedArticles.length === 0) {
+            container.innerHTML = '<p style="color: red; padding: 20px; text-align: center;">No articles found</p>';
+            return;
+        }
+
         // Render each article
         sortedArticles.forEach(article => {
             const articleElement = this.createArticleCard(article);
