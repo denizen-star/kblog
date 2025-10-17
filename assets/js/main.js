@@ -48,7 +48,8 @@ class BlogManager {
         this.loadHomepageArticles();
         
         // Set up auto-refresh for homepage (every 30 seconds)
-        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+        const pathname = window.location.pathname;
+        if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html')) {
             setInterval(() => {
                 this.refreshHomepageArticles();
             }, 30000); // Refresh every 30 seconds
@@ -490,14 +491,22 @@ class PostManager {
 
     loadHomepageArticles() {
         // Only load articles on the homepage
-        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+        const pathname = window.location.pathname;
+        console.log('🔍 Current pathname:', pathname);
+        console.log('🔍 Articles loaded:', this.articles.length);
+        
+        if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html')) {
+            console.log('✅ Homepage detected, rendering articles...');
             this.renderHomepageArticles();
+        } else {
+            console.log('❌ Not homepage, skipping article rendering');
         }
     }
 
     async refreshHomepageArticles() {
         // Only refresh on the homepage
-        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+        const pathname = window.location.pathname;
+        if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html')) {
             try {
                 // Reload articles data
                 const articlesResponse = await fetch('data/articles.json');
@@ -515,7 +524,11 @@ class PostManager {
 
     renderHomepageArticles() {
         const container = document.getElementById('articles-container');
-        if (!container) return;
+        console.log('🔍 Articles container found:', !!container);
+        if (!container) {
+            console.log('❌ Articles container not found!');
+            return;
+        }
 
         // Sort articles by published date (newest first)
         const sortedArticles = [...this.articles].sort((a, b) => {
