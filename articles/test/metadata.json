@@ -1,0 +1,59 @@
+{
+  "id": "test",
+  "slug": "test",
+  "title": "TEST",
+  "excerpt": "Information Asymmetry - Managing Information Imbalances in the Enterprise Microcosm - Series (1/5)",
+  "author": {
+    "id": "data-crusader",
+    "name": "Data Crusader",
+    "role": "Head of Data Strategy",
+    "avatar": "🦸‍♂️",
+    "bio": "A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.",
+    "articles": 16,
+    "followers": 1247
+  },
+  "published": "2025-10-17T11:17:29.219164",
+  "updated": "2025-10-17T11:17:29.219195",
+  "status": "published",
+  "readTime": 1,
+  "category": "Architecture",
+  "tags": [
+    "Budget",
+    "Data",
+    "Enterprise"
+  ],
+  "image": {
+    "featured": "test.jpg",
+    "alt": "TEST featured image"
+  },
+  "stats": {
+    "views": 0,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0
+  },
+  "seo": {
+    "metaTitle": "TEST - Kerv Talks-Data Blog",
+    "metaDescription": "Information Asymmetry - Managing Information Imbalances in the Enterprise Microcosm - Series (1/5)",
+    "keywords": [
+      "Budget",
+      "Data",
+      "Enterprise"
+    ],
+    "canonical": "https://kervtalksdata.com/articles/test/"
+  },
+  "settings": {
+    "featured": false,
+    "allowComments": false,
+    "notifySubscribers": false,
+    "archived": false
+  },
+  "content": "<h1 dir=\"ltr\" class=\"reader-draft-preview-header__title\" style=\"box-sizing: inherit; margin: 1.6rem 2.4rem; border-color: rgba(0, 0, 0, 0.9); border-style: none; border-width: 0px; border-image: none 100% / 1 / 0 stretch; font-size: 32px; vertical-align: baseline; background-image: none; background-position: 0% 0%; background-size: auto; background-repeat: repeat; background-attachment: scroll; background-origin: padding-box; background-clip: border-box; outline: rgba(0, 0, 0, 0.9) none 0px; line-height: 1.2; color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;\">Information Asymmetry - Managing Information Imbalances in the Enterprise Microcosm - Series (1/5)</h1>",
+  "contentStats": {
+    "wordCount": 13,
+    "characterCount": 1038,
+    "hasImages": false,
+    "hasCode": false,
+    "readingLevel": "intermediate"
+  }
+}

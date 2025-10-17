@@ -156,6 +156,42 @@ body {
     gap: var(--spacing-xxl);
 }
 
+/* Articles Header */
+.articles-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e1e5e9;
+}
+
+.articles-header h2 {
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.refresh-btn {
+    background: #6A7B9A;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.refresh-btn:hover {
+    background: #5a6b8a;
+}
+
+.refresh-btn:active {
+    transform: scale(0.98);
+}
+
 /* Card Components */
 .card {
     background-color: var(--white);

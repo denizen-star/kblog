@@ -43,6 +43,24 @@ class BlogManager {
         this.articleManager = new ArticleManager(this.articles);
         this.imageUploadManager = new ImageUploadManager();
         this.postManager = new PostManager();
+        
+        // Load and display articles on homepage
+        this.loadHomepageArticles();
+        
+        // Set up auto-refresh for homepage (every 30 seconds)
+        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+            setInterval(() => {
+                this.refreshHomepageArticles();
+            }, 30000); // Refresh every 30 seconds
+            
+            // Add refresh button event listener
+            const refreshBtn = document.getElementById('refresh-articles-btn');
+            if (refreshBtn) {
+                refreshBtn.addEventListener('click', () => {
+                    this.refreshHomepageArticles();
+                });
+            }
+        }
     }
 
     setupEventListeners() {
@@ -468,6 +486,122 @@ class PostManager {
         if (this.imageUploadContainer) {
             this.imageUploadContainer.style.display = 'none';
         }
+    }
+
+    loadHomepageArticles() {
+        // Only load articles on the homepage
+        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+            this.renderHomepageArticles();
+        }
+    }
+
+    async refreshHomepageArticles() {
+        // Only refresh on the homepage
+        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+            try {
+                // Reload articles data
+                const articlesResponse = await fetch('data/articles.json');
+                const articlesData = await articlesResponse.json();
+                this.articles = articlesData.articles;
+                
+                // Re-render articles
+                this.renderHomepageArticles();
+                console.log('🔄 Homepage articles refreshed');
+            } catch (error) {
+                console.error('Error refreshing articles:', error);
+            }
+        }
+    }
+
+    renderHomepageArticles() {
+        const container = document.getElementById('articles-container');
+        if (!container) return;
+
+        // Sort articles by published date (newest first)
+        const sortedArticles = [...this.articles].sort((a, b) => {
+            const dateA = new Date(a.published);
+            const dateB = new Date(b.published);
+            return dateB - dateA; // Newest first
+        });
+
+        // Clear container
+        container.innerHTML = '';
+
+        // Render each article
+        sortedArticles.forEach(article => {
+            const articleElement = this.createArticleCard(article);
+            container.appendChild(articleElement);
+        });
+
+        console.log(`✅ Loaded ${sortedArticles.length} articles on homepage (newest to oldest)`);
+    }
+
+    createArticleCard(article) {
+        const articleElement = document.createElement('article');
+        articleElement.className = 'card article-card';
+        articleElement.setAttribute('data-article-id', article.id);
+
+        // Calculate time ago
+        const timeAgo = this.getTimeAgo(article.published);
+
+        // Create article HTML
+        articleElement.innerHTML = `
+            <div class="article-header">
+                <div class="article-avatar">${article.author.avatar}</div>
+                <div class="article-info">
+                    <div class="article-author">${article.author.name}</div>
+                    <div class="article-meta">${article.author.role} • ${timeAgo}</div>
+                </div>
+            </div>
+            <div class="article-content">
+                <h3 class="article-title"><a href="articles/${article.id}/">${article.title}</a></h3>
+                <p class="article-excerpt">${article.excerpt}</p>
+                <div class="article-image">${this.getArticleImage(article)}</div>
+            </div>
+            <div class="article-actions">
+                <button class="action-button like-button" data-article-id="${article.id}">👍 Like</button>
+                <a href="articles/${article.id}/#comments" class="action-button">💬 Comment</a>
+                <button class="action-button share-button" data-article-id="${article.id}">🔄 Repost</button>
+                <button class="action-button">📤 Send</button>
+            </div>
+        `;
+
+        return articleElement;
+    }
+
+    getTimeAgo(publishedDate) {
+        const now = new Date();
+        const published = new Date(publishedDate);
+        const diffInSeconds = Math.floor((now - published) / 1000);
+
+        if (diffInSeconds < 60) {
+            return 'Just now';
+        } else if (diffInSeconds < 3600) {
+            const minutes = Math.floor(diffInSeconds / 60);
+            return `${minutes}m`;
+        } else if (diffInSeconds < 86400) {
+            const hours = Math.floor(diffInSeconds / 3600);
+            return `${hours}h`;
+        } else if (diffInSeconds < 2592000) {
+            const days = Math.floor(diffInSeconds / 86400);
+            return `${days}d`;
+        } else if (diffInSeconds < 31536000) {
+            const months = Math.floor(diffInSeconds / 2592000);
+            return `${months}mo`;
+        } else {
+            const years = Math.floor(diffInSeconds / 31536000);
+            return `${years}y`;
+        }
+    }
+
+    getArticleImage(article) {
+        // Check if article has a featured image
+        if (article.image && article.image !== 'placeholder.jpg') {
+            return `<img src="assets/images/articles/${article.image}" alt="${article.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">`;
+        }
+        
+        // Return author avatar as fallback
+        return article.author.avatar;
     }
 }
 

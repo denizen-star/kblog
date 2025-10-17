@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "test",
+      "title": "TEST",
+      "excerpt": "Information Asymmetry - Managing Information Imbalances in the Enterprise Microcosm - Series (1/5)",
+      "author": {
+        "name": "Data Crusader",
+        "avatar": "🦸‍♂️",
+        "role": "Head of Data Strategy"
+      },
+      "published": "2025-10-17",
+      "readTime": 1,
+      "category": "Architecture",
+      "tags": [
+        "Budget",
+        "Data",
+        "Enterprise"
+      ],
+      "image": "test.jpg",
+      "content": "test-content.html",
+      "likes": 0,
+      "comments": 0,
+      "views": 0
+    },
+    {
       "id": "real-article-ii",
       "title": "Real Article II",
       "excerpt": "Applications Requiring Follow-up",

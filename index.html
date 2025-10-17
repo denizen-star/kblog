@@ -69,8 +69,8 @@
         <main class="main-content">
             <div class="card create-post">
                 <form class="post-form" id="post-form">
-                    <div class="post-input">
-                        <div class="post-avatar">KT</div>
+                <div class="post-input">
+                    <div class="post-avatar">KT</div>
                         <textarea class="post-textarea" placeholder="Share an insight about data architecture..." name="content" required></textarea>
                     </div>
                     <div class="post-actions">
@@ -84,70 +84,20 @@
                         <div class="image-preview"></div>
                     </div>
                 </form>
-            </div>
+                </div>
 
-            <article class="card article-card" data-article-id="data-crusader-journey">
-                <div class="article-header">
-                    <div class="article-avatar">🦸‍♂️</div>
-                    <div class="article-info">
-                        <div class="article-author">Data Crusader</div>
-                        <div class="article-meta">Head of Data Strategy • 2d</div>
-                    </div>
+            <!-- Articles Header with Refresh Button -->
+            <div class="articles-header">
+                <h2>Latest Articles</h2>
+                <button id="refresh-articles-btn" class="refresh-btn" title="Refresh articles">
+                    🔄 Refresh
+                </button>
                 </div>
-                <div class="article-content">
-                    <h3 class="article-title"><a href="articles/data-crusader-journey/">The Data Crusader's Journey: Navigating Information Asymmetry</a></h3>
-                    <p class="article-excerpt">In the vast digital landscape of modern enterprise, information asymmetry reigns supreme. Like a crusader embarking on an epic quest, data professionals must navigate treacherous terrain where knowledge is power...</p>
-                    <div class="article-image">🦸‍♂️</div>
-                </div>
-                <div class="article-actions">
-                    <button class="action-button like-button" data-article-id="data-crusader-journey">👍 Like</button>
-                    <a href="articles/data-crusader-journey/#comments" class="action-button">💬 Comment</a>
-                    <button class="action-button share-button" data-article-id="data-crusader-journey">🔄 Repost</button>
-                    <button class="action-button">📤 Send</button>
-                </div>
-            </article>
 
-            <article class="card article-card" data-article-id="cosmic-data-flux">
-                <div class="article-header">
-                    <div class="article-avatar">🌌</div>
-                    <div class="article-info">
-                        <div class="article-author">Cosmic Analyst</div>
-                        <div class="article-meta">Data Architecture Lead • 3d</div>
-                    </div>
+            <!-- Dynamic Articles Container - Newest to Oldest -->
+            <div id="articles-container">
+                <!-- Articles will be loaded here dynamically from newest to oldest -->
                 </div>
-                <div class="article-content">
-                    <h3 class="article-title"><a href="articles/cosmic-data-flux/">Cosmic Data Flux: Building Enterprise Data Universes</a></h3>
-                    <p class="article-excerpt">Explore the infinite possibilities of data architecture and how enterprise systems create their own universe of information that spans across dimensions and organizational boundaries...</p>
-                    <div class="article-image">🌌</div>
-                </div>
-                <div class="article-actions">
-                    <button class="action-button like-button" data-article-id="cosmic-data-flux">👍 Like</button>
-                    <a href="articles/cosmic-data-flux/#comments" class="action-button">💬 Comment</a>
-                    <button class="action-button share-button" data-article-id="cosmic-data-flux">🔄 Repost</button>
-                    <button class="action-button">📤 Send</button>
-                </div>
-            </article>
-
-            <article class="card article-card" data-article-id="spinning-data-narrative">
-                <div class="article-header">
-                    <div class="article-avatar">🕷️</div>
-                    <div class="article-info">
-                        <div class="article-author">Web Weaver</div>
-                        <div class="article-meta">Analytics Specialist • 4d</div>
-                    </div>
-                </div>
-                <div class="article-content">
-                    <h3 class="article-title"><a href="articles/spinning-data-narrative/">Spinning the Data Narrative: Connecting Disparate Sources</a></h3>
-                    <p class="article-excerpt">Learn how to weave compelling data stories that connect disparate information sources into a cohesive web of knowledge that captures attention and drives action...</p>
-                    <div class="article-image">🕷️</div>
-                </div>
-                <div class="article-actions">
-                    <button class="action-button like-button" data-article-id="spinning-data-narrative">👍 Like</button>
-                    <a href="articles/spinning-data-narrative/#comments" class="action-button">💬 Comment</a>
-                    <button class="action-button share-button" data-article-id="spinning-data-narrative">🔄 Repost</button>
-                    <button class="action-button">📤 Send</button>
-                </div>
-            </article>
         </main>
 
         <aside class="right-sidebar">
