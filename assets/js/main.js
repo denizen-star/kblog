@@ -495,9 +495,14 @@ class PostManager {
     loadHomepageArticles() {
         // Only load articles on the homepage
         const pathname = window.location.pathname;
+        console.log('🔍 loadHomepageArticles called, pathname:', pathname);
+        console.log('🔍 Articles available:', this.articles.length);
         
         if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html')) {
+            console.log('✅ Homepage detected, calling renderHomepageArticles');
             this.renderHomepageArticles();
+        } else {
+            console.log('❌ Not homepage, skipping');
         }
     }
 
@@ -521,8 +526,13 @@ class PostManager {
     }
 
     renderHomepageArticles() {
+        console.log('🔍 renderHomepageArticles called');
         const container = document.getElementById('articles-container');
-        if (!container) return;
+        console.log('🔍 Container found:', !!container);
+        if (!container) {
+            console.log('❌ Articles container not found!');
+            return;
+        }
 
         // Sort articles by published date (newest first)
         const sortedArticles = [...this.articles].sort((a, b) => {
