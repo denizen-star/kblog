@@ -320,21 +320,46 @@ class ArticleEditor {
     }
 
     async saveArticleToFiles(articleData) {
-        // Create article directory
-        const articleDir = `../../articles/${articleData.slug}`;
-        
-        // Create article HTML file
-        const articleHTML = this.generateArticleHTML(articleData);
-        
-        // Create article directory and index.html file
-        await this.createArticleDirectory(articleData.slug, articleHTML);
-        
-        // Update articles.json
-        await this.updateArticlesJSON(articleData);
-        
-        // Save image if provided
-        if (articleData.featuredImage) {
-            await this.saveArticleImage(articleData);
+        try {
+            // Create FormData for the API request
+            const formData = new FormData();
+            
+            // Add all article data
+            formData.append('title', articleData.title);
+            formData.append('excerpt', articleData.excerpt || '');
+            formData.append('category', articleData.category);
+            formData.append('author', articleData.author);
+            formData.append('tags', articleData.tags.join(', '));
+            formData.append('content', articleData.content);
+            formData.append('featured', articleData.featured);
+            formData.append('comments', articleData.comments);
+            formData.append('notification', articleData.notification);
+            formData.append('slug', articleData.slug);
+            
+            // Add image if provided
+            if (articleData.featuredImage) {
+                formData.append('featuredImage', articleData.featuredImage);
+            }
+            
+            // Send to REAL API (Python server)
+            const response = await fetch('http://localhost:1978/api/create-article', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Failed to create article');
+            }
+            
+            const result = await response.json();
+            console.log('✅ Article created successfully:', result);
+            
+            return result;
+            
+        } catch (error) {
+            console.error('❌ Error creating article:', error);
+            throw error;
         }
     }
 
@@ -603,51 +628,37 @@ class ArticleEditor {
     }
 
     async createArticleDirectory(slug, htmlContent) {
-        // In a real application, this would make an API call to create the directory and file
-        // For now, we'll simulate this and provide instructions for manual creation
+        // This method is no longer needed as we handle everything in saveArticleToFiles
+        return Promise.resolve();
+    }
+
+    showManualCreationInstructions(slug, htmlContent) {
+        const instructions = `
+MANUAL ARTICLE CREATION REQUIRED:
+
+1. Create directory: mkdir -p articles/${slug}
+
+2. Create index.html file in articles/${slug}/ with the following content:
+${htmlContent}
+
+3. Create metadata.json file in articles/${slug}/ with article metadata
+
+4. Create comments.json file in articles/${slug}/ with empty comments array
+
+5. Update data/articles.json to include the new article
+
+6. If you uploaded an image, save it as assets/images/articles/${slug}.jpg
+        `;
         
-        console.log('Creating article directory: articles/' + slug);
-        console.log('Article HTML content generated');
+        console.log(instructions);
+        this.showNotification('Manual creation required. Check console for detailed instructions.', 'warning');
         
-        // Show instructions to the user
-        this.showNotification('Article files ready! Check console for file creation instructions.', 'info');
-        
-        // Store the HTML content for manual creation
+        // Store data for manual creation
         localStorage.setItem(`article_${slug}_html`, htmlContent);
-        
-        return Promise.resolve();
+        localStorage.setItem(`article_${slug}_instructions`, instructions);
     }
 
-    async updateArticlesJSON(articleData) {
-        // Get existing articles
-        const articlesResponse = await fetch('../../data/articles.json');
-        const articlesData = await articlesResponse.json();
-        
-        // Add new article to the beginning of the array
-        articlesData.articles.unshift(articleData);
-        
-        // Store updated data
-        localStorage.setItem('articles_json_update', JSON.stringify(articlesData));
-        
-        console.log('Updated articles.json with new article');
-        this.showNotification('Articles.json updated! Check console for update instructions.', 'info');
-        
-        return Promise.resolve();
-    }
-
-    async saveArticleImage(articleData) {
-        if (!articleData.featuredImage) return;
-        
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            // Store image data for manual saving
-            localStorage.setItem(`article_${articleData.slug}_image`, e.target.result);
-            console.log('Image data stored for article:', articleData.slug);
-        };
-        reader.readAsDataURL(articleData.featuredImage);
-        
-        return Promise.resolve();
-    }
+    // These methods are no longer needed as the API handles everything
 
     saveDraft() {
         const formData = new FormData(this.form);
