@@ -540,6 +540,7 @@ class PostManager {
         });
 
         console.log(`✅ Loaded ${sortedArticles.length} articles on homepage (newest to oldest)`);
+        console.log('📋 First article:', sortedArticles[0]?.title || 'No articles');
     }
 
     createArticleCard(article) {
