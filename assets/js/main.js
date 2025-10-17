@@ -104,6 +104,152 @@ class BlogManager {
             }
         });
     }
+
+    loadHomepageArticles() {
+        // Only load articles on the homepage
+        const pathname = window.location.pathname;
+        console.log('🔍 loadHomepageArticles called, pathname:', pathname);
+        console.log('🔍 Articles available:', this.articles.length);
+        
+        if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html')) {
+            console.log('✅ Homepage detected, calling renderHomepageArticles');
+            this.renderHomepageArticles();
+        } else {
+            console.log('❌ Not homepage, skipping');
+        }
+    }
+
+    async refreshHomepageArticles() {
+        // Only refresh on the homepage
+        const pathname = window.location.pathname;
+        if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html')) {
+            try {
+                // Reload articles data
+                const articlesResponse = await fetch('data/articles.json');
+                const articlesData = await articlesResponse.json();
+                this.articles = articlesData.articles;
+                
+                // Re-render articles
+                this.renderHomepageArticles();
+                console.log('🔄 Homepage articles refreshed');
+            } catch (error) {
+                console.error('Error refreshing articles:', error);
+            }
+        }
+    }
+
+    renderHomepageArticles() {
+        console.log('🔍 renderHomepageArticles called');
+        const container = document.getElementById('articles-container');
+        console.log('🔍 Container found:', !!container);
+        if (!container) {
+            console.log('❌ Articles container not found!');
+            return;
+        }
+
+        // Sort articles by published date (newest first)
+        const sortedArticles = [...this.articles].sort((a, b) => {
+            const dateA = new Date(a.published);
+            const dateB = new Date(b.published);
+            return dateB - dateA; // Newest first
+        });
+
+        // Clear container (including test element)
+        container.innerHTML = '';
+
+        // Add a test indicator
+        if (sortedArticles.length === 0) {
+            container.innerHTML = '<p style="color: red; padding: 20px; text-align: center;">No articles found</p>';
+            return;
+        }
+
+        // Render each article
+        sortedArticles.forEach(article => {
+            const articleElement = this.createArticleCard(article);
+            container.appendChild(articleElement);
+        });
+
+        console.log(`✅ Loaded ${sortedArticles.length} articles on homepage (newest to oldest)`);
+        console.log('📋 First article:', sortedArticles[0]?.title || 'No articles');
+    }
+
+    createArticleCard(article) {
+        const articleElement = document.createElement('article');
+        articleElement.className = 'card article-card';
+        articleElement.setAttribute('data-article-id', article.id);
+
+        // Calculate time ago
+        const timeAgo = this.getTimeAgo(article.published);
+
+        // Create article HTML
+        articleElement.innerHTML = `
+            <div class="article-header">
+                <div class="article-avatar">${article.author.avatar}</div>
+                <div class="article-info">
+                    <div class="article-author">${article.author.name}</div>
+                    <div class="article-meta">${article.author.role} • ${timeAgo}</div>
+                </div>
+            </div>
+            <div class="article-content">
+                <h3 class="article-title"><a href="articles/${article.id}/">${article.title}</a></h3>
+                <p class="article-excerpt">${article.excerpt}</p>
+                <div class="article-image">${this.getArticleImage(article)}</div>
+            </div>
+            <div class="article-actions">
+                <button class="action-button like-button" data-article-id="${article.id}">👍 Like</button>
+                <a href="articles/${article.id}/#comments" class="action-button">💬 Comment</a>
+                <button class="action-button share-button" data-article-id="${article.id}">🔄 Repost</button>
+                <button class="action-button">📤 Send</button>
+            </div>
+        `;
+
+        return articleElement;
+    }
+
+    getTimeAgo(publishedDate) {
+        const now = new Date();
+        const published = new Date(publishedDate);
+        const diffInSeconds = Math.floor((now - published) / 1000);
+
+        if (diffInSeconds < 60) {
+            return 'Just now';
+        } else if (diffInSeconds < 3600) {
+            const minutes = Math.floor(diffInSeconds / 60);
+            return `${minutes}m`;
+        } else if (diffInSeconds < 86400) {
+            const hours = Math.floor(diffInSeconds / 3600);
+            return `${hours}h`;
+        } else if (diffInSeconds < 2592000) {
+            const days = Math.floor(diffInSeconds / 86400);
+            return `${days}d`;
+        } else if (diffInSeconds < 31536000) {
+            const months = Math.floor(diffInSeconds / 2592000);
+            return `${months}mo`;
+        } else {
+            const years = Math.floor(diffInSeconds / 31536000);
+            return `${years}y`;
+        }
+    }
+
+    getArticleImage(article) {
+        // Check if article has a featured image
+        if (article.image && article.image !== 'placeholder.jpg') {
+            return `<img src="assets/images/articles/${article.image}" alt="${article.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">`;
+        }
+        
+        // Return author avatar as fallback
+        return article.author.avatar;
+    }
+
+    checkForRefreshFlag() {
+        // Check if we need to refresh due to new article creation
+        const refreshFlag = localStorage.getItem('refreshHomepage');
+        if (refreshFlag === 'true') {
+            console.log('🔄 New article detected, refreshing homepage...');
+            localStorage.removeItem('refreshHomepage');
+            this.refreshHomepageArticles();
+        }
+    }
 }
 
 // Search functionality
@@ -495,151 +641,28 @@ class PostManager {
         }
     }
 
-    loadHomepageArticles() {
-        // Only load articles on the homepage
-        const pathname = window.location.pathname;
-        console.log('🔍 loadHomepageArticles called, pathname:', pathname);
-        console.log('🔍 Articles available:', this.articles.length);
-        
-        if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html')) {
-            console.log('✅ Homepage detected, calling renderHomepageArticles');
-            this.renderHomepageArticles();
-        } else {
-            console.log('❌ Not homepage, skipping');
-        }
-    }
+}
 
-    async refreshHomepageArticles() {
-        // Only refresh on the homepage
-        const pathname = window.location.pathname;
-        if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html')) {
-            try {
-                // Reload articles data
-                const articlesResponse = await fetch('data/articles.json');
-                const articlesData = await articlesResponse.json();
-                this.articles = articlesData.articles;
-                
-                // Re-render articles
-                this.renderHomepageArticles();
-                console.log('🔄 Homepage articles refreshed');
-            } catch (error) {
-                console.error('Error refreshing articles:', error);
-            }
-        }
-    }
+// Initialize the blog when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 DOM loaded, initializing BlogManager...');
+    new BlogManager();
+});
 
-    renderHomepageArticles() {
-        console.log('🔍 renderHomepageArticles called');
-        const container = document.getElementById('articles-container');
-        console.log('🔍 Container found:', !!container);
-        if (!container) {
-            console.log('❌ Articles container not found!');
-            return;
-        }
+// Utility functions
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+}
 
-        // Sort articles by published date (newest first)
-        const sortedArticles = [...this.articles].sort((a, b) => {
-            const dateA = new Date(a.published);
-            const dateB = new Date(b.published);
-            return dateB - dateA; // Newest first
-        });
-
-        // Clear container (including test element)
-        container.innerHTML = '';
-
-        // Add a test indicator
-        if (sortedArticles.length === 0) {
-            container.innerHTML = '<p style="color: red; padding: 20px; text-align: center;">No articles found</p>';
-            return;
-        }
-
-        // Render each article
-        sortedArticles.forEach(article => {
-            const articleElement = this.createArticleCard(article);
-            container.appendChild(articleElement);
-        });
-
-        console.log(`✅ Loaded ${sortedArticles.length} articles on homepage (newest to oldest)`);
-        console.log('📋 First article:', sortedArticles[0]?.title || 'No articles');
-    }
-
-    createArticleCard(article) {
-        const articleElement = document.createElement('article');
-        articleElement.className = 'card article-card';
-        articleElement.setAttribute('data-article-id', article.id);
-
-        // Calculate time ago
-        const timeAgo = this.getTimeAgo(article.published);
-
-        // Create article HTML
-        articleElement.innerHTML = `
-            <div class="article-header">
-                <div class="article-avatar">${article.author.avatar}</div>
-                <div class="article-info">
-                    <div class="article-author">${article.author.name}</div>
-                    <div class="article-meta">${article.author.role} • ${timeAgo}</div>
-                </div>
-            </div>
-            <div class="article-content">
-                <h3 class="article-title"><a href="articles/${article.id}/">${article.title}</a></h3>
-                <p class="article-excerpt">${article.excerpt}</p>
-                <div class="article-image">${this.getArticleImage(article)}</div>
-            </div>
-            <div class="article-actions">
-                <button class="action-button like-button" data-article-id="${article.id}">👍 Like</button>
-                <a href="articles/${article.id}/#comments" class="action-button">💬 Comment</a>
-                <button class="action-button share-button" data-article-id="${article.id}">🔄 Repost</button>
-                <button class="action-button">📤 Send</button>
-            </div>
-        `;
-
-        return articleElement;
-    }
-
-    getTimeAgo(publishedDate) {
-        const now = new Date();
-        const published = new Date(publishedDate);
-        const diffInSeconds = Math.floor((now - published) / 1000);
-
-        if (diffInSeconds < 60) {
-            return 'Just now';
-        } else if (diffInSeconds < 3600) {
-            const minutes = Math.floor(diffInSeconds / 60);
-            return `${minutes}m`;
-        } else if (diffInSeconds < 86400) {
-            const hours = Math.floor(diffInSeconds / 3600);
-            return `${hours}h`;
-        } else if (diffInSeconds < 2592000) {
-            const days = Math.floor(diffInSeconds / 86400);
-            return `${days}d`;
-        } else if (diffInSeconds < 31536000) {
-            const months = Math.floor(diffInSeconds / 2592000);
-            return `${months}mo`;
-        } else {
-            const years = Math.floor(diffInSeconds / 31536000);
-            return `${years}y`;
-        }
-    }
-
-    getArticleImage(article) {
-        // Check if article has a featured image
-        if (article.image && article.image !== 'placeholder.jpg') {
-            return `<img src="assets/images/articles/${article.image}" alt="${article.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">`;
-        }
-        
-        // Return author avatar as fallback
-        return article.author.avatar;
-    }
-
-    checkForRefreshFlag() {
-        // Check if we need to refresh due to new article creation
-        const refreshFlag = localStorage.getItem('refreshHomepage');
-        if (refreshFlag === 'true') {
-            console.log('🔄 New article detected, refreshing homepage...');
-            localStorage.removeItem('refreshHomepage');
-            this.refreshHomepageArticles();
-        }
-    }
+function calculateReadTime(content) {
+    const wordsPerMinute = 200;
+    const wordCount = content.split(' ').length;
+    return Math.ceil(wordCount / wordsPerMinute);
 }
 
 // Export for use in other modules
