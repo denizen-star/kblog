@@ -8,15 +8,9 @@ class BlogConfig {
     }
 
     detectEnvironment() {
-        // Check if we're running on localhost (development)
+        // Simple fix: if hostname contains kervinapps.com, it's production
         const hostname = window.location.hostname;
-        const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.includes('kervinleacock');
-        
-        // Check if we're on the production domain
-        const isProduction = hostname === 'kblog.kervinapps.com' || hostname.includes('kervinapps.com');
-        
-        // Return true for development (localhost or kervinleacock), false for production
-        return isLocalhost && !isProduction;
+        return !hostname.includes('kervinapps.com');
     }
 
     getConfig() {
