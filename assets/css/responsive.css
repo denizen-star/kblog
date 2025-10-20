@@ -176,7 +176,6 @@
     
     .article-body {
         padding: var(--spacing-lg) var(--spacing-md);
-        margin-top: var(--spacing-md);
     }
     
     .article-lead {
@@ -245,90 +244,9 @@
         padding: var(--spacing-xs) var(--spacing-sm);
     }
     
-    /* Article sidebar mobile styles - make more compact */
+    /* Hide sidebar completely on mobile for cleaner reading experience */
     .article-sidebar {
-        order: -1;
-        gap: var(--spacing-md);
-        margin-bottom: var(--spacing-lg);
-    }
-    
-    .author-card {
-        padding: var(--spacing-md);
-        margin-bottom: var(--spacing-sm);
-    }
-    
-    .author-card-header {
-        flex-direction: row;
-        text-align: left;
-        gap: var(--spacing-sm);
-        margin-bottom: var(--spacing-sm);
-    }
-    
-    .author-avatar-sidebar {
-        width: 40px;
-        height: 40px;
-        font-size: var(--font-size-md);
-        flex-shrink: 0;
-    }
-    
-    .author-info-sidebar h3 {
-        font-size: var(--font-size-sm);
-        margin-bottom: 2px;
-    }
-    
-    .author-info-sidebar p {
-        font-size: var(--font-size-xs);
-    }
-    
-    .author-bio {
-        font-size: var(--font-size-xs);
-        line-height: 1.4;
-        margin-bottom: var(--spacing-sm);
-    }
-    
-    .author-stats {
-        justify-content: space-between;
-        gap: var(--spacing-md);
-    }
-    
-    .author-stat {
-        text-align: center;
-    }
-    
-    .stat-number {
-        font-size: var(--font-size-sm);
-    }
-    
-    .stat-label {
-        font-size: var(--font-size-xs);
-    }
-    
-    .newsletter-card {
-        padding: var(--spacing-md);
-    }
-    
-    .newsletter-card h3 {
-        font-size: var(--font-size-sm);
-        margin-bottom: var(--spacing-xs);
-    }
-    
-    .newsletter-card p {
-        font-size: var(--font-size-xs);
-        margin-bottom: var(--spacing-sm);
-    }
-    
-    .newsletter-form {
-        gap: var(--spacing-xs);
-    }
-    
-    .newsletter-form input {
-        padding: var(--spacing-xs) var(--spacing-sm);
-        font-size: var(--font-size-xs);
-    }
-    
-    .newsletter-form button {
-        padding: var(--spacing-xs) var(--spacing-sm);
-        font-size: var(--font-size-xs);
+        display: none;
     }
     
     /* Breadcrumb mobile styles */
