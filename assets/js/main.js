@@ -128,13 +128,23 @@ class BlogManager {
         // Hide navigation items that are restricted by feature flags
         const featureRestrictedItems = document.querySelectorAll('[data-feature]');
         
+        console.log('Environment check:', {
+            hostname: window.location.hostname,
+            isDevelopment: window.blogConfig.isDevelopment,
+            showArticlesPage: window.blogConfig.showArticlesPage
+        });
+        
         featureRestrictedItems.forEach(item => {
             const feature = item.getAttribute('data-feature');
-            if (!window.blogConfig.isFeatureEnabled(feature)) {
+            const isEnabled = window.blogConfig.isFeatureEnabled(feature);
+            console.log(`Feature ${feature}: ${isEnabled ? 'enabled' : 'disabled'}`);
+            
+            if (!isEnabled) {
                 // Hide the entire list item (parent <li>)
                 const listItem = item.closest('li');
                 if (listItem) {
                     listItem.style.display = 'none';
+                    console.log(`Hidden ${feature} navigation item`);
                 }
             }
         });
