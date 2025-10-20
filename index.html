@@ -140,5 +140,16 @@
     <!-- JavaScript -->
     <script src="assets/js/config.js"></script>
     <script src="assets/js/main.js?v=4&t=1732092000000"></script>
+    <script>
+        // Simple fix: hide Articles link on production
+        if (window.location.hostname.includes('kervinapps.com')) {
+            document.addEventListener('DOMContentLoaded', function() {
+                const articlesLink = document.querySelector('a[href="articles/"]');
+                if (articlesLink) {
+                    articlesLink.closest('li').style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
