@@ -1096,6 +1096,31 @@ body {
     line-height: 1.7;
 }
 
+/* Mobile-friendly table styles */
+.article-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-lg) 0;
+    font-size: var(--font-size-sm);
+}
+
+.article-body table th,
+.article-body table td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.article-body table th {
+    background-color: var(--background-color);
+    font-weight: 600;
+    color: var(--black);
+}
+
+.article-body table tr:hover {
+    background-color: rgba(106, 123, 154, 0.05);
+}
+
 .article-lead {
     font-size: var(--font-size-lg);
     color: var(--text-gray);
@@ -1116,6 +1141,22 @@ body {
     font-weight: 600;
     color: var(--black);
     margin: var(--spacing-xl) 0 var(--spacing-md);
+    line-height: 1.4;
+}
+
+.article-body h4 {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--black);
+    margin: var(--spacing-lg) 0 var(--spacing-sm);
+    line-height: 1.4;
+}
+
+.article-body h5 {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--black);
+    margin: var(--spacing-md) 0 var(--spacing-xs);
     line-height: 1.4;
 }
 
@@ -1140,6 +1181,45 @@ body {
 
 .article-body strong {
     font-weight: 600;
+    color: var(--black);
+}
+
+.article-body em {
+    font-style: italic;
+    color: var(--text-gray);
+}
+
+.article-body blockquote {
+    border-left: 4px solid var(--primary-color);
+    padding-left: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+    font-style: italic;
+    color: var(--text-gray);
+    background-color: rgba(106, 123, 154, 0.05);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-sm);
+}
+
+.article-body code {
+    background-color: var(--background-color);
+    padding: 2px 4px;
+    border-radius: var(--border-radius-sm);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--primary-color);
+}
+
+.article-body pre {
+    background-color: var(--background-color);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-sm);
+    overflow-x: auto;
+    margin: var(--spacing-lg) 0;
+}
+
+.article-body pre code {
+    background: none;
+    padding: 0;
     color: var(--black);
 }
 
