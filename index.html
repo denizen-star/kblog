@@ -57,7 +57,7 @@
             
             <ul class="nav-menu">
                 <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="articles/">Articles</a></li>
+                <li><a href="articles/" data-feature="showArticlesPage">Articles</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -67,30 +67,18 @@
     <main class="main-container">
 
         <main class="main-content">
-            <div class="card create-post">
-                <form class="post-form" id="post-form">
-                <div class="post-input">
-                    <div class="post-avatar">KT</div>
-                        <textarea class="post-textarea" placeholder="Share an insight about data architecture..." name="content" required></textarea>
-                </div>
-                <div class="post-actions">
-                        <button type="button" class="post-action" data-type="video">📹 Video</button>
-                        <button type="button" class="post-action" data-type="photo">📷 Photo</button>
-                        <button type="button" class="post-action" data-type="article">📝 Article</button>
-                        <button type="submit" class="post-submit">Post</button>
-                    </div>
-                    <div class="image-upload-container" style="display: none;">
-                        <input type="file" class="image-upload" accept="image/*" name="image">
-                        <div class="image-preview"></div>
-                    </div>
-                </form>
-                </div>
 
             <!-- Articles Header with Refresh Button -->
             <div class="articles-header">
                 <h2>Latest Articles</h2>
                 <button id="refresh-articles-btn" class="refresh-btn" title="Refresh articles">
-                    🔄 Refresh
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                        <path d="M21 3v5h-5"/>
+                        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                        <path d="M3 21v-5h5"/>
+                    </svg>
+                    Refresh
                 </button>
                 </div>
 
@@ -109,17 +97,6 @@
                 <a href="#" class="profile-company">Kerv Talks-Data Blog</a>
             </div>
 
-            <div class="card stats-card">
-                <h3 class="stats-title">Your activity</h3>
-                <div class="stat-item">
-                    <span class="stat-label">Articles read</span>
-                    <span class="stat-value">24</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Connections</span>
-                    <span class="stat-value">156</span>
-                </div>
-            </div>
 
             <div class="card quick-links">
                 <h3 class="quick-links-title">Quick links</h3>
@@ -151,31 +128,6 @@
                 <a href="#" class="show-more">Show more</a>
             </div>
 
-            <div class="card puzzles-card">
-                <h3 class="news-title">Today's challenges</h3>
-                <div class="puzzle-item">
-                    <div class="puzzle-icon">📊</div>
-                    <div class="puzzle-info">
-                        <div class="puzzle-name">Data Architecture Quiz</div>
-                        <div class="puzzle-players">45 connections played</div>
-                    </div>
-                </div>
-                <div class="puzzle-item">
-                    <div class="puzzle-icon">🧩</div>
-                    <div class="puzzle-info">
-                        <div class="puzzle-name">Analytics Puzzle</div>
-                        <div class="puzzle-players">32 connections played</div>
-                    </div>
-                </div>
-                <div class="puzzle-item">
-                    <div class="puzzle-icon">🎯</div>
-                    <div class="puzzle-info">
-                        <div class="puzzle-name">Data Strategy Challenge</div>
-                        <div class="puzzle-players">28 connections played</div>
-                    </div>
-                </div>
-                <a href="#" class="show-more">Show more</a>
-            </div>
         </aside>
     </main>
 

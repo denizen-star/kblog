@@ -24,14 +24,28 @@ class BlogConfig {
                 apiBaseUrl: 'http://localhost:1977',
                 staticBaseUrl: 'http://localhost:1978',
                 environment: 'development',
-                corsEnabled: true
+                corsEnabled: true,
+                // Feature flags for development
+                features: {
+                    showArticlesPage: true,
+                    showCreateArticle: true,
+                    showDebugInfo: true,
+                    enableDevTools: true
+                }
             };
         } else {
             return {
                 apiBaseUrl: 'https://kblog.kervinapps.com',
                 staticBaseUrl: 'https://kblog.kervinapps.com',
                 environment: 'production',
-                corsEnabled: false
+                corsEnabled: false,
+                // Feature flags for production
+                features: {
+                    showArticlesPage: false,  // Hide articles page in production
+                    showCreateArticle: false, // Hide create article in production
+                    showDebugInfo: false,
+                    enableDevTools: false
+                }
             };
         }
     }
@@ -73,14 +87,38 @@ class BlogConfig {
         return this.getApiUrl(`api/articles/${slug}/stats`);
     }
 
+    // Feature flag methods
+    isFeatureEnabled(feature) {
+        return this.config.features[feature] || false;
+    }
+
+    get showArticlesPage() {
+        return this.isFeatureEnabled('showArticlesPage');
+    }
+
+    get showCreateArticle() {
+        return this.isFeatureEnabled('showCreateArticle');
+    }
+
+    get showDebugInfo() {
+        return this.isFeatureEnabled('showDebugInfo');
+    }
+
+    get enableDevTools() {
+        return this.isFeatureEnabled('enableDevTools');
+    }
+
     // Log configuration for debugging
     logConfig() {
-        console.log('🔧 Blog Configuration:', {
-            environment: this.config.environment,
-            apiBaseUrl: this.config.apiBaseUrl,
-            staticBaseUrl: this.config.staticBaseUrl,
-            isDevelopment: this.isDevelopment
-        });
+        if (this.showDebugInfo) {
+            console.log('🔧 Blog Configuration:', {
+                environment: this.config.environment,
+                apiBaseUrl: this.config.apiBaseUrl,
+                staticBaseUrl: this.config.staticBaseUrl,
+                isDevelopment: this.isDevelopment,
+                features: this.config.features
+            });
+        }
     }
 }
 

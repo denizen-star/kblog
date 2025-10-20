@@ -50,13 +50,27 @@ class BlogManager {
     }
 
     initializeComponents() {
-        this.searchManager = new SearchManager(this.articles);
+        this.searchManager = new SearchManager(this.articles, this);
         this.commentsManager = new CommentsManager(this.comments);
         this.imageUploadManager = new ImageUploadManager();
         this.postManager = new PostManager();
         
+        // Hide environment-restricted components
+        this.hideEnvironmentRestrictedComponents();
+        
         // Homepage articles will be loaded in init() after data is ready
         
+    }
+
+    hideEnvironmentRestrictedComponents() {
+        // Hide post creation form if not enabled
+        const postForm = document.querySelector('#post-form');
+        if (postForm && !window.blogConfig.showCreateArticle) {
+            const postCard = postForm.closest('.create-post');
+            if (postCard) {
+                postCard.style.display = 'none';
+            }
+        }
     }
 
     setupEventListeners() {
@@ -64,7 +78,19 @@ class BlogManager {
         document.addEventListener('DOMContentLoaded', () => {
             this.updateArticleStats();
             this.setupNavigation();
+            this.setupRefreshButton();
         });
+    }
+
+    setupRefreshButton() {
+        const refreshBtn = document.getElementById('refresh-articles-btn');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', () => {
+                this.loadData().then(() => {
+                    this.renderHomepageArticles();
+                });
+            });
+        }
     }
 
     updateArticleStats() {
@@ -81,6 +107,9 @@ class BlogManager {
     }
 
     setupNavigation() {
+        // Hide navigation items based on feature flags
+        this.hideFeatureRestrictedItems();
+        
         // Add active class to current page navigation
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         const navLinks = document.querySelectorAll('.nav-menu a');
@@ -95,11 +124,31 @@ class BlogManager {
         });
     }
 
+    hideFeatureRestrictedItems() {
+        // Hide navigation items that are restricted by feature flags
+        const featureRestrictedItems = document.querySelectorAll('[data-feature]');
+        
+        featureRestrictedItems.forEach(item => {
+            const feature = item.getAttribute('data-feature');
+            if (!window.blogConfig.isFeatureEnabled(feature)) {
+                // Hide the entire list item (parent <li>)
+                const listItem = item.closest('li');
+                if (listItem) {
+                    listItem.style.display = 'none';
+                }
+            }
+        });
+    }
+
     loadHomepageArticles() {
-        // Only load articles on the homepage
+        // Load articles on both homepage and articles page
         const pathname = window.location.pathname;
         
-        if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html')) {
+        // Check if we're on homepage or articles page
+        const isHomepage = pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html');
+        const isArticlesPage = pathname.includes('/articles/') || pathname.endsWith('/articles') || pathname.includes('/articles/index.html');
+        
+        if (isHomepage || isArticlesPage) {
             this.renderHomepageArticles();
         }
     }
@@ -121,7 +170,8 @@ class BlogManager {
 
         // Add a test indicator
         if (sortedArticles.length === 0) {
-            container.innerHTML = '<div style="color: #666; padding: 40px; text-align: center; background: #f8f9fa; border-radius: 8px; margin: 20px 0;"><h3>No articles found</h3><p>Start writing your first article to see it here!</p><a href="articles/create/" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">Create Article</a></div>';
+            const createLink = this.getCreateArticleLink();
+            container.innerHTML = `<div style="color: #666; padding: 40px; text-align: center; background: #f8f9fa; border-radius: 8px; margin: 20px 0;"><h3>No articles found</h3><p>Start writing your first article to see it here!</p><a href="${createLink}" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">Create Article</a></div>`;
             console.log('📝 No articles found - showing empty state');
             return;
         }
@@ -153,7 +203,7 @@ class BlogManager {
                 </div>
             </div>
             <div class="article-content">
-                <h3 class="article-title"><a href="articles/${article.id}/">${article.title}</a></h3>
+                <h3 class="article-title"><a href="${this.getArticleLink(article.id)}">${article.title}</a></h3>
                 <p class="article-excerpt">${article.excerpt}</p>
                 <div class="article-image">${this.getArticleImage(article)}</div>
             </div>
@@ -187,11 +237,30 @@ class BlogManager {
         }
     }
 
+    getArticleLink(articleId) {
+        // Determine correct article link path based on current page
+        const pathname = window.location.pathname;
+        const isArticlesPage = pathname.includes('/articles/');
+        return isArticlesPage ? `${articleId}/` : `articles/${articleId}/`;
+    }
+
+    getCreateArticleLink() {
+        // Determine correct create article link path based on current page
+        const pathname = window.location.pathname;
+        const isArticlesPage = pathname.includes('/articles/');
+        return isArticlesPage ? 'create/' : 'articles/create/';
+    }
+
     getArticleImage(article) {
         // Check if article has a featured image and it's not a placeholder
         if (article.image && article.image !== 'placeholder.jpg' && article.image !== '') {
+            // Determine correct image path based on current page
+            const pathname = window.location.pathname;
+            const isArticlesPage = pathname.includes('/articles/');
+            const imagePath = isArticlesPage ? `../assets/images/articles/${article.image}` : `assets/images/articles/${article.image}`;
+            
             // Create image with error handling
-            return `<img src="assets/images/articles/${article.image}" alt="${article.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            return `<img src="${imagePath}" alt="${article.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div style="display: none; width: 100%; height: 200px; background: linear-gradient(45deg, #6A7B9A, #8B9DC3); border-radius: 8px; align-items: center; justify-content: center; color: white; font-size: 3rem;">${article.author.avatar}</div>`;
         }
         
@@ -203,8 +272,9 @@ class BlogManager {
 
 // Search functionality
 class SearchManager {
-    constructor(articles) {
+    constructor(articles, blogManager) {
         this.articles = articles;
+        this.blogManager = blogManager;
         this.searchInput = document.querySelector('.search-bar input');
         this.searchResults = document.querySelector('.search-results');
         this.init();
@@ -243,7 +313,7 @@ class SearchManager {
         } else {
             const resultsHTML = results.map(article => `
                 <div class="search-result-item">
-                    <h4><a href="articles/${article.id}/">${article.title}</a></h4>
+                    <h4><a href="${this.blogManager.getArticleLink(article.id)}">${article.title}</a></h4>
                     <p>${article.excerpt}</p>
                     <span class="search-meta">${article.author.name} • ${article.readTime} min read</span>
                 </div>
@@ -496,7 +566,10 @@ class PostManager {
             this.toggleImageUpload();
         } else if (type === 'article') {
             // Redirect to article creation page
-            window.location.href = 'articles/create/';
+            const pathname = window.location.pathname;
+            const isArticlesPage = pathname.includes('/articles/');
+            const createLink = isArticlesPage ? 'create/' : 'articles/create/';
+            window.location.href = createLink;
         } else if (type === 'video') {
             // Handle video upload
             alert('Video upload functionality coming soon!');

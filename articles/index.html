@@ -58,7 +58,7 @@
             
             <ul class="nav-menu">
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="index.html" class="active">Articles</a></li>
+                <li><a href="index.html" class="active" data-feature="showArticlesPage">Articles</a></li>
                 <li><a href="../about.html">About</a></li>
                 <li><a href="../contact.html">Contact</a></li>
             </ul>
@@ -66,39 +66,98 @@
     </header>
 
     <main class="main-container">
-        <div class="articles-header">
-            <h1>Articles</h1>
-            <p class="articles-subtitle">Professional insights on data architecture, information asymmetry, and enterprise strategies</p>
-            
-            <div class="articles-filters">
-                <div class="filter-group">
-                    <label for="category-filter">Category:</label>
-                    <select id="category-filter" class="filter-select">
-                        <option value="">All Categories</option>
-                        <option value="Strategy">Strategy</option>
-                        <option value="Architecture">Architecture</option>
-                        <option value="Analytics">Analytics</option>
-                    </select>
-        </div>
+        <main class="main-content">
+            <div class="card create-post">
+                <form class="post-form" id="post-form">
+                <div class="post-input">
+                    <div class="post-avatar">KT</div>
+                        <textarea class="post-textarea" placeholder="Share an insight about data architecture..." name="content" required></textarea>
+                </div>
+                <div class="post-actions">
+                        <button type="button" class="post-action" data-type="video">📹 Video</button>
+                        <button type="button" class="post-action" data-type="photo">📷 Photo</button>
+                        <button type="button" class="post-action" data-type="article">📝 Article</button>
+                        <button type="submit" class="post-submit">Post</button>
+                    </div>
+                    <div class="image-upload-container" style="display: none;">
+                        <input type="file" class="image-upload" accept="image/*" name="image">
+                        <div class="image-preview"></div>
+                    </div>
+                </form>
+                </div>
 
-                <div class="filter-group">
-                    <label for="sort-filter">Sort by:</label>
-                    <select id="sort-filter" class="filter-select">
-                        <option value="date">Date</option>
-                        <option value="popularity">Popularity</option>
-                        <option value="title">Title</option>
-                    </select>
+            <!-- Articles Header with Refresh Button -->
+            <div class="articles-header">
+                <h2>Latest Articles</h2>
+                <button id="refresh-articles-btn" class="refresh-btn" title="Refresh articles">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                        <path d="M21 3v5h-5"/>
+                        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                        <path d="M3 21v-5h5"/>
+                    </svg>
+                    Refresh
+                </button>
+                </div>
+
+            <!-- Dynamic Articles Container - Newest to Oldest -->
+            <div id="articles-container">
+                <!-- Articles will be loaded here dynamically from newest to oldest -->
+                </div>
+        </main>
+
+        <aside class="right-sidebar">
+            <div class="card profile-card">
+                <div class="profile-banner"></div>
+                <div class="profile-avatar">KT</div>
+                <h2 class="profile-name">Kerv Talks-Data</h2>
+                <p class="profile-title">Information Asymmetry Experts</p>
+                <a href="#" class="profile-company">Kerv Talks-Data Blog</a>
+            </div>
+
+            <div class="card stats-card">
+                <h3 class="stats-title">Your activity</h3>
+                <div class="stat-item">
+                    <span class="stat-label">Articles read</span>
+                    <span class="stat-value">24</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Connections</span>
+                    <span class="stat-value">156</span>
                 </div>
             </div>
-        </div>
 
-        <div class="articles-grid" id="articles-grid">
-            <!-- Articles will be loaded dynamically -->
-        </div>
+            <div class="card quick-links">
+                <h3 class="quick-links-title">Quick links</h3>
+                <a href="#" class="quick-link">📚 Saved articles</a>
+                <a href="#" class="quick-link">👥 Data groups</a>
+                <a href="#" class="quick-link">📧 Newsletter</a>
+                <a href="#" class="quick-link">📅 Events</a>
+            </div>
 
-        <div class="pagination" id="pagination">
-            <!-- Pagination will be generated dynamically -->
-        </div>
+            <div class="card premium-card">
+                <h3 class="premium-title">Premium insights</h3>
+                <p class="premium-text">Get exclusive access to advanced data strategies and enterprise case studies.</p>
+            </div>
+
+            <div class="card news-card">
+                <h3 class="news-title">Kerv Talks-Data News</h3>
+                <div class="news-item">
+                    <div class="news-headline">Enterprise data architecture trends for 2024</div>
+                    <div class="news-meta">2h ago • 1,234 readers</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-headline">Information asymmetry in AI-driven organizations</div>
+                    <div class="news-meta">4h ago • 892 readers</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-headline">Data governance best practices</div>
+                    <div class="news-meta">6h ago • 1,567 readers</div>
+                </div>
+                <a href="#" class="show-more">Show more</a>
+            </div>
+
+        </aside>
     </main>
 
     <footer class="footer">
@@ -110,6 +169,5 @@
     <!-- JavaScript -->
     <script src="../assets/js/config.js"></script>
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/articles.js"></script>
 </body>
 </html>

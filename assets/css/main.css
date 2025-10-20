@@ -174,18 +174,23 @@ body {
 }
 
 .refresh-btn {
-    background: #6A7B9A;
-    color: white;
-    border: none;
+    background: transparent;
+    color: #6A7B9A;
+    border: 1px solid #e0e0e0;
     padding: 0.5rem 1rem;
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.9rem;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .refresh-btn:hover {
-    background: #5a6b8a;
+    background: #f8f9fa;
+    border-color: #6A7B9A;
+    color: #5a6b8a;
 }
 
 .refresh-btn:active {
