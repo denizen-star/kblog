@@ -551,6 +551,13 @@
     <script>
         // Simple fix: hide Articles link on production
         if (window.location.hostname.includes('kervinapps.com')) {
+            // Hide immediately
+            const articlesLink = document.querySelector('a[href="articles/"]');
+            if (articlesLink) {
+                articlesLink.closest('li').style.display = 'none';
+            }
+            
+            // Also hide on DOM ready as backup
             document.addEventListener('DOMContentLoaded', function() {
                 const articlesLink = document.querySelector('a[href="articles/"]');
                 if (articlesLink) {
