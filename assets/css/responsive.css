@@ -128,7 +128,9 @@
     
     /* Article page mobile styles */
     .article-main-container {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-md);
+        max-width: 100%;
+        box-sizing: border-box;
     }
     
     .article-layout {
@@ -137,7 +139,9 @@
     }
     
     .article-header-full {
-        padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg);
+        padding: var(--spacing-lg) var(--spacing-md);
+        max-width: 100%;
+        box-sizing: border-box;
     }
     
     .article-title-full {
@@ -175,7 +179,10 @@
     }
     
     .article-body {
-        padding: var(--spacing-lg) var(--spacing-md);
+        padding: var(--spacing-md);
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
     }
     
     .article-lead {
@@ -272,12 +279,16 @@
     
     .article-content {
         overflow-x: hidden;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     
     .article-body {
         overflow-x: hidden;
         word-wrap: break-word;
         overflow-wrap: break-word;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     
     /* Additional mobile improvements */
