@@ -1,0 +1,58 @@
+{
+  "id": "ai-i-foundational-framework-the-economic-reality-of-internal-information-asymmetry",
+  "slug": "ai-i-foundational-framework-the-economic-reality-of-internal-information-asymmetry",
+  "title": "AI - I. Foundational Framework: The Economic Reality of Internal Information Asymmetry",
+  "excerpt": "Information Asymmetry: The Economic Reality of Internal Information Asymmetry  is a core management issue where one party has superior data, creating an imbalance. In corporations, this principal-agent problem causes adverse selection (pre-relationship information failures) and unobservable actions (moral hazard), leading to inefficient capital allocation and requiring strict monitoring.",
+  "author": {
+    "id": "data-crusader",
+    "name": "Data Crusader",
+    "role": "Head of Data Strategy",
+    "avatar": "🦸‍♂️",
+    "bio": "A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.",
+    "articles": 16,
+    "followers": 1247
+  },
+  "published": "2025-10-20T14:16:40.403Z",
+  "updated": "2025-10-20T14:16:40.407Z",
+  "status": "published",
+  "readTime": 6,
+  "category": "Strategy",
+  "tags": [
+    "Budget",
+    "Data",
+    "Enterprise"
+  ],
+  "image": {
+    "featured": "ai-i-foundational-framework-the-economic-reality-of-internal-information-asymmetry.jpg",
+    "alt": "AI - I. Foundational Framework: The Economic Reality of Internal Information Asymmetry featured image"
+  },
+  "stats": {
+    "views": 0,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0
+  },
+  "seo": {
+    "metaTitle": "AI - I. Foundational Framework: The Economic Reality of Internal Information Asymmetry - Kerv Talks-Data Blog",
+    "metaDescription": "Information Asymmetry: The Economic Reality of Internal Information Asymmetry  is a core management issue where one party has superior data, creating an imbalance. In corporations, this principal-agent problem causes adverse selection (pre-relationship information failures) and unobservable actions (moral hazard), leading to inefficient capital allocation and requiring strict monitoring.",
+    "keywords": [
+      "Budget",
+      "Data",
+      "Enterprise"
+    ],
+    "canonical": "https://kervtalksdata.com/articles/ai-i-foundational-framework-the-economic-reality-of-internal-information-asymmetry/"
+  },
+  "settings": {
+    "featured": false,
+    "allowComments": false,
+    "notifySubscribers": false,
+    "archived": false
+  },
+  "content": {
+    "wordCount": 1127,
+    "characterCount": 26965,
+    "hasImages": false,
+    "hasCode": false,
+    "readingLevel": "intermediate"
+  }
+}

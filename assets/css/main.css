@@ -492,30 +492,6 @@ body {
     margin-bottom: var(--spacing-md);
 }
 
-.article-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-lg);
-    border-top: 1px solid var(--background-color);
-}
-
-.action-button {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius-sm);
-    text-decoration: none;
-    color: var(--text-gray);
-    font-size: var(--font-size-sm);
-    font-weight: 500;
-    transition: background-color var(--transition-fast);
-}
-
-.action-button:hover {
-    background-color: var(--background-color);
-}
 
 /* Right Sidebar */
 .right-sidebar {
@@ -727,16 +703,6 @@ body {
     color: var(--primary-color);
 }
 
-/* Action Buttons */
-.action-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.action-button.liked {
-    color: var(--primary-color);
-}
 
 /* Articles Page Styles */
 .articles-header {
@@ -1008,7 +974,7 @@ body {
 
 .article-layout {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 4fr 1fr;
     gap: var(--spacing-xxxl);
     margin-bottom: var(--spacing-xxxl);
 }
@@ -1197,50 +1163,6 @@ body {
     border-top: 1px solid var(--background-color);
 }
 
-.action-button {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-sm) var(--spacing-lg);
-    border: 1px solid var(--border-gray);
-    background-color: var(--white);
-    color: var(--text-gray);
-    border-radius: var(--border-radius-sm);
-    font-size: var(--font-size-sm);
-    font-weight: 500;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-}
-
-.action-button:hover {
-    background-color: var(--background-color);
-    color: var(--black);
-}
-
-.action-button.liked,
-.action-button.bookmarked {
-    background-color: var(--primary-color);
-    color: var(--white);
-    border-color: var(--primary-color);
-}
-
-.action-icon {
-    font-size: var(--font-size-sm);
-}
-
-.action-count {
-    font-size: var(--font-size-xs);
-    background-color: var(--background-color);
-    color: var(--text-gray);
-    padding: 2px 6px;
-    border-radius: 10px;
-    margin-left: var(--spacing-xs);
-}
-
-.action-button.liked .action-count {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: var(--white);
-}
 
 /* Article Sidebar */
 .article-sidebar {
@@ -1947,33 +1869,6 @@ body {
     font-weight: bold;
 }
 
-/* SEO Preview */
-.seo-preview {
-    border: 1px solid var(--border-gray);
-    border-radius: var(--border-radius-sm);
-    padding: var(--spacing-md);
-    background-color: var(--white);
-}
-
-.seo-title {
-    font-size: var(--font-size-md);
-    font-weight: 600;
-    color: #1a0dab;
-    margin-bottom: var(--spacing-xs);
-    line-height: 1.3;
-}
-
-.seo-url {
-    font-size: var(--font-size-xs);
-    color: #006621;
-    margin-bottom: var(--spacing-xs);
-}
-
-.seo-description {
-    font-size: var(--font-size-xs);
-    color: #545454;
-    line-height: 1.4;
-}
 
 /* Writing Tips */
 .tips-list {

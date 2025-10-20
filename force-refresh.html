@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Force Refresh - Kerv Talks-Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .success {
+            color: #28a745;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .info {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            margin: 10px;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success">✅ Cache Cleared Successfully!</div>
+        <div class="info">
+            <p>All cached data has been cleared from your browser.</p>
+            <p>The blog should now show the correct empty state.</p>
+        </div>
+        <a href="index.html" class="button">Go to Homepage</a>
+        <a href="articles/create/" class="button">Create Article</a>
+    </div>
+
+    <script>
+        // Clear all storage
+        localStorage.clear();
+        sessionStorage.clear();
+        
+        // Specifically target article localStorage keys
+        const articleKeys = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && (key.startsWith('article_') || key.includes('draft') || key.includes('autosave'))) {
+                articleKeys.push(key);
+                localStorage.removeItem(key);
+            }
+        }
+        console.log('🧹 All storage cleared from force-refresh page - Removed', articleKeys.length, 'article keys');
+        
+        // Redirect after 3 seconds
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 3000);
+    </script>
+</body>
+</html>

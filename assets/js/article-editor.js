@@ -37,17 +37,6 @@ class ArticleEditor {
             this.autoSave();
         }, 30000);
 
-        // SEO preview updates
-        const titleInput = document.getElementById('article-title');
-        const excerptInput = document.getElementById('article-excerpt');
-        
-        if (titleInput) {
-            titleInput.addEventListener('input', this.updateSEOPreview.bind(this));
-        }
-        
-        if (excerptInput) {
-            excerptInput.addEventListener('input', this.updateSEOPreview.bind(this));
-        }
     }
 
     setupRichTextEditor() {
@@ -72,7 +61,6 @@ class ArticleEditor {
         // Content change tracking
         this.editorContent.addEventListener('input', () => {
             this.updateWordCount();
-            this.updateSEOPreview();
         });
 
         // Placeholder functionality
@@ -191,21 +179,6 @@ class ArticleEditor {
         if (readingTimeEl) readingTimeEl.textContent = `${readingTime} min`;
     }
 
-    updateSEOPreview() {
-        const title = document.getElementById('article-title').value;
-        const excerpt = document.getElementById('article-excerpt').value;
-        
-        const seoTitle = document.getElementById('seo-title');
-        const seoDescription = document.getElementById('seo-description');
-
-        if (seoTitle) {
-            seoTitle.textContent = title || 'Your article title will appear here';
-        }
-
-        if (seoDescription) {
-            seoDescription.textContent = excerpt || 'Your article description will appear here';
-        }
-    }
 
     handleSubmit(event) {
         event.preventDefault();
@@ -292,7 +265,6 @@ class ArticleEditor {
                 this.showNotification('Article published successfully!', 'success');
                 
                 // Set flag to refresh homepage
-                localStorage.setItem('refreshHomepage', 'true');
                 
                 // Redirect to the new article
                 setTimeout(() => {
@@ -344,8 +316,8 @@ class ArticleEditor {
                 formData.append('featuredImage', articleData.featuredImage);
             }
             
-            // Send to REAL API (Python server)
-            const response = await fetch('http://localhost:1978/api/create-article', {
+            // Send to REAL API (environment-aware)
+            const response = await fetch(window.blogConfig.createArticleUrl, {
                 method: 'POST',
                 body: formData
             });
@@ -657,8 +629,6 @@ ${htmlContent}
         this.showNotification('Manual creation required. Check console for detailed instructions.', 'warning');
         
         // Store data for manual creation
-        localStorage.setItem(`article_${slug}_html`, htmlContent);
-        localStorage.setItem(`article_${slug}_instructions`, instructions);
     }
 
     // These methods are no longer needed as the API handles everything
@@ -668,13 +638,7 @@ ${htmlContent}
         const draftData = this.collectArticleData(formData);
         draftData.status = 'draft';
 
-        // Save to localStorage (in a real app, this would be saved to a server)
-        const drafts = JSON.parse(localStorage.getItem('article_drafts') || '[]');
-        drafts.push({
-            ...draftData,
-            savedAt: new Date().toISOString()
-        });
-        localStorage.setItem('article_drafts', JSON.stringify(drafts));
+        // Draft saving removed - using JSON files only
 
         this.showNotification('Draft saved successfully!', 'success');
     }
@@ -735,8 +699,7 @@ ${htmlContent}
         autoSaveData.status = 'autosave';
         autoSaveData.autoSavedAt = new Date().toISOString();
 
-        // Save to localStorage
-        localStorage.setItem('article_autosave', JSON.stringify(autoSaveData));
+        // Autosave removed - using JSON files only
         
         // Show subtle indicator
         this.showAutoSaveIndicator();

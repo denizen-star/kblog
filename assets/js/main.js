@@ -1,4 +1,6 @@
 // Main JavaScript functionality for Kerv Talks-Data Blog
+// Version: 5.0 - NO LOCALSTORAGE, JSON FILES ONLY
+console.log('🚀 Loading main.js v5.0 - JSON FILES ONLY');
 
 class BlogManager {
     constructor() {
@@ -15,25 +17,29 @@ class BlogManager {
         
         // Load homepage articles after everything is initialized
         this.loadHomepageArticles();
-        
-        // Check if we need to refresh due to new article creation
-        this.checkForRefreshFlag();
     }
+
 
     async loadData() {
         try {
-            // Load articles data
-            const articlesResponse = await fetch('data/articles.json');
+            // Ensure blogConfig is available
+            if (!window.blogConfig) {
+                console.error('❌ blogConfig not available');
+                return;
+            }
+
+            // Load articles data with cache busting
+            const articlesResponse = await fetch(`${window.blogConfig.getStaticUrl('data/articles.json')}?t=${Date.now()}`);
             const articlesData = await articlesResponse.json();
             this.articles = articlesData.articles;
 
             // Load comments data
-            const commentsResponse = await fetch('data/comments.json');
+            const commentsResponse = await fetch(window.blogConfig.getStaticUrl('data/comments.json'));
             const commentsData = await commentsResponse.json();
             this.comments = commentsData.comments;
 
             // Load authors data
-            const authorsResponse = await fetch('data/authors.json');
+            const authorsResponse = await fetch(window.blogConfig.getStaticUrl('data/authors.json'));
             const authorsData = await authorsResponse.json();
             this.authors = authorsData.authors;
 
@@ -46,27 +52,11 @@ class BlogManager {
     initializeComponents() {
         this.searchManager = new SearchManager(this.articles);
         this.commentsManager = new CommentsManager(this.comments);
-        this.articleManager = new ArticleManager(this.articles);
         this.imageUploadManager = new ImageUploadManager();
         this.postManager = new PostManager();
         
         // Homepage articles will be loaded in init() after data is ready
         
-        // Set up auto-refresh for homepage (every 30 seconds)
-        const pathname = window.location.pathname;
-        if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html')) {
-            setInterval(() => {
-                this.refreshHomepageArticles();
-            }, 30000); // Refresh every 30 seconds
-            
-            // Add refresh button event listener
-            const refreshBtn = document.getElementById('refresh-articles-btn');
-            if (refreshBtn) {
-                refreshBtn.addEventListener('click', () => {
-                    this.refreshHomepageArticles();
-                });
-            }
-        }
     }
 
     setupEventListeners() {
@@ -114,24 +104,6 @@ class BlogManager {
         }
     }
 
-    async refreshHomepageArticles() {
-        // Only refresh on the homepage
-        const pathname = window.location.pathname;
-        if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('index.html')) {
-            try {
-                // Reload articles data
-                const articlesResponse = await fetch('data/articles.json');
-                const articlesData = await articlesResponse.json();
-                this.articles = articlesData.articles;
-                
-                // Re-render articles
-                this.renderHomepageArticles();
-                console.log('🔄 Homepage articles refreshed');
-            } catch (error) {
-                console.error('Error refreshing articles:', error);
-            }
-        }
-    }
 
     renderHomepageArticles() {
         const container = document.getElementById('articles-container');
@@ -149,7 +121,8 @@ class BlogManager {
 
         // Add a test indicator
         if (sortedArticles.length === 0) {
-            container.innerHTML = '<p style="color: red; padding: 20px; text-align: center;">No articles found</p>';
+            container.innerHTML = '<div style="color: #666; padding: 40px; text-align: center; background: #f8f9fa; border-radius: 8px; margin: 20px 0;"><h3>No articles found</h3><p>Start writing your first article to see it here!</p><a href="articles/create/" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">Create Article</a></div>';
+            console.log('📝 No articles found - showing empty state');
             return;
         }
 
@@ -183,12 +156,6 @@ class BlogManager {
                 <h3 class="article-title"><a href="articles/${article.id}/">${article.title}</a></h3>
                 <p class="article-excerpt">${article.excerpt}</p>
                 <div class="article-image">${this.getArticleImage(article)}</div>
-            </div>
-            <div class="article-actions">
-                <button class="action-button like-button" data-article-id="${article.id}">👍 Like</button>
-                <a href="articles/${article.id}/#comments" class="action-button">💬 Comment</a>
-                <button class="action-button share-button" data-article-id="${article.id}">🔄 Repost</button>
-                <button class="action-button">📤 Send</button>
             </div>
         `;
 
@@ -232,14 +199,6 @@ class BlogManager {
         return `<div style="width: 100%; height: 200px; background: linear-gradient(45deg, #6A7B9A, #8B9DC3); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">${article.author.avatar}</div>`;
     }
 
-    checkForRefreshFlag() {
-        // Check if we need to refresh due to new article creation
-        const refreshFlag = localStorage.getItem('refreshHomepage');
-        if (refreshFlag === 'true') {
-            localStorage.removeItem('refreshHomepage');
-            this.refreshHomepageArticles();
-        }
-    }
 }
 
 // Search functionality
@@ -407,58 +366,6 @@ class CommentsManager {
 }
 
 // Article interactions
-class ArticleManager {
-    constructor(articles) {
-        this.articles = articles;
-        this.likeButtons = document.querySelectorAll('.like-button, .action-button');
-        this.shareButtons = document.querySelectorAll('.share-button');
-        this.init();
-    }
-
-    init() {
-        this.likeButtons.forEach(button => {
-            if (button.textContent.includes('Like')) {
-                button.addEventListener('click', this.handleLike.bind(this));
-            }
-        });
-
-        this.shareButtons.forEach(button => {
-            button.addEventListener('click', this.handleShare.bind(this));
-        });
-    }
-
-    handleLike(event) {
-        event.preventDefault();
-        const button = event.currentTarget;
-        const isLiked = button.classList.contains('liked');
-        
-        if (isLiked) {
-            button.classList.remove('liked');
-            button.textContent = button.textContent.replace('👍', '👍');
-        } else {
-            button.classList.add('liked');
-            button.textContent = button.textContent.replace('👍', '👍');
-        }
-    }
-
-    handleShare(event) {
-        event.preventDefault();
-        const url = window.location.href;
-        const title = document.title;
-        
-        if (navigator.share) {
-            navigator.share({
-                title: title,
-                url: url
-            });
-        } else {
-            // Fallback to clipboard
-            navigator.clipboard.writeText(url).then(() => {
-                alert('Link copied to clipboard!');
-            });
-        }
-    }
-}
 
 // Image upload functionality
 class ImageUploadManager {
@@ -657,5 +564,5 @@ function calculateReadTime(content) {
 
 // Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { BlogManager, SearchManager, CommentsManager, ArticleManager, ImageUploadManager, PostManager };
+    module.exports = { BlogManager, SearchManager, CommentsManager, ImageUploadManager, PostManager };
 }

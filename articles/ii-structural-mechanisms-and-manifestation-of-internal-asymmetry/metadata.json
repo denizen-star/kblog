@@ -1,0 +1,56 @@
+{
+  "id": "ii-structural-mechanisms-and-manifestation-of-internal-asymmetry",
+  "slug": "ii-structural-mechanisms-and-manifestation-of-internal-asymmetry",
+  "title": "II. Structural Mechanisms and Manifestation of Internal Asymmetry",
+  "excerpt": "The theoretical framework established in the preceding section finds its practical expression in concrete organizational and technological structures that either exacerbate or alleviate information imbalances.",
+  "author": {
+    "id": "data-crusader",
+    "name": "Data Crusader",
+    "role": "Head of Data Strategy",
+    "avatar": "🦸‍♂️",
+    "bio": "A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.",
+    "articles": 16,
+    "followers": 1247
+  },
+  "published": "2025-10-20T16:20:03.109Z",
+  "updated": "2025-10-20T16:20:03.118Z",
+  "status": "published",
+  "readTime": 4,
+  "category": "Strategy",
+  "tags": [
+    "Budget",
+    "Data"
+  ],
+  "image": {
+    "featured": "ii-structural-mechanisms-and-manifestation-of-internal-asymmetry.jpg",
+    "alt": "II. Structural Mechanisms and Manifestation of Internal Asymmetry featured image"
+  },
+  "stats": {
+    "views": 0,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0
+  },
+  "seo": {
+    "metaTitle": "II. Structural Mechanisms and Manifestation of Internal Asymmetry - Kerv Talks-Data Blog",
+    "metaDescription": "The theoretical framework established in the preceding section finds its practical expression in concrete organizational and technological structures that either exacerbate or alleviate information imbalances.",
+    "keywords": [
+      "Budget",
+      "Data"
+    ],
+    "canonical": "https://kervtalksdata.com/articles/ii-structural-mechanisms-and-manifestation-of-internal-asymmetry/"
+  },
+  "settings": {
+    "featured": false,
+    "allowComments": false,
+    "notifySubscribers": false,
+    "archived": false
+  },
+  "content": {
+    "wordCount": 780,
+    "characterCount": 17592,
+    "hasImages": false,
+    "hasCode": false,
+    "readingLevel": "intermediate"
+  }
+}

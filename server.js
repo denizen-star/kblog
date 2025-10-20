@@ -13,7 +13,7 @@ const path = require('path');
 const cors = require('cors');
 
 const app = express();
-const PORT = 1978; // Different port from the static server
+const PORT = 1977; // Main server port
 
 // Middleware
 app.use(cors());
@@ -139,13 +139,7 @@ app.post('/api/create-article', upload.single('featuredImage'), async (req, res)
                 notifySubscribers: notification === 'true',
                 archived: false
             },
-            content: {
-                wordCount: content.replace(/<[^>]*>/g, '').split(/\s+/).length,
-                characterCount: content.length,
-                hasImages: content.includes('<img'),
-                hasCode: content.includes('<code') || content.includes('<pre'),
-                readingLevel: 'intermediate'
-            }
+            content: content
         };
 
         // Create article directory
@@ -196,6 +190,11 @@ app.post('/api/create-article', upload.single('featuredImage'), async (req, res)
 
         console.log(`✅ Article "${slug}" created successfully!`);
         
+        // Get the base URL from environment
+        const baseUrl = process.env.NODE_ENV === 'production' 
+            ? 'https://kblog.kervinapps.com' 
+            : 'http://localhost:1978';
+            
         res.json({
             success: true,
             message: 'Article created successfully!',
@@ -203,7 +202,7 @@ app.post('/api/create-article', upload.single('featuredImage'), async (req, res)
                 id: articleData.id,
                 slug: articleData.slug,
                 title: articleData.title,
-                url: `http://localhost:1977/articles/${slug}/`
+                url: `${baseUrl}/articles/${slug}/`
             }
         });
 
@@ -354,7 +353,7 @@ function generateArticleHTML(articleData) {
     <meta property="og:title" content="${articleData.title}">
     <meta property="og:description" content="${articleData.excerpt || 'Professional insights on data architecture and enterprise strategies.'}">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://kervtalksdata.com/articles/${articleData.slug}/">
+    <meta property="og:url" content="https://kblog.kervinapps.com/articles/${articleData.slug}/">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../../assets/css/main.css">
@@ -376,7 +375,7 @@ function generateArticleHTML(articleData) {
             "name": "Kerv Talks-Data",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://kervtalksdata.com/assets/images/logo.png"
+                "url": "https://kblog.kervinapps.com/assets/images/logo.png"
             }
         },
         "datePublished": "${articleData.published}",
@@ -468,25 +467,6 @@ function generateArticleHTML(articleData) {
                     <div class="article-content-html">${articleData.content}</div>
                 </div>
 
-                <!-- Article Actions -->
-                <div class="article-actions-full">
-                    <button class="action-button like-button" data-article-id="${articleData.id}">
-                        <span class="action-icon">👍</span>
-                        <span class="action-text">Like</span>
-                        <span class="action-count">${articleData.stats.likes}</span>
-                    </button>
-                    
-                    <button class="action-button share-button" data-article-id="${articleData.id}">
-                        <span class="action-icon">🔄</span>
-                        <span class="action-text">Share</span>
-                    </button>
-                    
-                    <button class="action-button bookmark-button">
-                        <span class="action-icon">🔖</span>
-                        <span class="action-text">Save</span>
-                    </button>
-                </div>
-
                 <!-- Tags -->
                 <div class="article-tags-full">
                     ${articleData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
@@ -528,30 +508,6 @@ function generateArticleHTML(articleData) {
                 </div>
             </aside>
         </div>
-
-        <!-- Comments Section -->
-        <section class="comments-section" id="comments">
-            <div class="comments-header">
-                <h2>Comments (${articleData.stats.comments})</h2>
-            </div>
-            
-            <div class="comment-form-container">
-                <form class="comment-form" id="comment-form">
-                    <div class="comment-input-group">
-                        <div class="comment-avatar">You</div>
-                        <div class="comment-input-wrapper">
-                            <textarea placeholder="Share your thoughts..." name="content" required></textarea>
-                            <input type="text" placeholder="Your name (optional)" name="author">
-                        </div>
-                    </div>
-                    <button type="submit" class="comment-submit">Post Comment</button>
-                </form>
-            </div>
-            
-            <div class="comments-container" id="comments-container">
-                <p class="no-comments">No comments yet. Be the first to comment!</p>
-            </div>
-        </section>
     </main>
 
     <footer class="footer">
@@ -561,6 +517,7 @@ function generateArticleHTML(articleData) {
     </footer>
     
     <!-- JavaScript -->
+    <script src="../../assets/js/config.js"></script>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/article.js"></script>
 </body>
@@ -601,7 +558,7 @@ async function updateArticlesJSON(articleData) {
         category: articleData.category,
         tags: articleData.tags,
         image: articleData.image.featured || `${articleData.slug}.jpg`,
-        content: `${articleData.slug}-content.html`,
+        content: articleData.content,
         likes: articleData.stats.likes,
         comments: articleData.stats.comments,
         views: articleData.stats.views

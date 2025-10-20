@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "static": "python3 -m http.server 1977",
+    "static": "python3 -m http.server 1978",
     "both": "concurrently \"npm run static\" \"npm start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

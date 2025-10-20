@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ARTICLE_TITLE}} - Kerv Talks-Data Blog</title>
+    <meta name="description" content="{{ARTICLE_EXCERPT}}">
+    <meta name="keywords" content="{{ARTICLE_TAGS}}">
+    <meta name="author" content="{{AUTHOR_NAME}}">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ARTICLE_TITLE}}">
+    <meta property="og:description" content="{{ARTICLE_EXCERPT}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ARTICLE_URL}}">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "{{ARTICLE_TITLE}}",
+        "author": {
+            "@type": "Person",
+            "name": "{{AUTHOR_NAME}}",
+            "jobTitle": "{{AUTHOR_ROLE}}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Kerv Talks-Data",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://kblog.kervinapps.com/assets/images/logo.png"
+            }
+        },
+        "datePublished": "{{PUBLISHED_DATE}}",
+        "description": "{{ARTICLE_EXCERPT}}"
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="../../index.html" class="logo">
+                <div class="logo-icon">KT</div>
+                Kerv Talks-Data
+            </a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search articles, authors, topics..." id="search-input">
+                <div class="search-results" id="search-results"></div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../index.html">Articles</a></li>
+                <li><a href="../../about.html">About</a></li>
+                <li><a href="../../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="article-main-container">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <a href="../../index.html">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="../index.html">Articles</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">{{ARTICLE_TITLE}}</span>
+        </nav>
+
+        <div class="article-layout">
+            <article class="article-content">
+                <!-- Article Header -->
+                <header class="article-header-full">
+                    <div class="article-category-badge">{{ARTICLE_CATEGORY}}</div>
+                    <h1 class="article-title-full">{{ARTICLE_TITLE}}</h1>
+                    
+                    <div class="article-meta-full">
+                        <div class="article-author-info">
+                            <div class="article-avatar-large">{{AUTHOR_AVATAR}}</div>
+                            <div class="author-details">
+                                <div class="author-name">{{AUTHOR_NAME}}</div>
+                                <div class="author-role">{{AUTHOR_ROLE}}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="article-stats-full">
+                            <div class="stat-item">
+                                <span class="stat-label">Published</span>
+                                <span class="stat-value">{{PUBLISHED_DATE_FORMATTED}}</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Read time</span>
+                                <span class="stat-value">{{READ_TIME}} min</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Views</span>
+                                <span class="stat-value">{{VIEWS}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Article Image -->
+                <div class="article-featured-image">
+                    <img src="../../assets/images/articles/{{FEATURED_IMAGE}}" alt="{{ARTICLE_TITLE}}" style="width: 100%; height: 300px; object-fit: cover;" id="featured-image">
+                </div>
+
+                <!-- Article Body -->
+                <div class="article-body">
+                    <p class="article-lead">{{ARTICLE_EXCERPT}}</p>
+                    
+                    <div class="article-content-html">
+                        {{ARTICLE_CONTENT}}
+                    </div>
+                </div>
+
+                <!-- Tags -->
+                <div class="article-tags-full">
+                    {{ARTICLE_TAGS_HTML}}
+                </div>
+            </article>
+
+            <!-- Sidebar -->
+            <aside class="article-sidebar">
+                <!-- Author Card -->
+                <div class="card author-card">
+                    <div class="author-card-header">
+                        <div class="author-avatar-sidebar">{{AUTHOR_AVATAR}}</div>
+                        <div class="author-info-sidebar">
+                            <h3>{{AUTHOR_NAME}}</h3>
+                            <p>{{AUTHOR_ROLE}}</p>
+                        </div>
+                    </div>
+                    <p class="author-bio">{{AUTHOR_BIO}}</p>
+                    <div class="author-stats">
+                        <div class="author-stat">
+                            <span class="stat-number">{{AUTHOR_ARTICLES}}</span>
+                            <span class="stat-label">Articles</span>
+                        </div>
+                        <div class="author-stat">
+                            <span class="stat-number">{{AUTHOR_FOLLOWERS}}</span>
+                            <span class="stat-label">Followers</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Newsletter Signup -->
+                <div class="card newsletter-card">
+                    <h3>Stay Updated</h3>
+                    <p>Get the latest insights on data architecture and enterprise strategies delivered to your inbox.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Kerv Talks-Data Blog. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/article.js"></script>
+</body>
+</html>
