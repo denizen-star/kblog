@@ -126,6 +126,13 @@ class BlogConfig {
 // Create global instance
 window.blogConfig = new BlogConfig();
 
+// Debug: Log the configuration immediately
+console.log('Config initialized:', {
+    hostname: window.location.hostname,
+    isDevelopment: window.blogConfig.isDevelopment,
+    showArticlesPage: window.blogConfig.showArticlesPage
+});
+
 // Log configuration on load
 window.blogConfig.logConfig();
 
