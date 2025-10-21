@@ -284,6 +284,97 @@ app.post('/api/articles/:slug/stats', (req, res) => {
     }
 });
 
+// Newsletter subscription endpoint
+app.post('/api/newsletter/subscribe', async (req, res) => {
+    try {
+        console.log('📧 Processing newsletter subscription...');
+        
+        const {
+            email,
+            sessionId,
+            deviceData,
+            sessionInfo,
+            source,
+            pageUrl,
+            referrer
+        } = req.body;
+
+        // Validate required fields
+        if (!email) {
+            return res.status(400).json({
+                error: 'Email address is required'
+            });
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({
+                error: 'Please enter a valid email address'
+            });
+        }
+
+        // Generate subscription ID
+        const subscriptionId = 'sub_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        
+        // Create subscription data
+        const subscriptionData = {
+            id: subscriptionId,
+            email: email.toLowerCase().trim(),
+            sessionId: sessionId || null,
+            deviceData: deviceData || null,
+            sessionInfo: sessionInfo || null,
+            subscriptionDate: new Date().toISOString(),
+            source: source || 'newsletter_signup',
+            pageUrl: pageUrl || null,
+            referrer: referrer || null,
+            status: 'active',
+            preferences: {
+                frequency: 'weekly',
+                categories: ['data-architecture', 'information-asymmetry']
+            }
+        };
+
+        // Save subscription to newsletter.json
+        await saveNewsletterSubscription(subscriptionData);
+        console.log(`✅ Newsletter subscription saved: ${email}`);
+
+        res.json({
+            success: true,
+            message: 'Successfully subscribed to newsletter!',
+            subscription: {
+                id: subscriptionData.id,
+                email: subscriptionData.email,
+                status: subscriptionData.status
+            }
+        });
+
+    } catch (error) {
+        console.error('Error processing newsletter subscription:', error);
+        res.status(500).json({
+            error: 'Failed to process subscription',
+            message: error.message
+        });
+    }
+});
+
+// Get newsletter subscribers (admin endpoint)
+app.get('/api/newsletter/subscribers', (req, res) => {
+    try {
+        const newsletterPath = path.join(DATA_DIR, 'newsletter.json');
+        
+        if (fs.existsSync(newsletterPath)) {
+            const newsletterData = JSON.parse(fs.readFileSync(newsletterPath, 'utf8'));
+            res.json(newsletterData);
+        } else {
+            res.json({ subscriptions: [], stats: { totalSubscribers: 0, activeSubscribers: 0 } });
+        }
+    } catch (error) {
+        console.error('Error reading newsletter data:', error);
+        res.status(500).json({ error: 'Failed to read newsletter data' });
+    }
+});
+
 /**
  * Helper Functions
  */
@@ -576,6 +667,64 @@ async function updateArticlesJSON(articleData) {
     
     // Write updated articles.json
     fs.writeFileSync(articlesJsonPath, JSON.stringify(articlesData, null, 2), 'utf8');
+}
+
+async function saveNewsletterSubscription(subscriptionData) {
+    const newsletterPath = path.join(DATA_DIR, 'newsletter.json');
+    
+    // Read existing newsletter data
+    let newsletterData;
+    try {
+        if (fs.existsSync(newsletterPath)) {
+            const content = fs.readFileSync(newsletterPath, 'utf8');
+            newsletterData = JSON.parse(content);
+        } else {
+            newsletterData = { 
+                subscriptions: [],
+                stats: {
+                    totalSubscribers: 0,
+                    activeSubscribers: 0,
+                    lastSubscription: null
+                }
+            };
+        }
+    } catch (error) {
+        console.error('Error reading newsletter.json:', error);
+        newsletterData = { 
+            subscriptions: [],
+            stats: {
+                totalSubscribers: 0,
+                activeSubscribers: 0,
+                lastSubscription: null
+            }
+        };
+    }
+    
+    // Check if email already exists
+    const existingIndex = newsletterData.subscriptions.findIndex(
+        sub => sub.email === subscriptionData.email
+    );
+    
+    if (existingIndex >= 0) {
+        // Update existing subscription
+        newsletterData.subscriptions[existingIndex] = subscriptionData;
+        console.log(`📧 Updated existing newsletter subscription: ${subscriptionData.email}`);
+    } else {
+        // Add new subscription
+        newsletterData.subscriptions.push(subscriptionData);
+        console.log(`📧 Added new newsletter subscription: ${subscriptionData.email}`);
+    }
+    
+    // Update stats
+    newsletterData.stats.totalSubscribers = newsletterData.subscriptions.length;
+    newsletterData.stats.activeSubscribers = newsletterData.subscriptions.filter(
+        sub => sub.status === 'active'
+    ).length;
+    newsletterData.stats.lastSubscription = subscriptionData.subscriptionDate;
+    
+    // Write updated newsletter.json
+    fs.writeFileSync(newsletterPath, JSON.stringify(newsletterData, null, 2), 'utf8');
+    console.log(`📄 Updated newsletter.json with ${newsletterData.subscriptions.length} subscriptions`);
 }
 
 // Error handling middleware
