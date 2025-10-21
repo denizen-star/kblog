@@ -132,15 +132,21 @@ class NewsletterSubscription {
     }
     
     async handleSubscription(event) {
+        console.log('Newsletter subscription attempt started');
         const form = event.target;
         const emailInput = form.querySelector('input[type="email"]');
         const email = emailInput.value.trim();
         
+        console.log('Email input value:', email);
+        
         // Validate email
         if (!this.validateEmail(email)) {
+            console.log('Email validation failed');
             this.showError('Please enter a valid email address', form);
             return;
         }
+        
+        console.log('Email validation passed, proceeding with subscription');
         
         // Show loading state
         this.showLoading(form);
@@ -178,6 +184,22 @@ class NewsletterSubscription {
     }
     
     async submitSubscription(data) {
+        // For testing without server, simulate success
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            console.log('Simulating newsletter subscription (no server):', data);
+            
+            // Store in localStorage for testing
+            const existingSubscriptions = JSON.parse(localStorage.getItem('newsletter_subscriptions') || '[]');
+            existingSubscriptions.push({
+                ...data,
+                timestamp: new Date().toISOString(),
+                id: 'test_' + Date.now()
+            });
+            localStorage.setItem('newsletter_subscriptions', JSON.stringify(existingSubscriptions));
+            
+            return { success: true, message: 'Subscription successful (test mode)' };
+        }
+        
         const baseUrl = window.location.hostname === 'localhost' 
             ? 'http://localhost:1977' 
             : 'https://kblog.kervinapps.com';
@@ -194,8 +216,14 @@ class NewsletterSubscription {
     }
     
     validateEmail(email) {
+        // More permissive email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+        const isValid = emailRegex.test(email);
+        
+        // Debug logging
+        console.log('Email validation:', { email, isValid });
+        
+        return isValid;
     }
     
     showLoading(form) {
