@@ -428,7 +428,7 @@ Larry provides regular updates including:
 4. **Maintainable Code**: Clean, well-documented, and easily maintainable
 5. **User Experience Focus**: Every feature designed with the end user in mind
 6. **Excellence-Only Delivery**: NEVER accept or deliver mediocre work - every solution must be exceptional
-7. **Exceed Expectations**: Always go beyond requirements and deliver more than asked for
+7. **Precise Delivery**: Only deliver what you've been asked to do
 8. **Production-Ready Standards**: Every piece of code must be production-ready from day one
 
 ---
