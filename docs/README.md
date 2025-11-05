@@ -32,6 +32,13 @@ This comprehensive documentation covers all aspects of the Kerv Talks-Data Blog 
 | [Deployment Guide](current/DEPLOYMENT_GUIDE.md) | Production deployment instructions | 2025-01-27 | ✅ Current |
 | [Deployment Instructions](current/DEPLOYMENT_INSTRUCTIONS.md) | Quick deployment reference | 2025-01-27 | ✅ Current |
 
+### **📋 Inspiration & References** (`docs/`)
+**Status:** ✅ **ACTIVE** - Design and content inspiration sources
+
+| Document | Purpose | Last Updated | Status |
+|----------|---------|--------------|--------|
+| [Inspiration](INSPIRATION.md) | Design and content strategy inspiration references | 2025-01-27 | ✅ Current |
+
 ### **📋 Requirements Documentation** (`docs/requirements/`)
 **Status:** ✅ **ACTIVE** - Original project specifications
 
