@@ -212,6 +212,20 @@
             font-weight: bold;
         }
 
+        .hero-avatar--image {
+            background: radial-gradient(circle at center, #9aa7c2 0%, #6A7B9A 60%, #4b5873 100%);
+            padding: 4px;
+            overflow: hidden;
+        }
+
+        .hero-avatar--image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: 50% 20%;
+        }
+
         .hero-name {
             font-size: 18px;
             font-weight: 600;
@@ -376,7 +390,9 @@
             <h2>Meet Our Data Experts</h2>
             <div class="hero-grid">
                 <div class="hero-card">
-                    <div class="hero-avatar">🦸‍♂️</div>
+                    <div class="hero-avatar hero-avatar--image">
+                        <img src="docs/image.png" alt="Data Crusader avatar">
+                    </div>
                     <h3 class="hero-name">Data Crusader</h3>
                     <p class="hero-role">Chief Strategy Officer</p>
                     <p class="hero-bio">A veteran of the data wars, the Data Crusader has spent decades navigating the treacherous terrain of enterprise information systems. Known for turning information asymmetry into strategic advantage.</p>
