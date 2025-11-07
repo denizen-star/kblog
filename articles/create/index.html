@@ -41,8 +41,12 @@
                 <input type="text" placeholder="Search articles, authors, topics..." id="search-input">
                 <div class="search-results" id="search-results"></div>
             </div>
-            
-            <ul class="nav-menu">
+
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Toggle navigation">
+                <span class="nav-toggle-bar"></span>
+            </button>
+
+            <ul class="nav-menu" id="primary-navigation">
                 <li><a href="../../index.html">Home</a></li>
                 <li><a href="../index.html">Articles</a></li>
                 <li><a href="../../about.html">About</a></li>
@@ -250,6 +254,7 @@
     </footer>
     
     <!-- JavaScript -->
+    <script src="../../assets/js/nav.js"></script>
     <script src="../../assets/js/config.js"></script>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/article-editor.js"></script>

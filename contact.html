@@ -67,6 +67,69 @@
             align-items: center;
         }
 
+        .nav-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-radius: 12px;
+            background-color: transparent;
+            color: #6A7B9A;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-toggle:hover,
+        .nav-toggle:focus-visible {
+            background: rgba(106, 123, 154, 0.15);
+            color: #000000;
+            outline: none;
+        }
+
+        .nav-toggle-bar {
+            position: relative;
+            display: block;
+            width: 22px;
+            height: 2px;
+            background-color: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-toggle-bar::before,
+        .nav-toggle-bar::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 22px;
+            height: 2px;
+            background-color: currentColor;
+            transition: transform 0.3s ease, top 0.3s ease, opacity 0.3s ease;
+        }
+
+        .nav-toggle-bar::before {
+            top: -6px;
+        }
+
+        .nav-toggle-bar::after {
+            top: 6px;
+        }
+
+        .nav-toggle[aria-expanded="true"] .nav-toggle-bar {
+            transform: rotate(45deg);
+        }
+
+        .nav-toggle[aria-expanded="true"] .nav-toggle-bar::before {
+            top: 0;
+            transform: rotate(-90deg);
+        }
+
+        .nav-toggle[aria-expanded="true"] .nav-toggle-bar::after {
+            top: 0;
+            opacity: 0;
+        }
+
         .nav-menu a {
             color: #666666;
             text-decoration: none;
@@ -362,10 +425,40 @@
             
             .nav-container {
                 padding: 0 16px;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 12px;
             }
             
             .search-bar {
                 display: none;
+            }
+
+            .nav-toggle {
+                display: inline-flex;
+            }
+
+            .nav-menu {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                display: none;
+                margin-top: 8px;
+                padding-top: 8px;
+                border-top: 1px solid #e0dfdc;
+            }
+
+            .nav-menu.nav-menu--open {
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-menu a {
+                justify-content: center;
+                width: 100%;
             }
             
             .page-title {
@@ -393,8 +486,12 @@
             <div class="search-bar">
                 <input type="text" placeholder="Search articles, authors, topics...">
             </div>
-            
-            <ul class="nav-menu">
+
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Toggle navigation">
+                <span class="nav-toggle-bar"></span>
+            </button>
+
+            <ul class="nav-menu" id="primary-navigation">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="articles.html">Articles</a></li>
                 <li><a href="about.html">About</a></li>
@@ -554,5 +651,6 @@
             display: none !important;
         }
     </style>
+    <script src="assets/js/nav.js"></script>
 </body>
 </html>

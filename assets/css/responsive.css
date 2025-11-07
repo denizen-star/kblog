@@ -2,6 +2,39 @@
 
 /* Mobile Styles (default) */
 @media (max-width: 767px) {
+    .nav-container {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: var(--spacing-sm);
+    }
+
+    .nav-toggle {
+        display: inline-flex;
+    }
+
+    .nav-menu {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        display: none;
+        padding-top: var(--spacing-sm);
+        border-top: 1px solid var(--border-gray);
+        margin-top: var(--spacing-sm);
+    }
+
+    .nav-menu.nav-menu--open {
+        display: flex;
+    }
+
+    .nav-menu li {
+        width: 100%;
+    }
+
+    .nav-menu a {
+        justify-content: center;
+        width: 100%;
+    }
+
     .main-container {
         grid-template-columns: 1fr;
         padding: var(--spacing-lg);
@@ -21,7 +54,6 @@
     
     .nav-menu {
         gap: var(--spacing-xs);
-        flex-wrap: wrap;
     }
     
     .nav-menu a {
