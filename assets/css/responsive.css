@@ -68,6 +68,8 @@
         max-width: none;
         height: 3rem;
         border-radius: var(--border-radius-md);
+        display: flex;
+        justify-content: center;
     }
 
     .nav-container {
@@ -643,6 +645,8 @@
         max-width: none;
         height: 3rem;
         border-radius: var(--border-radius-md);
+        display: flex;
+        justify-content: center;
     }
 }
 

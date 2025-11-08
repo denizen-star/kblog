@@ -1138,6 +1138,8 @@ body {
         max-width: none;
         height: 48px;
         border-radius: 18px;
+        display: flex;
+        justify-content: center;
     }
 
     .newsletter-panel__icons {
@@ -1157,6 +1159,8 @@ body {
         max-width: none;
         height: 48px;
         border-radius: 18px;
+        display: flex;
+        justify-content: center;
     }
 }
 
