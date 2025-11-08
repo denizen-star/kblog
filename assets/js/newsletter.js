@@ -118,6 +118,12 @@ class NewsletterSubscription {
         this.sessionManager = new SessionManager();
         this.setupEventListeners();
     }
+
+    getApiBaseUrl() {
+        const hostname = window.location.hostname;
+        const isLocal = hostname === 'localhost' || hostname === '127.0.0.1';
+        return isLocal ? 'http://localhost:1977' : 'https://kblog.kervinapps.com';
+    }
     
     setupEventListeners() {
         // Find all newsletter forms on the page
@@ -155,13 +161,16 @@ class NewsletterSubscription {
             // Collect all data
             const subscriptionData = {
                 email: email,
+                dataType: 'newsletter',
                 sessionId: this.sessionManager.sessionId,
-                deviceData: DeviceMetadataCollector.collectDeviceData(),
+                deviceInfo: DeviceMetadataCollector.collectDeviceData(),
                 sessionInfo: this.sessionManager.getSessionData(),
                 timestamp: new Date().toISOString(),
-                source: 'newsletter_signup',
+                source: form.dataset.source || 'newsletter_signup',
+                campaignTag: form.dataset.campaign || null,
                 pageUrl: window.location.href,
-                referrer: document.referrer
+                referrer: document.referrer || '',
+                componentId: form.dataset.component || null
             };
             
             // Send to server
@@ -184,25 +193,7 @@ class NewsletterSubscription {
     }
     
     async submitSubscription(data) {
-        // For testing without server, simulate success
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            console.log('Simulating newsletter subscription (no server):', data);
-            
-            // Store in localStorage for testing
-            const existingSubscriptions = JSON.parse(localStorage.getItem('newsletter_subscriptions') || '[]');
-            existingSubscriptions.push({
-                ...data,
-                timestamp: new Date().toISOString(),
-                id: 'test_' + Date.now()
-            });
-            localStorage.setItem('newsletter_subscriptions', JSON.stringify(existingSubscriptions));
-            
-            return { success: true, message: 'Subscription successful (test mode)' };
-        }
-        
-        const baseUrl = window.location.hostname === 'localhost' 
-            ? 'http://localhost:1977' 
-            : 'https://kblog.kervinapps.com';
+        const baseUrl = this.getApiBaseUrl();
             
         const response = await fetch(`${baseUrl}/api/newsletter/subscribe`, {
             method: 'POST',
@@ -230,6 +221,9 @@ class NewsletterSubscription {
         const submitButton = form.querySelector('button[type="submit"]');
         if (submitButton) {
             submitButton.disabled = true;
+            if (!submitButton.dataset.originalText) {
+                submitButton.dataset.originalText = submitButton.textContent;
+            }
             submitButton.textContent = 'Subscribing...';
         }
     }
@@ -238,7 +232,7 @@ class NewsletterSubscription {
         const submitButton = form.querySelector('button[type="submit"]');
         if (submitButton) {
             submitButton.disabled = false;
-            submitButton.textContent = 'Subscribe';
+            submitButton.textContent = submitButton.dataset.originalText || 'Subscribe';
         }
     }
     
@@ -301,7 +295,7 @@ class NewsletterSubscription {
         console.log('Newsletter subscription successful:', {
             email: data.email,
             sessionId: data.sessionId,
-            deviceType: data.deviceData.deviceType,
+            deviceType: data.deviceInfo.deviceType,
             source: data.source
         });
     }

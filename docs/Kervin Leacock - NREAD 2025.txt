@@ -1,0 +1,141 @@
+﻿Kervin Leacock
+New York, NY, 11212 | 917.670.0693 | kervin.leacock@yahoo.com 
+SUMMARY
+Seasoned Data Strategy Leader with extensive experience in transforming data operations for Fortune 500 companies. Expertise includes developing enterprise-wide data strategies and building robust data platforms. Proven ability to lead high-performing teams to unlock data assets and achieve measurable business outcomes.
+EXPERIENCE
+Head of Data Product Manager Self Financial | Austin, TX 
+May 2022 - Current
+* Designed and implemented data strategies to address business challenges effectively.
+* Architected scalable systems for cross-platform product support.
+* Managed planning, coordination, execution, and completion of lakehouse data solutions.
+* Aligned initiatives to establish standards for product, customer, accounts hierarchies, and funnel data.
+* Developed comprehensive roadmaps for data strategy across applications, microservices, vendors, lakehouse, AI, and Data Ops.
+* Collaborated with engineering teams to ensure accurate implementation of feature specifications.
+* Provided regular progress updates to senior leadership regarding project milestones.
+* Integrated analytics vendor solutions and orchestrated data flows with CRM systems.
+Data Analytics Product Manager GoodLeap | Sacramento, CA - Remote
+March 2021 - May 2022
+* Defined product vision and roadmap for Data and Analytics initiatives.
+* Prioritized feature backlog to drive impactful product enhancements.
+* Advocated for reusability, maintainability, and scalability of platform design.
+* Led migration from Redshift and Aurora to Databricks.
+* Measured time to market and assessed product team efficiency metrics.
+* Led the ledger migration to blockchain
+
+
+
+
+
+
+
+
+Data Analytics Delivery Manager Royal Bank of Canada | New York, NY 
+March 2018 - March 2021
+* Directed implementation of client analytics operations, enhancing data-driven decision-making.
+* Managed Client Revenue Intelligence Analytics projects, ensuring timely and effective delivery.
+* Established standards for client reporting to align initiatives with organizational goals.
+* Defined project delivery cadence, including release plans and sprints for optimal workflow.
+* Coached teams on Agile and Scrum methodologies to improve efficiency and collaboration.
+* Utilized SQL, Qlik, Python, and Tableau for comprehensive data analysis and visualization.
+* Managed the Data and BI Teams. Consisting of Business Analysts, Research Analysts, BI Analysts, Data Engineers, Project Managers. Managing the resource plan roadmap and budget estimates
+* Developed and implemented MLOps driving the team to completion of a first-class referral system with 2500+ engaged users in the first month
+Division Director of Business Performance Primary Residential Mortgage | Salt Lake City, UT 
+February 2015 - March 2018
+* Manage division profitability through procedural and automation practices
+* Design and implement action plans for service profitability and growth
+* Advise on financial planning, budgeting, cash flow, and investment priorities
+* Generate business performance insights for improved financial results
+* Implement policies, internal controls, standards, and procedures
+* Directed a distributed workforce of 250 employees across 28 branch locations, effectively managing 20 direct reports.
+
+
+Vice-President Business Intelligence The Bank of New York Mellon | New York, NY 
+February 2011 - February 2015
+* Reengineered information science platform for Broker Dealer Services to enhance operational efficiency.
+* Designed comprehensive roadmap for analytics, dashboard, scorecard, and big data initiatives.
+* Managed reporting processes for $3 trillion in daily transactions to ensure accuracy.
+* Implemented data ingestion procedures for compliance and regulatory reporting requirements.
+* Collaborated with executive team to deliver critical information and support decision-making.
+* Led and mentored a team of 22 direct reports responsible for the entire data pipeline, including acquisition, storage, and ensuring data availability for all enterprise-wide reporting.
+Senior Consultant Analytics8 | Raleigh, NC - Remote
+March 2010 - March 2011
+* Designed logic diagrams to resolve complex business challenges.
+* Led implementation teams to enhance business lines effectively.
+* Developed dashboard solutions for Customer Relationship Management, improving data visibility.
+* Managed application migration sprints to ensure seamless transitions.
+* Mentored analysts on security models and best practices for dashboard design.
+* Simultaneously managed three to five complex analytics initiatives, coordinating and leading project teams composed of two to five specialized consultants.
+Senior Lead Consultant Dunn Solutions Group | Chicago, IL 
+January 2008 - January 2010
+* Designed and implemented Business Intelligence solutions to enhance data accessibility.
+* Led teams in executing data, semantic, and reporting solutions for various projects.
+* Managed migrations from Crystal Reports Server, Business Objects, and Cognos to improve efficiency.
+* Customized SAP Business Objects for diverse verticals to meet specific client needs.
+* Conducted strategic staffing and architectural design of technical solutions as project manager and technical lead.
+* Actively contributed as a key technical resource to drive project outcomes.
+* Directed three to five concurrent data analysis projects, managing all phases and mentoring project teams of two to five consultants to deliver insights.
+Business Intelligence Analyst Aequicap Insurance | Fort Lauderdale, FL 
+January 2006 - January 2008
+* Led Business Objects migration from version 6.5 to Webi, enhancing system performance.
+* Designed and implemented star schemas for effective policy lifecycle monitoring.
+* Created and maintained Universes to support data analysis and reporting needs.
+* Modeled website payment and sales data for accurate financial insights.
+* Implemented automated payment posting process to improve transaction efficiency.
+* Developed complex reports and monitoring systems to facilitate informed decision-making.
+Programmer Trax | Miami, FL 
+February 2005 - August 2005
+* Integrated Trax tracking software with SABRE to enhance data accuracy.
+* Developed complex SQL statements for efficient data transformations.
+* Conducted data validation and quality assurance to ensure integrity.
+* Connected Oracle Database with SABRE for streamlined data management.
+* Utilized technologies such as Java, MS Access, MS Excel, Oracle, and PL/SQL.
+ 
+TRUSTED BY 
+Aequicap Insurance
+Bacardi
+Primary Residential Mortgage
+Analytics8
+Banesco
+Promega
+American Imaging Management
+Bank of New York Mellon
+Royal Bank of Canada
+Aspen Waste
+Bayer
+Self Financial
+Blue Cross Blue Shield of South Carolina
+Burger King
+Southern Wines
+CBS
+Chico's
+Target
+Corpac
+Digicel
+Technicolor
+Dunn Solutions Group
+FTD Flowers
+The Toro Company
+GoodLeap
+GlaxoKlyne
+PBSO
+Johnsonville 
+Trax  
+EDUCATION
+BS | Computer Science
+January 2001 
+Universidad Nueva Esparta, Caracas, Venezuela
+TRAINING & CERTIFICATIONS
+TDWI: Data Warehousing Concepts and Principles, TDWI: Hands on Business Analytics, TDWI: Data Requirement Analysis, TDWI: CBIP Preparation - Information Systems Core Exam, TDWI: Boot Camp for Analyst, TDWI: Data Integration Testing, TDWI: Data Mining, TDWI: Data Modeling, TDWI: Hands on Statistical Analysis for BI, Data Quality 1:1, Customizations for Web Intelligence, Constructing a Real-Time Data Warehouse, SDK Applications, Performance Analytics 1:1, Universe Design, Architecting ETL for Data Integrator, Data Quality Tools Process and People, Crystal Reports Level I, II, and III, BusinessObjects Under the Hood XI R2, Web Intelligence XI R1/R2, Universe Design XI R1/R2, Xcelsius Enterprise: Core and Connectivity, Enterprise XIR2 Administration, Data Integrator XI R1/R2, SAP BusinessObjects Integration Kit for BW, Scrum Master Certified, Gathering Business Requirements, Writing Functional Requirements, Workshop Internal Client Attention (BAYER, S.A.), Workshop Internal Client Attention (Banesco), MBA - School of Mortgage Banking I, MBA - School of Mortgage Banking II, NMLS – Mortgage Loan Originator, Teradata Introduction to Data Modeling, Using Pig, Hive, and Impala with Hadoop, Cisco Certified Network Associate, Business Intelligence Optimization with Teradata, PASW – Data Mining, SPSS Modeler, QlikView Designer I & II, QlikView Professional I & II 
+SKILLS
+Informatica, Talend, SSIS, AWS Glue, dbt, Stitch, Tableau, Business Objects, SSAS, SSRS, Cognos, Qlik, Looker, MicroStrategy, SPSS, Power BI, Sisense, AWS Redshift, AWS Cassandra, AWS Databricks, Amazon S3, SageMaker, AWS CloudFormation, Amazon Kinesis, Delta Lake, Docker, Kubernetes, Terraform, Airflow, GitLab, Kubeflow, MySQL, PostgreSQL, Apache Spark, Apache Hive, Elasticsearch, Cassandra, Python, Cursor AI, Scala, R, ERwin, LucidArt, Jamboard, Figma, Miro
+RECOGNITIONS
+• We are better together - Self Financial (2024)- For the delivery of a first in class Marketing tool in record time
+• WOW Take a Bow - BNY Mellon (2015)- For contributions to the team
+• WOW Applause - BNY Mellon (2015) –For creating and delivering training program for new hires
+• Above and beyond - BNY Mellon (2014)- Project Bridgewater: for going above and beyond in the on-boarding of the largest asset servicing client in BoNY history ($120B AUM)
+• Best in Class - BNY Mellon (2014)  - CASS – For the delivery of changes to the system of books and records at a record time
+• Client Excellence Award - BNY Mellon (2014)- Bridgewater Onboarding - For the delivery of all on-boarding deliverable within time and budget
+LANGUAGES
+English: Native/ Bilingual 
+Spanish: Native/ Bilingual 
+Portuguese: Professional

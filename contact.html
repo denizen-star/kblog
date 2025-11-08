@@ -4,476 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Kerv Talks-Data Blog</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-            background-color: #f3f2ef;
-            color: #000000;
-            line-height: 1.6;
-        }
-
-        .header {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e0dfdc;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1128px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 52px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: #6A7B9A;
-            font-weight: 600;
-            font-size: 20px;
-        }
-
-        .logo-icon {
-            width: 34px;
-            height: 34px;
-            background-color: #6A7B9A;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .nav-toggle {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border: none;
-            border-radius: 12px;
-            background-color: transparent;
-            color: #6A7B9A;
-            cursor: pointer;
-            transition: background 0.2s ease, color 0.2s ease;
-        }
-
-        .nav-toggle:hover,
-        .nav-toggle:focus-visible {
-            background: rgba(106, 123, 154, 0.15);
-            color: #000000;
-            outline: none;
-        }
-
-        .nav-toggle-bar {
-            position: relative;
-            display: block;
-            width: 22px;
-            height: 2px;
-            background-color: currentColor;
-            transition: transform 0.3s ease;
-        }
-
-        .nav-toggle-bar::before,
-        .nav-toggle-bar::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            width: 22px;
-            height: 2px;
-            background-color: currentColor;
-            transition: transform 0.3s ease, top 0.3s ease, opacity 0.3s ease;
-        }
-
-        .nav-toggle-bar::before {
-            top: -6px;
-        }
-
-        .nav-toggle-bar::after {
-            top: 6px;
-        }
-
-        .nav-toggle[aria-expanded="true"] .nav-toggle-bar {
-            transform: rotate(45deg);
-        }
-
-        .nav-toggle[aria-expanded="true"] .nav-toggle-bar::before {
-            top: 0;
-            transform: rotate(-90deg);
-        }
-
-        .nav-toggle[aria-expanded="true"] .nav-toggle-bar::after {
-            top: 0;
-            opacity: 0;
-        }
-
-        .nav-menu a {
-            color: #666666;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .nav-menu a:hover {
-            background-color: #f3f2ef;
-            color: #000000;
-        }
-
-        .nav-menu a.active {
-            color: #6A7B9A;
-            border-bottom: 2px solid #6A7B9A;
-            background-color: transparent;
-        }
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-            background-color: #f3f2ef;
-            border-radius: 4px;
-            padding: 8px 12px;
-            min-width: 280px;
-            border: 1px solid #e0dfdc;
-        }
-
-        .search-bar input {
-            border: none;
-            background: none;
-            outline: none;
-            flex: 1;
-            font-size: 14px;
-            color: #000000;
-        }
-
-        .search-bar input::placeholder {
-            color: #666666;
-        }
-
-        .main-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 24px;
-        }
-
-        .page-header {
-            background-color: #ffffff;
-            border-radius: 8px;
-            border: 1px solid #e0dfdc;
-            padding: 32px;
-            margin-bottom: 24px;
-            text-align: center;
-        }
-
-        .page-title {
-            font-size: 32px;
-            font-weight: 600;
-            color: #000000;
-            margin-bottom: 12px;
-        }
-
-        .page-subtitle {
-            font-size: 18px;
-            color: #666666;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-bottom: 32px;
-        }
-
-        .contact-form {
-            background-color: #ffffff;
-            border-radius: 8px;
-            border: 1px solid #e0dfdc;
-            padding: 32px;
-        }
-
-        .form-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #000000;
-            margin-bottom: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            color: #000000;
-            font-weight: 500;
-            margin-bottom: 6px;
-            font-size: 14px;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #e0dfdc;
-            border-radius: 4px;
-            background-color: #ffffff;
-            color: #000000;
-            font-size: 14px;
-            transition: border-color 0.2s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #6A7B9A;
-        }
-
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background-color: #6A7B9A;
-            color: #ffffff;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            background-color: #004182;
-        }
-
-        .contact-info {
-            background-color: #ffffff;
-            border-radius: 8px;
-            border: 1px solid #e0dfdc;
-            padding: 32px;
-        }
-
-        .info-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #000000;
-            margin-bottom: 24px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 16px;
-            background-color: #f3f2ef;
-            border-radius: 8px;
-        }
-
-        .contact-icon {
-            width: 48px;
-            height: 48px;
-            background-color: #6A7B9A;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #ffffff;
-            margin-right: 16px;
-            flex-shrink: 0;
-        }
-
-        .contact-details h4 {
-            color: #000000;
-            font-weight: 600;
-            margin-bottom: 4px;
-            font-size: 16px;
-        }
-
-        .contact-details p {
-            color: #666666;
-            margin: 0;
-            font-size: 14px;
-        }
-
-        .social-links {
-            margin-top: 24px;
-        }
-
-        .social-links h4 {
-            color: #000000;
-            font-weight: 600;
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-
-        .social-grid {
-            display: flex;
-            gap: 12px;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background-color: #6A7B9A;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: #ffffff;
-            font-size: 18px;
-            transition: background-color 0.2s ease;
-        }
-
-        .social-link:hover {
-            background-color: #004182;
-        }
-
-        .faq-section {
-            background-color: #ffffff;
-            border-radius: 8px;
-            border: 1px solid #e0dfdc;
-            padding: 32px;
-            margin-bottom: 32px;
-        }
-
-        .faq-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #000000;
-            margin-bottom: 24px;
-        }
-
-        .faq-item {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #f3f2ef;
-        }
-
-        .faq-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .faq-question {
-            color: #000000;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-
-        .faq-answer {
-            color: #666666;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .footer {
-            background-color: #ffffff;
-            border-top: 1px solid #e0dfdc;
-            padding: 24px;
-            margin-top: 40px;
-        }
-
-        .footer-content {
-            max-width: 1128px;
-            margin: 0 auto;
-            text-align: center;
-            color: #666666;
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .main-container {
-                padding: 16px;
-            }
-            
-            .nav-container {
-                padding: 0 16px;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                gap: 12px;
-            }
-            
-            .search-bar {
-                display: none;
-            }
-
-            .nav-toggle {
-                display: inline-flex;
-            }
-
-            .nav-menu {
-                width: 100%;
-                flex-direction: column;
-                align-items: stretch;
-                display: none;
-                margin-top: 8px;
-                padding-top: 8px;
-                border-top: 1px solid #e0dfdc;
-            }
-
-            .nav-menu.nav-menu--open {
-                display: flex;
-            }
-
-            .nav-menu li {
-                width: 100%;
-            }
-
-            .nav-menu a {
-                justify-content: center;
-                width: 100%;
-            }
-            
-            .page-title {
-                font-size: 24px;
-            }
-            
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .social-grid {
-                justify-content: center;
-            }
-        }
-    </style>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="stylesheet" href="assets/css/page-layout.css">
 </head>
 <body>
     <header class="header">
@@ -482,10 +14,6 @@
                 <div class="logo-icon">KT</div>
                 Kerv Talks-Data
             </a>
-            
-            <div class="search-bar">
-                <input type="text" placeholder="Search articles, authors, topics...">
-            </div>
 
             <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Toggle navigation">
                 <span class="nav-toggle-bar"></span>
@@ -493,41 +21,91 @@
 
             <ul class="nav-menu" id="primary-navigation">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="articles.html">Articles</a></li>
+                <li><a href="articles/index.html">Articles</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="project-inquiries.html">Project inquiries</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="main-container">
-        <div class="page-header">
-            <h1 class="page-title">Contact Us</h1>
-            <p class="page-subtitle">Ready to begin your professional journey?</p>
-        </div>
+        <section class="hero hero--content-only">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="hero-eyebrow">Let's Connect</span>
+                    <h1 class="hero-title">Get in Touch</h1>
+                    <p class="hero-subtitle">Ready to begin your professional journey?</p>
+                </div>
+                <div class="hero-actions">
+                    <div class="newsletter-panel newsletter-panel--hero">
+                        <p class="newsletter-panel__headline">Join data leaders gaining hands-on human experience with my free monthly newsletter.</p>
+                        <form class="newsletter-panel__form" action="#" method="post" novalidate>
+                            <div class="newsletter-panel__inputs">
+                                <input class="newsletter-panel__input" type="text" name="name" autocomplete="name" placeholder="Name">
+                                <input class="newsletter-panel__input" type="email" name="email" autocomplete="email" placeholder="Email" required>
+                                <button class="newsletter-panel__submit" type="submit" aria-label="Subscribe to newsletter">S</button>
+                            </div>
+                            <div class="newsletter-panel__icons">
+                                <a class="newsletter-panel__icon newsletter-panel__icon--linkedin" href="https://www.linkedin.com/in/kleacock/" target="_blank" rel="noopener" aria-label="Connect on LinkedIn">
+                                    <span class="newsletter-panel__icon-inner">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path fill="currentColor" d="M20.452 20.452h-3.555v-5.569c0-1.327-.027-3.038-1.852-3.038-1.853 0-2.136 1.449-2.136 2.948v5.659H9.354V9.012h3.414v1.561h.049c.476-.9 1.637-1.852 3.369-1.852 3.601 0 4.267 2.37 4.267 5.455v6.276zM5.337 7.433c-1.144 0-2.068-.929-2.068-2.072 0-1.144.924-2.072 2.068-2.072 1.143 0 2.067.928 2.067 2.072 0 1.143-.924 2.072-2.067 2.072zM7.119 20.452H3.552V9.012h3.567v11.44z"/>
+                                        </svg>
+                                    </span>
+                                </a>
+                                <a class="newsletter-panel__icon newsletter-panel__icon--mail" href="mailto:optium.optimizer@gmail.com" aria-label="Email Kervin">
+                                    <span class="newsletter-panel__icon-inner">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path fill="currentColor" d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm0 2v.21L12 13l9-5.79V7H3zm0 12h18V9.24l-9 5.79-9-5.79V19z"/>
+                                        </svg>
+                                    </span>
+                                </a>
+                                <a class="newsletter-panel__icon newsletter-panel__icon--kerv" href="https://kervinapps.com/" target="_blank" rel="noopener" aria-label="Visit KervinApps">
+                                    <span class="newsletter-panel__icon-inner">
+                                        <span class="newsletter-panel__icon-text">K</span>
+                                    </span>
+                                </a>
+                                <a class="newsletter-panel__icon newsletter-panel__icon--chat" href="contact.html" aria-label="Contact Kervin">
+                                    <span class="newsletter-panel__icon-inner">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path fill="currentColor" d="M4 4h16a2 2 0 012 2v9a2 2 0 01-2 2h-6l-4 3v-3H4a2 2 0 01-2-2V6a2 2 0 012-2zm3 5a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2z"/>
+                                    </svg>
+                                    </span>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="contact-grid">
-            <div class="contact-form">
-                <h2 class="form-title">Send us a message</h2>
-                <form>
+        <div class="content-layout content-layout--single">
+            <div class="content-column">
+                <section class="section-card section-card--static" id="contact-form">
+                    <div class="contact-section-card">
+                        <span class="pill">Send us a message</span>
+                        <h2>Share your details</h2>
+                        <p>Use the form below to tell us about your professional journey or how we can help you become a data hero.</p>
+                        <form class="form-grid" action="#" method="post" novalidate>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="name">Your name</label>
+                                    <input class="input-field" type="text" id="name" name="name" autocomplete="name" required>
+                                </div>
                     <div class="form-group">
-                        <label for="name">Your name</label>
-                        <input type="text" id="name" name="name" required>
+                                    <label class="form-label" for="email">Email address</label>
+                                    <input class="input-field" type="email" id="email" name="email" autocomplete="email" required>
+                                </div>
                     </div>
-                    
+                            <div class="form-row">
                     <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" id="email" name="email" required>
+                                    <label class="form-label" for="organization">Organization</label>
+                                    <input class="input-field" type="text" id="organization" name="organization" autocomplete="organization">
                     </div>
-                    
                     <div class="form-group">
-                        <label for="organization">Organization</label>
-                        <input type="text" id="organization" name="organization">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="role">Your role</label>
-                        <select id="role" name="role">
+                                    <label class="form-label" for="role">Your Role</label>
+                                    <select class="select-field" id="role" name="role">
                             <option value="">Select your role</option>
                             <option value="data-analyst">Data Analyst</option>
                             <option value="data-scientist">Data Scientist</option>
@@ -538,10 +116,10 @@
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    
+                            </div>
                     <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <select id="subject" name="subject">
+                                <label class="form-label" for="subject">Subject</label>
+                                <select class="select-field" id="subject" name="subject">
                             <option value="">Select a subject</option>
                             <option value="collaboration">Collaboration Opportunity</option>
                             <option value="speaking">Speaking Engagement</option>
@@ -551,93 +129,87 @@
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    
                     <div class="form-group">
-                        <label for="message">Your message</label>
-                        <textarea id="message" name="message" placeholder="Tell us about your professional journey or how we can help you become a data hero..." required></textarea>
+                                <label class="form-label" for="message">Your message</label>
+                                <textarea class="textarea-field" id="message" name="message" placeholder="Tell us about your professional journey or how we can help you become a data hero..." required></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button class="submit-button" type="submit">Send Message</button>
                     </div>
-                    
-                    <button type="submit" class="submit-btn">Send Message</button>
                 </form>
-            </div>
+                    </div>
+                </section>
 
-            <div class="contact-info">
-                <h2 class="info-title">Get in touch</h2>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">📧</div>
-                    <div class="contact-details">
-                        <h4>Email</h4>
-                        <p>heroes@dataheroes.blog</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">📱</div>
-                    <div class="contact-details">
-                        <h4>Phone</h4>
-                        <p>+1 (555) DATA-HERO</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">🏢</div>
-                    <div class="contact-details">
-                        <h4>Office</h4>
-                        <p>Kerv Talks-Data Headquarters<br>123 Information Street<br>Digital City, DC 12345</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">⏰</div>
-                    <div class="contact-details">
-                        <h4>Business Hours</h4>
-                        <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM</p>
-                    </div>
-                </div>
-
-                <div class="social-links">
-                    <h4>Follow our journey</h4>
-                    <div class="social-grid">
-                        <a href="#" class="social-link">📘</a>
-                        <a href="#" class="social-link">🐦</a>
-                        <a href="#" class="social-link">💼</a>
-                        <a href="#" class="social-link">📺</a>
-                        <a href="#" class="social-link">📷</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <section class="faq-section">
-            <h2 class="faq-title">Frequently Asked Questions</h2>
-            
+                <details class="section-card" open>
+                    <summary>
+                        <span class="pill">Frequently Asked Questions</span>
+                        <span class="summary-arrow" aria-hidden="true">➜</span>
+                    </summary>
+                    <div class="section-body faq-grid">
             <div class="faq-item">
                 <div class="faq-question">How can I contribute to the Kerv Talks-Data Blog?</div>
                 <div class="faq-answer">We welcome contributions from data professionals who want to share their professional journeys. Contact us with your article ideas, and we'll help you craft compelling stories that inspire other data professionals.</div>
             </div>
-            
             <div class="faq-item">
                 <div class="faq-question">Do you offer consulting services?</div>
                 <div class="faq-answer">Yes! Our team of data experts provides consulting services in data architecture, analytics strategy, and information governance. We help organizations transform their data challenges into competitive advantages.</div>
             </div>
-            
             <div class="faq-item">
                 <div class="faq-question">Can I request a specific topic for an article?</div>
                 <div class="faq-answer">Absolutely! We love hearing from our community about topics they'd like to see covered. Send us your suggestions, and we'll consider them for future articles.</div>
             </div>
-            
             <div class="faq-item">
                 <div class="faq-question">How often do you publish new articles?</div>
                 <div class="faq-answer">We publish new articles weekly, featuring insights from our team of data experts and guest contributors. Subscribe to our newsletter to never miss an update.</div>
             </div>
-            
             <div class="faq-item">
                 <div class="faq-question">Do you offer speaking engagements?</div>
                 <div class="faq-answer">Yes! Our data experts are available for speaking engagements at conferences, workshops, and corporate events. Contact us to discuss your event needs.</div>
             </div>
-        </section>
+                    </div>
+                </details>
+            </div>
+        </div>
     </main>
+
+    <section class="newsletter-panel newsletter-panel--footer">
+        <p class="newsletter-panel__headline">Join data leaders gaining hands-on human experience with my free monthly newsletter.</p>
+        <form class="newsletter-panel__form" action="#" method="post" novalidate>
+            <div class="newsletter-panel__inputs">
+                <input class="newsletter-panel__input" type="text" name="name" autocomplete="name" placeholder="Name">
+                <input class="newsletter-panel__input" type="email" name="email" autocomplete="email" placeholder="Email" required>
+                <button class="newsletter-panel__submit" type="submit" aria-label="Subscribe to newsletter">S</button>
+            </div>
+            <div class="newsletter-panel__icons">
+                <a class="newsletter-panel__icon newsletter-panel__icon--linkedin" href="https://www.linkedin.com/in/kleacock/" target="_blank" rel="noopener" aria-label="Connect on LinkedIn">
+                    <span class="newsletter-panel__icon-inner">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M20.452 20.452h-3.555v-5.569c0-1.327-.027-3.038-1.852-3.038-1.853 0-2.136 1.449-2.136 2.948v5.659H9.354V9.012h3.414v1.561h.049c.476-.9 1.637-1.852 3.369-1.852 3.601 0 4.267 2.37 4.267 5.455v6.276zM5.337 7.433c-1.144 0-2.068-.929-2.068-2.072 0-1.144.924-2.072 2.068-2.072 1.143 0 2.067.928 2.067 2.072 0 1.143-.924 2.072-2.067 2.072zM7.119 20.452H3.552V9.012h3.567v11.44z"/>
+                        </svg>
+                    </span>
+                </a>
+                <a class="newsletter-panel__icon newsletter-panel__icon--mail" href="mailto:optium.optimizer@gmail.com" aria-label="Email Kervin">
+                    <span class="newsletter-panel__icon-inner">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm0 2v.21L12 13l9-5.79V7H3zm0 12h18V9.24l-9 5.79-9-5.79V19z"/>
+                        </svg>
+                    </span>
+                </a>
+                <a class="newsletter-panel__icon newsletter-panel__icon--kerv" href="https://kervinapps.com/" target="_blank" rel="noopener" aria-label="Visit KervinApps">
+                    <span class="newsletter-panel__icon-inner">
+                        <span class="newsletter-panel__icon-text">K</span>
+                    </span>
+                </a>
+                <a class="newsletter-panel__icon newsletter-panel__icon--chat" href="contact.html" aria-label="Contact Kervin">
+                    <span class="newsletter-panel__icon-inner">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M4 4h16a2 2 0 012 2v9a2 2 0 01-2 2h-6l-4 3v-3H4a2 2 0 01-2-2V6a2 2 0 012-2zm3 5a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2z"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </form>
+    </section>
 
     <footer class="footer">
         <div class="footer-content">
@@ -645,12 +217,8 @@
         </div>
     </footer>
     
-    <style>
-        /* Hide Articles link on production - CSS is more reliable than JS */
-        a[href="articles/index.html"] {
-            display: none !important;
-        }
-    </style>
     <script src="assets/js/nav.js"></script>
+    <script src="assets/js/newsletter.js"></script>
+    <script src="assets/js/contact.js"></script>
 </body>
 </html>

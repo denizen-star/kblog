@@ -11,6 +11,7 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+const { submitToGoogleSheets } = require('./lib/googleSheetsClient');
 
 const app = express();
 const PORT = 1977; // Main server port
@@ -335,6 +336,34 @@ app.post('/api/newsletter/subscribe', async (req, res) => {
             }
         };
 
+        const submissionPayload = {
+            dataType: 'newsletter',
+            timestamp: subscriptionData.subscriptionDate,
+            sessionId: subscriptionData.sessionId,
+            sourcePage: pageUrl || null,
+            email: subscriptionData.email,
+            campaignTag: source || 'newsletter_signup',
+            referrer: referrer || null,
+            deviceInfo: {
+                deviceData: deviceData || null,
+                sessionInfo: sessionInfo || null
+            },
+            userAgent: req.headers['user-agent'] || 'unknown',
+            ipAddress:
+                (req.headers['x-forwarded-for'] || '').split(',')[0].trim() ||
+                req.ip ||
+                req.connection?.remoteAddress ||
+                'unknown',
+            status: 'submitted'
+        };
+
+        try {
+            await submitToGoogleSheets(submissionPayload);
+            console.log('🧾 Newsletter submission forwarded to Google Sheets');
+        } catch (gsError) {
+            console.error('Sheets submission failed (newsletter):', gsError);
+        }
+
         // Save subscription to newsletter.json
         await saveNewsletterSubscription(subscriptionData);
         console.log(`✅ Newsletter subscription saved: ${email}`);
@@ -353,6 +382,84 @@ app.post('/api/newsletter/subscribe', async (req, res) => {
         console.error('Error processing newsletter subscription:', error);
         res.status(500).json({
             error: 'Failed to process subscription',
+            message: error.message
+        });
+    }
+});
+
+// Contact form endpoint
+app.post('/api/contact/submit', async (req, res) => {
+    try {
+        console.log('📮 Processing contact form submission...');
+
+        const {
+            name,
+            email,
+            organization,
+            role,
+            subject,
+            message,
+            sessionId,
+            deviceInfo,
+            sessionInfo,
+            pageUrl
+        } = req.body;
+
+        if (!name || !email || !message) {
+            return res.status(400).json({
+                error: 'Name, email, and message are required.',
+            });
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({
+                error: 'Please enter a valid email address.'
+            });
+        }
+
+        const submissionTimestamp = new Date().toISOString();
+        const submissionPayload = {
+            dataType: 'contact',
+            timestamp: submissionTimestamp,
+            sessionId: sessionId || `contact_${Date.now()}`,
+            sourcePage: pageUrl || 'contact',
+            name: name.trim(),
+            email: email.toLowerCase().trim(),
+            organization: organization || '',
+            role: role || '',
+            subject: subject || '',
+            message: message || '',
+            deviceInfo: {
+                deviceData: deviceInfo || null,
+                sessionInfo: sessionInfo || null
+            },
+            userAgent: req.headers['user-agent'] || 'unknown',
+            ipAddress:
+                (req.headers['x-forwarded-for'] || '').split(',')[0].trim() ||
+                req.ip ||
+                req.connection?.remoteAddress ||
+                'unknown',
+            status: 'submitted'
+        };
+
+        let sheetsResponse = null;
+        try {
+            sheetsResponse = await submitToGoogleSheets(submissionPayload);
+            console.log('📊 Contact submission forwarded to Google Sheets');
+        } catch (gsError) {
+            console.error('Sheets submission failed (contact):', gsError);
+        }
+
+        res.json({
+            success: true,
+            message: 'Message received. Thank you for contacting us!',
+            sheetsResponse
+        });
+    } catch (error) {
+        console.error('Error processing contact submission:', error);
+        res.status(500).json({
+            error: 'Failed to process contact submission.',
             message: error.message
         });
     }
