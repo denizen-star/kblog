@@ -637,6 +637,16 @@
     }
 }
 
+@media (max-width: 640px) {
+    .newsletter-panel__submit-label {
+        display: inline;
+    }
+
+    .newsletter-panel__submit-icon {
+        display: none;
+    }
+}
+
 /* Print Styles */
 @media print {
     .header,

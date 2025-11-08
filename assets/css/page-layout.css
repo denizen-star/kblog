@@ -254,9 +254,10 @@ body {
     color: #ffffff;
     font-size: 18px;
     font-weight: 700;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
     cursor: pointer;
     box-shadow: 0 18px 32px rgba(34, 52, 84, 0.32);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -265,6 +266,19 @@ body {
 .newsletter-panel__submit:hover {
     transform: translateY(-2px);
     box-shadow: 0 22px 36px rgba(34, 52, 84, 0.38);
+}
+
+.newsletter-panel__submit-label {
+    display: none;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.newsletter-panel__submit-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .newsletter-panel__icons {
@@ -1147,6 +1161,16 @@ body {
 
     .newsletter-panel--hero {
         max-width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .newsletter-panel__submit-label {
+        display: inline;
+    }
+
+    .newsletter-panel__submit-icon {
+        display: none;
     }
 }
 
