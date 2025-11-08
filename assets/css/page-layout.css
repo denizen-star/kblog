@@ -1102,14 +1102,14 @@ body {
     }
 
     .newsletter-panel {
-        padding: 24px 20px;
+        padding: 22px 18px;
     }
 
     .newsletter-panel__inputs {
         flex-direction: column;
         align-items: stretch;
         border-radius: 24px;
-        gap: 12px;
+        gap: 10px;
     }
 
     .newsletter-panel__input {
@@ -1130,12 +1130,12 @@ body {
     .newsletter-panel__icons {
         justify-content: center;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 10px;
     }
 
     .newsletter-panel--hero {
         max-width: 100%;
-        padding: 24px 20px;
+        padding: 22px 18px;
         background: linear-gradient(135deg, rgba(46, 68, 105, 0.92), rgba(84, 107, 146, 0.82));
         border: 1px solid rgba(255, 255, 255, 0.32);
         box-shadow: 0 24px 40px rgba(15, 26, 42, 0.32);
@@ -1186,14 +1186,14 @@ body {
     }
 
     .newsletter-panel {
-        padding: 24px 20px;
+        padding: 22px 18px;
     }
 
     .newsletter-panel__inputs {
         flex-direction: column;
         align-items: stretch;
         border-radius: 24px;
-        gap: 12px;
+        gap: 10px;
     }
 
     .newsletter-panel__input {
@@ -1214,7 +1214,7 @@ body {
     .newsletter-panel__icons {
         justify-content: center;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 10px;
     }
 
     .newsletter-panel--hero {
@@ -1259,6 +1259,51 @@ body {
 
     .profile-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .newsletter-panel {
+        padding: 20px 16px;
+        border-radius: 24px;
+    }
+
+    .newsletter-panel__inputs {
+        padding: 0;
+        gap: 8px;
+    }
+
+    .newsletter-panel__icons {
+        gap: 8px;
+    }
+
+    .newsletter-panel--hero {
+        padding: 20px 16px;
+    }
+
+    .newsletter-panel--hero .newsletter-panel__headline {
+        font-size: 16px;
+        line-height: 1.35;
+    }
+
+    .newsletter-panel--hero .newsletter-panel__inputs {
+        padding: 8px 10px;
+    }
+
+    .newsletter-panel--hero .newsletter-panel__input {
+        padding: 12px 14px;
+        border-radius: 18px;
+    }
+
+    .newsletter-panel--hero .newsletter-panel__submit {
+        height: 46px;
+        border-radius: 16px;
+    }
+
+    .newsletter-panel--hero .newsletter-panel__icon {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
     }
 }
 

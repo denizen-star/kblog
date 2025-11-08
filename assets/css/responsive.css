@@ -42,7 +42,7 @@
 
     .newsletter-panel--hero {
         width: 100%;
-        padding: 24px 20px;
+        padding: 20px 16px;
         background: linear-gradient(135deg, rgba(46, 68, 105, 0.92), rgba(84, 107, 146, 0.82));
         border: 1px solid rgba(255, 255, 255, 0.32);
         box-shadow: 0 24px 40px rgba(15, 26, 42, 0.32);
@@ -52,8 +52,9 @@
     .newsletter-panel--hero .newsletter-panel__inputs {
         flex-direction: column;
         align-items: stretch;
-        gap: var(--spacing-sm);
+        gap: var(--spacing-xs);
         border-radius: 24px;
+        padding: 8px 10px;
     }
 
     .newsletter-panel__input {
@@ -62,19 +63,30 @@
         width: 100%;
     }
 
+    .newsletter-panel__headline {
+        font-size: clamp(1rem, 3vw, 1.1rem);
+        line-height: 1.35;
+    }
+
     .newsletter-panel--hero .newsletter-panel__icons {
         justify-content: center;
         flex-wrap: wrap;
-        gap: var(--spacing-sm);
+        gap: var(--spacing-xs);
     }
 
     .newsletter-panel__submit {
         width: 100%;
         max-width: none;
-        height: 3rem;
-        border-radius: var(--border-radius-md);
+        height: 2.875rem;
+        border-radius: var(--border-radius-sm);
         display: flex;
         justify-content: center;
+    }
+
+    .newsletter-panel--hero .newsletter-panel__icon {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
     }
 
     .nav-container {
