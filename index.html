@@ -1075,14 +1075,19 @@
             .hero {
                 flex-direction: column;
                 padding: 48px 32px;
+                gap: 32px;
                 text-align: center;
             }
 
             .hero-media {
+                flex: 0 1 auto;
+                width: min(280px, 100%);
                 max-width: 280px;
+                margin: 0 auto;
             }
 
             .hero-actions {
+                flex-direction: column;
                 align-items: center;
             }
 
@@ -1157,6 +1162,7 @@
 
             .hero {
                 padding: 40px 24px;
+                gap: 28px;
             }
 
             .content-layout {
@@ -1165,6 +1171,31 @@
 
             .subscribe-banner {
                 max-width: 100%;
+            }
+
+            .subscribe-form {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .subscribe-input {
+                min-width: 0;
+                flex: 0 1 auto;
+                width: 100%;
+            }
+
+            .subscribe-button {
+                width: 100%;
+                max-width: none;
+                height: 48px;
+                border-radius: 16px;
+                flex: 0 0 auto;
+            }
+
+            .subscribe-caption {
+                margin-left: 0;
+                text-align: center;
             }
 
             .cta-section {
@@ -1376,13 +1407,22 @@
                 gap: 12px;
             }
 
+            .newsletter-panel__input {
+                flex: 0 1 auto;
+                width: 100%;
+            }
+
             .newsletter-panel__submit {
-                width: 48px;
+                width: 100%;
+                max-width: none;
                 height: 48px;
+                border-radius: 18px;
             }
 
             .newsletter-panel__icons {
                 justify-content: center;
+                flex-wrap: wrap;
+                gap: 12px;
             }
 
             .newsletter-panel--hero {
