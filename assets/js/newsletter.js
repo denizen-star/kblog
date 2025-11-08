@@ -127,7 +127,7 @@ class NewsletterSubscription {
     
     setupEventListeners() {
         // Find all newsletter forms on the page
-        const newsletterForms = document.querySelectorAll('.newsletter-form');
+        const newsletterForms = document.querySelectorAll('.newsletter-form, .newsletter-panel__form');
         
         newsletterForms.forEach(form => {
             form.addEventListener('submit', (e) => {

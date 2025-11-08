@@ -76,10 +76,12 @@ class ArticlePageManager {
     }
 
     setupEventListeners() {
-        // Newsletter form
-        const newsletterForm = document.querySelector('.newsletter-form');
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', this.handleNewsletterSubmit.bind(this));
+        // Newsletter forms
+        const newsletterForms = document.querySelectorAll('.newsletter-panel__form, .newsletter-form');
+        if (newsletterForms.length > 0) {
+            newsletterForms.forEach((form) => {
+                form.addEventListener('submit', this.handleNewsletterSubmit.bind(this));
+            });
         }
     }
 
