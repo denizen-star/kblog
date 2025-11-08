@@ -17,7 +17,13 @@
     }
 
     .hero-actions {
-        gap: var(--spacing-lg);
+        gap: var(--spacing-md);
+    }
+
+    .hero.hero--content-only .hero-actions {
+        margin-top: var(--spacing-md);
+        gap: var(--spacing-sm);
+        align-items: center;
     }
 
     .hero-cta {
@@ -485,7 +491,13 @@
     }
 
     .hero-actions {
-        gap: var(--spacing-xl);
+        gap: var(--spacing-lg);
+    }
+
+    .hero.hero--content-only .hero-actions {
+        margin-top: var(--spacing-lg);
+        gap: var(--spacing-md);
+        align-items: center;
     }
 
     .hero-highlights {
