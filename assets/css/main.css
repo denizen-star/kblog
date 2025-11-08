@@ -463,19 +463,6 @@ body {
     box-shadow: 0 22px 36px rgba(34, 52, 84, 0.38);
 }
 
-.newsletter-panel__submit-label {
-    display: none;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-}
-
-.newsletter-panel__submit-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .newsletter-panel__icons {
     display: flex;
     align-items: center;
@@ -589,14 +576,6 @@ body {
         max-width: none;
         height: 48px;
         border-radius: 18px;
-    }
-
-    .newsletter-panel__submit-label {
-        display: inline;
-    }
-
-    .newsletter-panel__submit-icon {
-        display: none;
     }
 
     .newsletter-panel__icons {

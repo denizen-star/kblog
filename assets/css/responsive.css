@@ -638,12 +638,11 @@
 }
 
 @media (max-width: 640px) {
-    .newsletter-panel__submit-label {
-        display: inline;
-    }
-
-    .newsletter-panel__submit-icon {
-        display: none;
+    .newsletter-panel__submit {
+        width: 100%;
+        max-width: none;
+        height: 3rem;
+        border-radius: var(--border-radius-md);
     }
 }
 
