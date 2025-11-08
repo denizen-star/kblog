@@ -552,6 +552,38 @@ body {
     font-size: 22px;
 }
 
+@media (max-width: 960px) {
+    .newsletter-panel {
+        padding: 24px 20px;
+    }
+
+    .newsletter-panel__inputs {
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 24px;
+        gap: 12px;
+    }
+
+    .newsletter-panel__input {
+        flex: 0 1 auto;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .newsletter-panel__submit {
+        width: 100%;
+        max-width: none;
+        height: 48px;
+        border-radius: 18px;
+    }
+
+    .newsletter-panel__icons {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+}
+
 /* Articles Header */
 .articles-header {
     display: flex;
