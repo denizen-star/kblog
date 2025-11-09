@@ -62,7 +62,7 @@
 
     .newsletter-panel--hero .newsletter-panel__inputs {
         flex-direction: column;
-        align-items: stretch;
+        align-items: flex-start;
         gap: var(--spacing-xs);
         border-radius: 20px;
         padding: 6px;
@@ -82,19 +82,25 @@
         line-height: 1.35;
     }
 
-    .newsletter-panel--hero .newsletter-panel__icons {
-        justify-content: center;
+    .newsletter-panel__actions {
+        width: 100%;
+        gap: var(--spacing-xs);
+        justify-content: flex-start;
+    }
+
+    .newsletter-panel--hero .newsletter-panel__icons,
+    .newsletter-panel__icons {
+        justify-content: flex-start;
         flex-wrap: wrap;
         gap: var(--spacing-xs);
     }
 
     .newsletter-panel__submit {
-        width: 100%;
-        max-width: none;
         height: 2.5rem;
         border-radius: 14px;
         display: flex;
         justify-content: center;
+        align-self: flex-start;
         font-size: clamp(0.95rem, 2.4vw, 1rem);
     }
 
