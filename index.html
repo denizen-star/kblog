@@ -155,16 +155,16 @@
         .main-container {
             max-width: 1320px;
             margin: 0 auto;
-            padding: 56px 32px 72px;
+            padding: 48px 32px 64px;
         }
 
         .hero {
             display: flex;
-            gap: 60px;
+            gap: 40px;
             align-items: center;
             background: linear-gradient(140deg, rgba(34, 52, 84, 0.95), rgba(79, 107, 150, 0.88));
             border-radius: 28px;
-            padding: 64px 56px;
+            padding: 48px 44px;
             color: #ffffff;
             box-shadow: 0 24px 48px rgba(34, 52, 84, 0.25);
             margin-bottom: 40px;
@@ -206,8 +206,8 @@
         .hero-media {
             position: relative;
             z-index: 1;
-            flex: 0 0 340px;
-            max-width: 360px;
+            flex: 0 0 300px;
+            max-width: 320px;
         }
 
         .hero-media::before {
@@ -245,15 +245,17 @@
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 720px;
+            flex: 1 1 0;
+            max-width: none;
+            min-width: 0;
         }
 
         .hero-actions {
-            margin-top: 28px;
+            margin-top: 20px;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            gap: 20px;
+            gap: 16px;
             width: 100%;
         }
 
@@ -403,15 +405,15 @@
         }
 
         .hero-title {
-            font-size: clamp(36px, 5vw, 56px);
+            font-size: clamp(34px, 4.8vw, 52px);
             font-weight: 700;
             line-height: 1.1;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .hero-subtitle {
             font-size: 18px;
-            max-width: 560px;
+            max-width: 100%;
             font-weight: 400;
             opacity: 0.85;
         }
@@ -1199,24 +1201,34 @@
         .newsletter-panel__form {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 16px;
         }
 
         .newsletter-panel__inputs {
             display: flex;
-            align-items: stretch;
-            gap: 16px;
-            row-gap: 14px;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 14px;
+            row-gap: 12px;
             background: rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             padding: 12px 14px;
             flex-wrap: wrap;
         }
 
+        .newsletter-panel__actions {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex: 0 0 auto;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
         .newsletter-panel__input {
             flex: 1 1 220px;
             min-width: 180px;
-            min-height: 52px;
+            min-height: 48px;
             border: none;
             background: rgba(255, 255, 255, 0.92);
             border-radius: 18px;
@@ -1232,8 +1244,8 @@
 
         .newsletter-panel__submit {
             flex: 0 0 auto;
-            padding: 14px 28px;
-            min-height: 52px;
+            padding: 12px 24px;
+            min-height: 48px;
             border-radius: 999px;
             border: none;
             background: linear-gradient(135deg, #223454, #475c7e);
@@ -1273,15 +1285,17 @@
         }
 
         .newsletter-panel__icons {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
+            justify-content: flex-start;
+            flex: 0 0 auto;
         }
 
         .newsletter-panel__icon {
-            width: 68px;
-            height: 68px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             background: linear-gradient(140deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.12));
             border: 2px solid rgba(255, 255, 255, 0.38);
@@ -1291,8 +1305,8 @@
             color: #ffffff;
             text-decoration: none;
             font-weight: 600;
-            font-size: 26px;
-            box-shadow: 0 24px 40px rgba(15, 26, 42, 0.36);
+            font-size: 20px;
+            box-shadow: 0 20px 36px rgba(15, 26, 42, 0.32);
             transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -1312,8 +1326,8 @@
         }
 
         .newsletter-panel__icon svg {
-            width: 28px;
-            height: 28px;
+            width: 22px;
+            height: 22px;
             display: block;
         }
 
@@ -1342,7 +1356,7 @@
         }
 
         .newsletter-panel--sidebar .newsletter-panel__icons {
-            justify-content: center;
+            justify-content: flex-start;
         }
 
         .newsletter-panel--sidebar .newsletter-panel__icon {
@@ -1352,7 +1366,7 @@
         }
 
         .newsletter-panel--hero {
-            max-width: 760px;
+            max-width: 100%;
             padding: 0;
             gap: 16px;
             background: none;
@@ -1368,37 +1382,84 @@
         .newsletter-panel--hero .newsletter-panel__inputs {
             padding: 10px 12px;
             border-radius: 24px;
-            align-items: stretch;
-            gap: 14px;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: nowrap;
+        }
+
+        .newsletter-panel--hero .newsletter-panel__actions {
+            gap: 10px;
+            flex-wrap: nowrap;
         }
 
         .newsletter-panel--hero .newsletter-panel__input {
             border-radius: 20px;
             padding: 12px 18px;
-            min-height: 52px;
+            min-height: 48px;
         }
 
         .newsletter-panel--hero .newsletter-panel__submit {
             flex: 0 0 auto;
-            padding: 14px 28px;
-            min-height: 52px;
+            padding: 12px 24px;
+            min-height: 48px;
             border-radius: 999px;
             font-size: 16px;
         }
 
         .newsletter-panel--hero .newsletter-panel__icons {
-            gap: 16px;
+            gap: 10px;
+            flex-wrap: nowrap;
         }
 
         .newsletter-panel--hero .newsletter-panel__icon {
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
+            width: 48px;
+            height: 48px;
+            font-size: 20px;
         }
 
         .newsletter-panel--footer {
+            position: relative;
             margin: 72px auto 0;
-            max-width: 960px;
+            max-width: 1320px;
+            padding: 64px 56px;
+            border-radius: 28px;
+            background: linear-gradient(140deg, rgba(34, 52, 84, 0.95), rgba(79, 107, 150, 0.88));
+            box-shadow: 0 24px 48px rgba(34, 52, 84, 0.25);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 48px;
+            overflow: hidden;
+        }
+
+        .newsletter-panel--footer::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.18), transparent 55%),
+                        radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.14), transparent 60%),
+                        radial-gradient(circle at 50% 100%, rgba(21, 36, 62, 0.55), transparent 65%);
+            pointer-events: none;
+        }
+
+        .newsletter-panel--footer > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-panel--footer .newsletter-panel__headline {
+            flex: 1 1 45%;
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .newsletter-panel--footer .newsletter-panel__form {
+            flex: 1 1 55%;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 24px;
+            border-radius: 24px;
+            backdrop-filter: blur(12px);
         }
 
         @media (max-width: 960px) {
@@ -1413,10 +1474,33 @@
                 gap: 10px;
             }
 
+            .newsletter-panel--hero .newsletter-panel__inputs {
+                flex-wrap: wrap;
+            }
+
             .newsletter-panel__input {
                 flex: 0 1 auto;
                 width: 100%;
                 min-width: 0;
+            }
+
+            .newsletter-panel__actions {
+                width: 100%;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 10px;
+                margin-left: 0;
+            }
+
+            .newsletter-panel__actions .newsletter-panel__icons {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .newsletter-panel--hero .newsletter-panel__actions {
+                flex-wrap: wrap;
             }
 
             .newsletter-panel__submit {
@@ -1435,13 +1519,17 @@
                 gap: 10px;
             }
 
-            .newsletter-panel--hero {
+            .newsletter-panel--hero,
+            .newsletter-panel--footer {
                 max-width: 100%;
                 padding: 22px 18px;
                 background: linear-gradient(135deg, rgba(46, 68, 105, 0.92), rgba(84, 107, 146, 0.82));
                 border: 1px solid rgba(255, 255, 255, 0.32);
                 box-shadow: 0 24px 40px rgba(15, 26, 42, 0.32);
                 backdrop-filter: blur(18px);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 18px;
             }
 
             .newsletter-panel--hero .newsletter-panel__submit {
@@ -1485,7 +1573,8 @@
                 gap: 8px;
             }
 
-            .newsletter-panel--hero {
+            .newsletter-panel--hero,
+            .newsletter-panel--footer {
                 padding: 18px 14px;
             }
 
@@ -1503,7 +1592,8 @@
                 border-radius: 14px;
             }
 
-            .newsletter-panel--hero .newsletter-panel__submit {
+            .newsletter-panel--hero .newsletter-panel__submit,
+            .newsletter-panel--footer .newsletter-panel__submit {
                 min-height: 46px;
                 border-radius: 14px;
             }
@@ -1549,35 +1639,37 @@
                             <div class="newsletter-panel__inputs">
                                 <input class="newsletter-panel__input" type="text" name="name" autocomplete="name" placeholder="Name">
                                 <input class="newsletter-panel__input" type="email" name="email" autocomplete="email" placeholder="Email" required>
-                                <button class="newsletter-panel__submit" type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
-                            </div>
-                            <div class="newsletter-panel__icons">
-                                <a class="newsletter-panel__icon newsletter-panel__icon--linkedin" href="https://www.linkedin.com/in/kleacock/" target="_blank" rel="noopener" aria-label="Connect on LinkedIn">
-                                    <span class="newsletter-panel__icon-inner">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                                            <path fill="currentColor" d="M20.452 20.452h-3.555v-5.569c0-1.327-.027-3.038-1.852-3.038-1.853 0-2.136 1.449-2.136 2.948v5.659H9.354V9.012h3.414v1.561h.049c.476-.9 1.637-1.852 3.369-1.852 3.601 0 4.267 2.37 4.267 5.455v6.276zM5.337 7.433c-1.144 0-2.068-.929-2.068-2.072 0-1.144.924-2.072 2.068-2.072 1.143 0 2.067.928 2.067 2.072 0 1.143-.924 2.072-2.067 2.072zM7.119 20.452H3.552V9.012h3.567v11.44z"/>
-                                        </svg>
-                                    </span>
-                                </a>
-                                <a class="newsletter-panel__icon newsletter-panel__icon--mail" href="mailto:optium.optimizer@gmail.com" aria-label="Email Kervin">
-                                    <span class="newsletter-panel__icon-inner">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                                            <path fill="currentColor" d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm0 2v.21L12 13l9-5.79V7H3zm0 12h18V9.24l-9 5.79-9-5.79V19z"/>
-                                        </svg>
-                                    </span>
-                                </a>
-                                <a class="newsletter-panel__icon newsletter-panel__icon--kerv" href="https://kervinapps.com/" target="_blank" rel="noopener" aria-label="Visit KervinApps">
-                                    <span class="newsletter-panel__icon-inner">
-                                        <span class="newsletter-panel__icon-text">K</span>
-                                    </span>
-                                </a>
-                                <a class="newsletter-panel__icon newsletter-panel__icon--chat" href="contact.html" aria-label="Contact Kervin">
-                                    <span class="newsletter-panel__icon-inner">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                                            <path fill="currentColor" d="M4 4h16a2 2 0 012 2v9a2 2 0 01-2 2h-6l-4 3v-3H4a2 2 0 01-2-2V6a2 2 0 012-2zm3 5a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2z"/>
-                                        </svg>
-                                    </span>
-                                </a>
+                                <div class="newsletter-panel__actions">
+                                    <button class="newsletter-panel__submit" type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
+                                    <div class="newsletter-panel__icons">
+                                        <a class="newsletter-panel__icon newsletter-panel__icon--linkedin" href="https://www.linkedin.com/in/kleacock/" target="_blank" rel="noopener" aria-label="Connect on LinkedIn">
+                                            <span class="newsletter-panel__icon-inner">
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path fill="currentColor" d="M20.452 20.452h-3.555v-5.569c0-1.327-.027-3.038-1.852-3.038-1.853 0-2.136 1.449-2.136 2.948v5.659H9.354V9.012h3.414v1.561h.049c.476-.9 1.637-1.852 3.369-1.852 3.601 0 4.267 2.37 4.267 5.455v6.276zM5.337 7.433c-1.144 0-2.068-.929-2.068-2.072 0-1.144.924-2.072 2.068-2.072 1.143 0 2.067.928 2.067 2.072 0 1.143-.924 2.072-2.067 2.072zM7.119 20.452H3.552V9.012h3.567v11.44z"/>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                        <a class="newsletter-panel__icon newsletter-panel__icon--mail" href="mailto:optium.optimizer@gmail.com" aria-label="Email Kervin">
+                                            <span class="newsletter-panel__icon-inner">
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path fill="currentColor" d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm0 2v.21L12 13l9-5.79V7H3zm0 12h18V9.24l-9 5.79-9-5.79V19z"/>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                        <a class="newsletter-panel__icon newsletter-panel__icon--kerv" href="https://kervinapps.com/" target="_blank" rel="noopener" aria-label="Visit KervinApps">
+                                            <span class="newsletter-panel__icon-inner">
+                                                <span class="newsletter-panel__icon-text">K</span>
+                                            </span>
+                                        </a>
+                                        <a class="newsletter-panel__icon newsletter-panel__icon--chat" href="contact.html" aria-label="Contact Kervin">
+                                            <span class="newsletter-panel__icon-inner">
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path fill="currentColor" d="M4 4h16a2 2 0 012 2v9a2 2 0 01-2 2h-6l-4 3v-3H4a2 2 0 01-2-2V6a2 2 0 012-2zm3 5a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2z"/>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -1943,14 +2035,35 @@
                 <p class="premium-text">Get exclusive access to advanced data strategies and enterprise case studies.</p>
             </div>
 
-            <div class="newsletter-panel newsletter-panel--sidebar">
-                <p class="newsletter-panel__headline">Join data leaders gaining hands-on human experience with my free monthly newsletter.</p>
-                <form class="newsletter-panel__form" action="#" method="post" novalidate data-source="sidebar" data-component="sidebar-newsletter">
-                    <div class="newsletter-panel__inputs">
-                        <input class="newsletter-panel__input" type="text" name="name" autocomplete="name" placeholder="Name">
-                        <input class="newsletter-panel__input" type="email" name="email" autocomplete="email" placeholder="Email" required>
-                        <button class="newsletter-panel__submit" type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
-                    </div>
+
+            <div class="card news-card">
+                <h3 class="news-title">Kerv Talks-Data News</h3>
+                <div class="news-item">
+                    <div class="news-headline">Enterprise data architecture trends for 2024</div>
+                    <div class="news-meta">2h ago • 1,234 readers</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-headline">Information asymmetry in AI-driven organizations</div>
+                    <div class="news-meta">4h ago • 892 readers</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-headline">Data governance best practices</div>
+                    <div class="news-meta">6h ago • 1,567 readers</div>
+                </div>
+                <a href="#" class="show-more">Show more</a>
+            </div>
+        </aside>
+        </div>
+    </main>
+
+    <section class="newsletter-panel newsletter-panel--footer">
+        <p class="newsletter-panel__headline">Join data leaders gaining hands-on human experience with my free monthly newsletter.</p>
+        <form class="newsletter-panel__form" action="#" method="post" novalidate>
+            <div class="newsletter-panel__inputs">
+                <input class="newsletter-panel__input" type="text" name="name" autocomplete="name" placeholder="Name">
+                <input class="newsletter-panel__input" type="email" name="email" autocomplete="email" placeholder="Email" required>
+                <div class="newsletter-panel__actions">
+                    <button class="newsletter-panel__submit" type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
                     <div class="newsletter-panel__icons">
                         <a class="newsletter-panel__icon newsletter-panel__icon--linkedin" href="https://www.linkedin.com/in/kleacock/" target="_blank" rel="noopener" aria-label="Connect on LinkedIn">
                             <span class="newsletter-panel__icon-inner">
@@ -1979,64 +2092,7 @@
                             </span>
                         </a>
                     </div>
-                </form>
-            </div>
-
-            <div class="card news-card">
-                <h3 class="news-title">Kerv Talks-Data News</h3>
-                <div class="news-item">
-                    <div class="news-headline">Enterprise data architecture trends for 2024</div>
-                    <div class="news-meta">2h ago • 1,234 readers</div>
                 </div>
-                <div class="news-item">
-                    <div class="news-headline">Information asymmetry in AI-driven organizations</div>
-                    <div class="news-meta">4h ago • 892 readers</div>
-                </div>
-                <div class="news-item">
-                    <div class="news-headline">Data governance best practices</div>
-                    <div class="news-meta">6h ago • 1,567 readers</div>
-                </div>
-                <a href="#" class="show-more">Show more</a>
-            </div>
-        </aside>
-        </div>
-    </main>
-
-    <section class="newsletter-panel newsletter-panel--footer">
-        <p class="newsletter-panel__headline">Join data leaders gaining hands-on human experience with my free monthly newsletter.</p>
-        <form class="newsletter-panel__form" action="#" method="post" novalidate>
-            <div class="newsletter-panel__inputs">
-                <input class="newsletter-panel__input" type="text" name="name" autocomplete="name" placeholder="Name">
-                <input class="newsletter-panel__input" type="email" name="email" autocomplete="email" placeholder="Email" required>
-                <button class="newsletter-panel__submit" type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
-            </div>
-            <div class="newsletter-panel__icons">
-                <a class="newsletter-panel__icon newsletter-panel__icon--linkedin" href="https://www.linkedin.com/in/kleacock/" target="_blank" rel="noopener" aria-label="Connect on LinkedIn">
-                    <span class="newsletter-panel__icon-inner">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill="currentColor" d="M20.452 20.452h-3.555v-5.569c0-1.327-.027-3.038-1.852-3.038-1.853 0-2.136 1.449-2.136 2.948v5.659H9.354V9.012h3.414v1.561h.049c.476-.9 1.637-1.852 3.369-1.852 3.601 0 4.267 2.37 4.267 5.455v6.276zM5.337 7.433c-1.144 0-2.068-.929-2.068-2.072 0-1.144.924-2.072 2.068-2.072 1.143 0 2.067.928 2.067 2.072 0 1.143-.924 2.072-2.067 2.072zM7.119 20.452H3.552V9.012h3.567v11.44z"/>
-                        </svg>
-                    </span>
-                </a>
-                <a class="newsletter-panel__icon newsletter-panel__icon--mail" href="mailto:optium.optimizer@gmail.com" aria-label="Email Kervin">
-                    <span class="newsletter-panel__icon-inner">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill="currentColor" d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm0 2v.21L12 13l9-5.79V7H3zm0 12h18V9.24l-9 5.79-9-5.79V19z"/>
-                        </svg>
-                    </span>
-                </a>
-                <a class="newsletter-panel__icon newsletter-panel__icon--kerv" href="https://kervinapps.com/" target="_blank" rel="noopener" aria-label="Visit KervinApps">
-                    <span class="newsletter-panel__icon-inner">
-                        <span class="newsletter-panel__icon-text">K</span>
-                    </span>
-                </a>
-                <a class="newsletter-panel__icon newsletter-panel__icon--chat" href="contact.html" aria-label="Contact Kervin">
-                    <span class="newsletter-panel__icon-inner">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill="currentColor" d="M4 4h16a2 2 0 012 2v9a2 2 0 01-2 2h-6l-4 3v-3H4a2 2 0 01-2-2V6a2 2 0 012-2zm3 5a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2z"/>
-                        </svg>
-                    </span>
-                </a>
             </div>
         </form>
     </section>
