@@ -1000,22 +1000,35 @@
         @media (max-width: 768px) {
             .nav-container {
                 flex-wrap: wrap;
-                justify-content: space-between;
+                align-items: center;
                 gap: 12px;
+                padding: 12px 18px;
             }
 
             .nav-toggle {
                 display: inline-flex;
+                margin-left: auto;
             }
 
             .nav-menu {
                 width: 100%;
+                display: none;
                 flex-direction: column;
                 align-items: stretch;
-                display: none;
-                margin-top: 8px;
-                padding-top: 8px;
-                border-top: 1px solid rgba(34, 52, 84, 0.12);
+                gap: 6px;
+                margin-top: 12px;
+                padding: 14px 16px;
+                border-radius: 18px;
+                background: rgba(255, 255, 255, 0.94);
+                border: 1px solid rgba(34, 52, 84, 0.12);
+                box-shadow: 0 20px 36px rgba(15, 26, 42, 0.16);
+                backdrop-filter: blur(18px);
+            }
+
+            @supports not ((-webkit-backdrop-filter: blur(0)) or (backdrop-filter: blur(0))) {
+                .nav-menu {
+                    background-color: #ffffff;
+                }
             }
 
             .nav-menu.nav-menu--open {
@@ -1026,9 +1039,36 @@
                 width: 100%;
             }
 
+            .nav-menu li + li {
+                border-top: 1px solid rgba(34, 52, 84, 0.08);
+                padding-top: 4px;
+            }
+
             .nav-menu a {
-                justify-content: center;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                justify-content: flex-start;
                 width: 100%;
+                padding: 12px 14px;
+                border-radius: 12px;
+                font-size: 15px;
+                color: #223454;
+                background-color: transparent;
+                transition: background-color 0.2s ease, color 0.2s ease;
+            }
+
+            .nav-menu a:hover,
+            .nav-menu a:focus-visible {
+                background-color: rgba(34, 52, 84, 0.08);
+                color: #0f1a2a;
+                outline: none;
+            }
+
+            .nav-menu a.active {
+                border: none;
+                background-color: rgba(34, 52, 84, 0.14);
+                color: #0f1a2a;
             }
         }
 
