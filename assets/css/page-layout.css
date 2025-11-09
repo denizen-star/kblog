@@ -493,7 +493,7 @@ body {
 }
 
 .hero-title {
-    font-size: clamp(36px, 5vw, 56px);
+    font-size: 40px;
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 20px;
@@ -1304,6 +1304,67 @@ body {
     .hero.hero--content-only .hero-actions {
         margin-top: 18px;
         gap: 12px;
+    }
+}
+
+@media (max-width: 720px) {
+    .page-about .hero,
+    .page-contact .hero,
+    .page-project-inquiries .hero {
+        padding: 28px 18px;
+        margin: 24px 0 32px;
+        text-align: left;
+        align-items: stretch;
+        gap: 20px;
+    }
+
+    .page-about .hero-content,
+    .page-contact .hero-content,
+    .page-project-inquiries .hero-content,
+    .page-about .hero-text,
+    .page-contact .hero-text,
+    .page-project-inquiries .hero-text {
+        width: 100%;
+        max-width: none;
+    }
+
+    .page-about .hero-subtitle,
+    .page-contact .hero-subtitle,
+    .page-project-inquiries .hero-subtitle {
+        max-width: none;
+    }
+
+    .page-about .hero-actions,
+    .page-contact .hero-actions,
+    .page-project-inquiries .hero-actions {
+        width: 100%;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .page-about .newsletter-panel--hero,
+    .page-contact .newsletter-panel--hero,
+    .page-project-inquiries .newsletter-panel--hero {
+        width: 100%;
+        padding: 18px 14px;
+    }
+
+    .page-about .newsletter-panel__inputs,
+    .page-contact .newsletter-panel__inputs,
+    .page-project-inquiries .newsletter-panel__inputs {
+        width: 100%;
+    }
+
+    .page-about .newsletter-panel__submit,
+    .page-contact .newsletter-panel__submit,
+    .page-project-inquiries .newsletter-panel__submit {
+        width: 100%;
+    }
+
+    .page-about .newsletter-panel__icons,
+    .page-contact .newsletter-panel__icons,
+    .page-project-inquiries .newsletter-panel__icons {
+        justify-content: flex-start;
     }
 }
 
