@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "information-asymmetry-how-does-it-impact-your-business-13",
+      "title": "Information Asymmetry - How does it impact your business? (1/3)",
+      "excerpt": "Information asymmetry (IA)— Is the condition where a party possesses superior information relative to another—is not just a market phenomenon but a foundational feature of organizational structure. Within the enterprise microcosm, IA manifests as Principal-Agent conflicts, data silos, and bureaucratic exploitation, leading to sub-optimal resource allocation, reduced productivity, and systemic risks.",
+      "author": {
+        "name": "Data Crusader",
+        "avatar": "🦸‍♂️",
+        "role": "Head of Data Strategy"
+      },
+      "published": "2025-11-09",
+      "readTime": 1,
+      "category": "Strategy",
+      "tags": [
+        "Budget",
+        "Data",
+        "Enterprise"
+      ],
+      "image": "information-asymmetry-how-does-it-impact-your-business-13.jpg",
+      "content": "information-asymmetry-how-does-it-impact-your-business-13-content.html",
+      "likes": 0,
+      "comments": 0,
+      "views": 0
+    },
+    {
       "id": "information-asymmetry",
       "title": "Information Asymmetry",
       "excerpt": "Information asymmetry (IA)—the condition where one party possesses superior information relative to another—is not merely an external market phenomenon but a foundational feature of organizational structure. Within the enterprise microcosm, IA manifests as Principal-Agent conflicts, data silos, and bureaucratic exploitation, leading to sub-optimal resource allocation, reduced productivity, and systemic risks.\r\n",
