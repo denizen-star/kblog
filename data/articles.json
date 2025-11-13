@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": "data-bi-analytics-ml-and-ai-are-we-viewing-them-as-one-function-one-team-or-competing-functions-",
+      "title": "Data, BI, Analytics, ML, and AI  - Are we viewing them as one function, one team, or competing functions? ",
+      "excerpt": "It's time to stop enforcing a single structure. Each function possesses a unique value chain. The keys to achieving genuine intelligence lie in collaboration, clarity of roles, and establishing a strong data baseline. #BusinessIntelligece #BI #AI #Data #ML #Analytics #DATACRUSADER",
+      "author": {
+        "name": "Data Crusader",
+        "avatar": "🦸‍♂️",
+        "role": "Head of Data Strategy"
+      },
+      "published": "2025-11-13",
+      "readTime": 1,
+      "category": "Strategy",
+      "tags": [
+        "BI",
+        "AI",
+        "Data",
+        "ML",
+        "Analytics",
+        "DATACRUSADER",
+        "Organizations"
+      ],
+      "image": "data-bi-analytics-ml-and-ai-are-we-viewing-them-as-one-function-one-team-or-competing-functions-.jpg",
+      "content": "<h3><b>Beyond Silos: The Collaborative Data Ecosystem</b></h3><p></p><ul><li><p><b>The Foundational Mandate: Data as a Validated Asset</b></p><ul><li><p>Establish a&nbsp;<b>repeatable, repeatable, and validated baseline</b>&nbsp;for all business data today. This is the unshakeable truth layer that prevents downstream confusion.</p></li><li><p>Data quality and governance must be the first line of defense against AI's \"hallucination.\"</p></li></ul></li><li><p><b>Business Intelligence (BI): The Navigator of the Present</b></p><ul><li><p>Build a&nbsp;<b>standardized scaffolding of intuitive reports</b>—easy to read and relatable for&nbsp;<i>every</i>&nbsp;position.</p></li><li><p>Reports must be both&nbsp;<b>prescriptive</b>&nbsp;(telling you what to do&nbsp;<i>now</i>) and&nbsp;<b>predictive</b>&nbsp;(showing what&nbsp;<i>could</i>&nbsp;happen).</p></li></ul></li><li><p><b>Analytics: The Research &amp; Development Arm</b></p><ul><li><p>Analytics must be an&nbsp;<b>active research partner</b>, proactively hunting for new opportunities and insights.</p></li><li><p>Embed analysts with product teams to find, test, and implement changes, then hand off monitoring to Data/BI teams.</p></li></ul></li><li><p><b>ML/AI: The Engine of Automated Evolution</b></p></li><ul><li><p>ML operationalizes the&nbsp;<b>automations and complex operations</b>&nbsp;that standard systems cannot handle.</p></li><li><p>Agentic AI covers an&nbsp;<b>unprecedented number of tasks</b>, rapidly augmenting employee performance, but its outputs&nbsp;<i>must</i>&nbsp;be cross-checked with analytical and BI tools for validation.</p></li></ul></ul><div><br></div><div><br></div>\r\n                            ",
+      "likes": 0,
+      "comments": 0,
+      "views": 0
+    },
+    {
       "id": "information-asymmetry-how-does-it-impact-your-business-13",
       "title": "Information Asymmetry - How does it impact your business? (1/3)",
       "excerpt": "Information asymmetry (IA)— Is the condition where a party possesses superior information relative to another—is not just a market phenomenon but a foundational feature of organizational structure. Within the enterprise microcosm, IA manifests as Principal-Agent conflicts, data silos, and bureaucratic exploitation, leading to sub-optimal resource allocation, reduced productivity, and systemic risks.",

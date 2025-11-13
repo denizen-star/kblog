@@ -31,9 +31,9 @@ const storage = multer.diskStorage({
         cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
-        const slug = req.body.slug || 'article';
         const ext = path.extname(file.originalname);
-        cb(null, `${slug}${ext}`);
+        const tempName = `${Date.now()}${ext}` || Date.now().toString();
+        cb(null, tempName);
     }
 });
 
@@ -104,6 +104,34 @@ app.post('/api/create-article', upload.single('featuredImage'), async (req, res)
         // Generate slug
         const slug = generateSlug(title);
         const articleId = slug;
+        let featuredImageFilename = null;
+
+        if (req.file) {
+            const originalExt = path.extname(req.file.originalname) || path.extname(req.file.filename);
+            featuredImageFilename = `${slug}${originalExt}`;
+            const currentPath = req.file.path;
+            const destinationPath = path.join(IMAGES_DIR, featuredImageFilename);
+
+            try {
+                if (fs.existsSync(destinationPath)) {
+                    fs.unlinkSync(destinationPath);
+                }
+                fs.renameSync(currentPath, destinationPath);
+                req.file.filename = featuredImageFilename;
+                req.file.path = destinationPath;
+                console.log(`🖼️  Image saved as: ${featuredImageFilename}`);
+            } catch (renameError) {
+                console.error('Error renaming uploaded image:', renameError);
+                try {
+                    if (fs.existsSync(currentPath)) {
+                        fs.unlinkSync(currentPath);
+                    }
+                } catch (cleanupError) {
+                    console.error('Failed to clean up temporary image file:', cleanupError);
+                }
+                featuredImageFilename = null;
+            }
+        }
         
         // Create article data
         const articleData = {
@@ -119,7 +147,7 @@ app.post('/api/create-article', upload.single('featuredImage'), async (req, res)
             category: category,
             tags: tags ? tags.split(',').map(tag => tag.trim()).filter(tag => tag) : [],
             image: {
-                featured: req.file ? `${slug}${path.extname(req.file.originalname)}` : null,
+                featured: featuredImageFilename,
                 alt: `${title} featured image`
             },
             stats: {
@@ -185,8 +213,8 @@ app.post('/api/create-article', upload.single('featuredImage'), async (req, res)
         console.log(`📝 Updated: data/articles.json`);
 
         // Handle image if uploaded
-        if (req.file) {
-            console.log(`🖼️  Image uploaded: ${req.file.filename}`);
+        if (featuredImageFilename) {
+            console.log(`🖼️  Featured image available at: assets/images/articles/${featuredImageFilename}`);
         }
 
         console.log(`✅ Article "${slug}" created successfully!`);
