@@ -28,8 +28,6 @@
     --border-radius-md: 8px;
     --border-radius-lg: 25px;
     
-    --article-content-max-width: 880px;
-    
     --transition-fast: 0.2s ease;
     --transition-medium: 0.3s ease;
     --transition-slow: 0.5s ease;
@@ -1548,10 +1546,6 @@ body {
 
 .article-newsletter {
     margin-bottom: var(--spacing-xxxl);
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 0 var(--spacing-xxl);
 }
 
 .article-newsletter--bottom {
@@ -1563,8 +1557,7 @@ body {
     border-radius: var(--border-radius-md);
     border: 1px solid var(--border-gray);
     overflow: hidden;
-    max-width: var(--article-content-max-width);
-    margin: 0 auto;
+    width: 100%;
     box-sizing: border-box;
 }
 
