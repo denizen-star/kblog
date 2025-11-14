@@ -1548,6 +1548,10 @@ body {
 
 .article-newsletter {
     margin-bottom: var(--spacing-xxxl);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 var(--spacing-xxl);
 }
 
 .article-newsletter--bottom {
