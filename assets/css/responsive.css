@@ -332,8 +332,7 @@
     }
     
     .article-layout {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-xl);
+        display: block;
     }
     
     .article-header-full {
@@ -449,10 +448,6 @@
         padding: var(--spacing-xs) var(--spacing-sm);
     }
     
-    /* Hide sidebar completely on mobile for cleaner reading experience */
-    .article-sidebar {
-        display: none;
-    }
     
     /* Breadcrumb mobile styles */
     .breadcrumb {
@@ -641,8 +636,7 @@
     }
     
     .article-layout {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-xxl);
+        display: block;
     }
     
     .article-header-full {
@@ -689,10 +683,6 @@
         font-size: var(--font-size-sm);
     }
     
-    /* Article sidebar tablet styles */
-    .article-sidebar {
-        order: -1;
-    }
     
     .author-card {
         padding: var(--spacing-xl);

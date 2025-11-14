@@ -9,7 +9,9 @@ NO SIMULATION - ACTUAL FILE CREATION
 import os
 import json
 import re
+import sys
 import shutil
+import mimetypes
 from datetime import datetime
 from pathlib import Path
 from http.server import HTTPServer, BaseHTTPRequestHandler
@@ -42,6 +44,13 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
         """Handle GET requests"""
         parsed_path = urlparse(self.path)
         
+        if parsed_path.path.startswith('/api/'):
+            self.route_api_request(parsed_path)
+        else:
+            self.handle_static(parsed_path.path)
+
+    def route_api_request(self, parsed_path):
+        """Dispatch API routes"""
         if parsed_path.path == '/api/health':
             self.handle_health()
         elif parsed_path.path == '/api/articles':
@@ -51,6 +60,47 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
             self.handle_get_article(slug)
         else:
             self.send_error(404, "Not Found")
+
+    def handle_static(self, url_path):
+        """Serve static files for the blog UI so port 1978 mirrors the site"""
+        relative_path = url_path.lstrip('/')
+        if not relative_path:
+            relative_path = 'index.html'
+        
+        file_path = (self.project_root / relative_path).resolve()
+        try:
+            project_root_resolved = self.project_root.resolve()
+        except FileNotFoundError:
+            project_root_resolved = self.project_root
+        
+        # Prevent directory traversal
+        if not str(file_path).startswith(str(project_root_resolved)):
+            self.send_error(403, "Forbidden")
+            return
+        
+        if not file_path.exists() or file_path.is_dir():
+            self.send_error(404, "Not Found")
+            return
+        
+        content_type, _ = mimetypes.guess_type(str(file_path))
+        if not content_type:
+            content_type = 'application/octet-stream'
+        
+        try:
+            with open(file_path, 'rb') as fp:
+                data = fp.read()
+        except Exception as exc:
+            print(f"Error reading {file_path}: {exc}")
+            self.send_error(500, "Failed to read file")
+            return
+        
+        self.send_response(200)
+        self.send_header('Content-Type', content_type)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Content-Length', str(len(data)))
+        self.end_headers()
+        if self.command != 'HEAD':
+            self.wfile.write(data)
     
     def do_POST(self):
         """Handle POST requests"""
@@ -458,6 +508,49 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
             <span class="breadcrumb-current">{article_data['title']}</span>
         </nav>
 
+        <section class="article-newsletter article-newsletter--top">
+            <div class="newsletter-panel newsletter-panel--article">
+                <p class="newsletter-panel__headline">Join data leaders gaining hands-on human experience with my free monthly newsletter.</p>
+                <form class="newsletter-panel__form" action="#" method="post" novalidate data-source="api-article-top" data-component="article-newsletter">
+                    <div class="newsletter-panel__inputs">
+                        <input class="newsletter-panel__input" type="text" name="name" autocomplete="name" placeholder="Name">
+                        <input class="newsletter-panel__input" type="email" name="email" autocomplete="email" placeholder="Email" required>
+                        <div class="newsletter-panel__actions">
+                            <button class="newsletter-panel__submit" type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
+                            <div class="newsletter-panel__icons">
+                                <a class="newsletter-panel__icon newsletter-panel__icon--linkedin" href="https://www.linkedin.com/in/kleacock/" target="_blank" rel="noopener" aria-label="Connect on LinkedIn">
+                                    <span class="newsletter-panel__icon-inner">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path fill="currentColor" d="M20.452 20.452h-3.555v-5.569c0-1.327-.027-3.038-1.852-3.038-1.853 0-2.136 1.449-2.136 2.948v5.659H9.354V9.012h3.414v1.561h.049c.476-.9 1.637-1.852 3.369-1.852 3.601 0 4.267 2.37 4.267 5.455v6.276zM5.337 7.433c-1.144 0-2.068-.929-2.068-2.072 0-1.144.924-2.072 2.068-2.072 1.143 0 2.067.928 2.067 2.072 0 1.143-.924 2.072-2.067 2.072zM7.119 20.452H3.552V9.012h3.567v11.44z"/>
+                                        </svg>
+                                    </span>
+                                </a>
+                                <a class="newsletter-panel__icon newsletter-panel__icon--mail" href="mailto:optium.optimizer@gmail.com" aria-label="Email Kervin">
+                                    <span class="newsletter-panel__icon-inner">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path fill="currentColor" d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm0 2v.21L12 13l9-5.79V7H3zm0 12h18V9.24l-9 5.79-9-5.79V19z"/>
+                                        </svg>
+                                    </span>
+                                </a>
+                                <a class="newsletter-panel__icon newsletter-panel__icon--kerv" href="https://kervinapps.com/" target="_blank" rel="noopener" aria-label="Visit KervinApps">
+                                    <span class="newsletter-panel__icon-inner">
+                                        <span class="newsletter-panel__icon-text">K</span>
+                                    </span>
+                                </a>
+                                <a class="newsletter-panel__icon newsletter-panel__icon--chat" href="../../contact.html" aria-label="Contact Kervin">
+                                    <span class="newsletter-panel__icon-inner">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path fill="currentColor" d="M4 4h16a2 2 0 012 2v9a2 2 0 01-2 2h-6l-4 3v-3H4a2 2 0 01-2-2V6a2 2 0 012-2zm3 5a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2z"/>
+                                        </svg>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
         <div class="article-layout">
             <article class="article-content">
                 <!-- Article Header -->
@@ -533,75 +626,74 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
                 <div class="article-tags-full">
                     {''.join([f'<span class="tag">{tag}</span>' for tag in article_data['tags']])}
                 </div>
-            </article>
 
-            <!-- Sidebar -->
-            <aside class="article-sidebar">
-                <!-- Author Card -->
-                <div class="card author-card">
-                    <div class="author-card-header">
-                        <div class="author-avatar-sidebar">{author_info['avatar']}</div>
-                        <div class="author-info-sidebar">
-                            <h3>{author_info['name']}</h3>
-                            <p>{author_info['role']}</p>
-                        </div>
-                    </div>
-                    <p class="author-bio">{author_info['bio']}</p>
-                    <div class="author-stats">
-                        <div class="author-stat">
-                            <span class="stat-number">{author_info['articles']}</span>
-                            <span class="stat-label">Articles</span>
-                        </div>
-                        <div class="author-stat">
-                            <span class="stat-number">{author_info['followers']}</span>
-                            <span class="stat-label">Followers</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Newsletter Signup -->
-                <div class="newsletter-panel newsletter-panel--sidebar">
-                    <p class="newsletter-panel__headline">Join data leaders gaining hands-on human experience with my free monthly newsletter.</p>
-                    <form class="newsletter-panel__form" action="#" method="post" novalidate data-source="api-article-sidebar" data-component="sidebar-newsletter">
-                        <div class="newsletter-panel__inputs">
-                            <input class="newsletter-panel__input" type="text" name="name" autocomplete="name" placeholder="Name">
-                            <input class="newsletter-panel__input" type="email" name="email" autocomplete="email" placeholder="Email" required>
-                            <div class="newsletter-panel__actions">
-                                <button class="newsletter-panel__submit" type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
-                                <div class="newsletter-panel__icons">
-                                    <a class="newsletter-panel__icon newsletter-panel__icon--linkedin" href="https://www.linkedin.com/in/kleacock/" target="_blank" rel="noopener" aria-label="Connect on LinkedIn">
-                                        <span class="newsletter-panel__icon-inner">
-                                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                                <path fill="currentColor" d="M20.452 20.452h-3.555v-5.569c0-1.327-.027-3.038-1.852-3.038-1.853 0-2.136 1.449-2.136 2.948v5.659H9.354V9.012h3.414v1.561h.049c.476-.9 1.637-1.852 3.369-1.852 3.601 0 4.267 2.37 4.267 5.455v6.276zM5.337 7.433c-1.144 0-2.068-.929-2.068-2.072 0-1.144.924-2.072 2.068-2.072 1.143 0 2.067.928 2.067 2.072 0 1.143-.924 2.072-2.067 2.072zM7.119 20.452H3.552V9.012h3.567v11.44z"/>
-                                            </svg>
-                                        </span>
-                                    </a>
-                                    <a class="newsletter-panel__icon newsletter-panel__icon--mail" href="mailto:optium.optimizer@gmail.com" aria-label="Email Kervin">
-                                        <span class="newsletter-panel__icon-inner">
-                                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                                <path fill="currentColor" d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm0 2v.21L12 13l9-5.79V7H3zm0 12h18V9.24l-9 5.79-9-5.79V19z"/>
-                                            </svg>
-                                        </span>
-                                    </a>
-                                    <a class="newsletter-panel__icon newsletter-panel__icon--kerv" href="https://kervinapps.com/" target="_blank" rel="noopener" aria-label="Visit KervinApps">
-                                        <span class="newsletter-panel__icon-inner">
-                                            <span class="newsletter-panel__icon-text">K</span>
-                                        </span>
-                                    </a>
-                                    <a class="newsletter-panel__icon newsletter-panel__icon--chat" href="../../contact.html" aria-label="Contact Kervin">
-                                        <span class="newsletter-panel__icon-inner">
-                                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                                <path fill="currentColor" d="M4 4h16a2 2 0 012 2v9a2 2 0 01-2 2h-6l-4 3v-3H4a2 2 0 01-2-2V6a2 2 0 012-2zm3 5a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2z"/>
-                                            </svg>
-                                        </span>
-                                    </a>
-                                </div>
+                <section class="article-author-section">
+                    <div class="card author-card">
+                        <div class="author-card-header">
+                            <div class="author-avatar-sidebar">{author_info['avatar']}</div>
+                            <div class="author-info-sidebar">
+                                <h3>{author_info['name']}</h3>
+                                <p>{author_info['role']}</p>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </aside>
+                        <p class="author-bio">{author_info['bio']}</p>
+                        <div class="author-stats">
+                            <div class="author-stat">
+                                <span class="stat-number">{author_info['articles']}</span>
+                                <span class="stat-label">Articles</span>
+                            </div>
+                            <div class="author-stat">
+                                <span class="stat-number">{author_info['followers']}</span>
+                                <span class="stat-label">Followers</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </article>
         </div>
+
+        <section class="article-newsletter article-newsletter--bottom">
+            <div class="newsletter-panel newsletter-panel--article">
+                <p class="newsletter-panel__headline">Join data leaders gaining hands-on human experience with my free monthly newsletter.</p>
+                <form class="newsletter-panel__form" action="#" method="post" novalidate data-source="api-article-bottom" data-component="article-newsletter">
+                    <div class="newsletter-panel__inputs">
+                        <input class="newsletter-panel__input" type="text" name="name" autocomplete="name" placeholder="Name">
+                        <input class="newsletter-panel__input" type="email" name="email" autocomplete="email" placeholder="Email" required>
+                        <div class="newsletter-panel__actions">
+                            <button class="newsletter-panel__submit" type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
+                            <div class="newsletter-panel__icons">
+                                <a class="newsletter-panel__icon newsletter-panel__icon--linkedin" href="https://www.linkedin.com/in/kleacock/" target="_blank" rel="noopener" aria-label="Connect on LinkedIn">
+                                    <span class="newsletter-panel__icon-inner">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path fill="currentColor" d="M20.452 20.452h-3.555v-5.569c0-1.327-.027-3.038-1.852-3.038-1.853 0-2.136 1.449-2.136 2.948v5.659H9.354V9.012h3.414v1.561h.049c.476-.9 1.637-1.852 3.369-1.852 3.601 0 4.267 2.37 4.267 5.455v6.276zM5.337 7.433c-1.144 0-2.068-.929-2.068-2.072 0-1.144.924-2.072 2.068-2.072 1.143 0 2.067.928 2.067 2.072 0 1.143-.924 2.072-2.067 2.072zM7.119 20.452H3.552V9.012h3.567v11.44z"/>
+                                        </svg>
+                                    </span>
+                                </a>
+                                <a class="newsletter-panel__icon newsletter-panel__icon--mail" href="mailto:optium.optimizer@gmail.com" aria-label="Email Kervin">
+                                    <span class="newsletter-panel__icon-inner">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path fill="currentColor" d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm0 2v.21L12 13l9-5.79V7H3zm0 12h18V9.24l-9 5.79-9-5.79V19z"/>
+                                        </svg>
+                                    </span>
+                                </a>
+                                <a class="newsletter-panel__icon newsletter-panel__icon--kerv" href="https://kervinapps.com/" target="_blank" rel="noopener" aria-label="Visit KervinApps">
+                                    <span class="newsletter-panel__icon-inner">
+                                        <span class="newsletter-panel__icon-text">K</span>
+                                    </span>
+                                </a>
+                                <a class="newsletter-panel__icon newsletter-panel__icon--chat" href="../../contact.html" aria-label="Contact Kervin">
+                                    <span class="newsletter-panel__icon-inner">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path fill="currentColor" d="M4 4h16a2 2 0 012 2v9a2 2 0 01-2 2h-6l-4 3v-3H4a2 2 0 01-2-2V6a2 2 0 012-2zm3 5a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2z"/>
+                                        </svg>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
 
         <!-- Comments Section -->
         <section class="comments-section" id="comments">
@@ -721,4 +813,10 @@ def run_server(port=1978):
         httpd.server_close()
 
 if __name__ == '__main__':
-    run_server()
+    port_arg = 1979
+    if len(sys.argv) > 1:
+        try:
+            port_arg = int(sys.argv[1])
+        except ValueError:
+            print(f"Invalid port '{sys.argv[1]}', falling back to {port_arg}")
+    run_server(port_arg)

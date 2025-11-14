@@ -176,6 +176,11 @@
     font-size: 22px;
 }
 
+.newsletter-panel--article {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .newsletter-panel--hero {
     width: 100%;
     max-width: 100%;
