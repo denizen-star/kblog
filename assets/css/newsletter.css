@@ -178,7 +178,9 @@
 
 .newsletter-panel--article {
     width: 100%;
+    max-width: var(--article-content-max-width);
     box-sizing: border-box;
+    margin: 0 auto;
 }
 
 .newsletter-panel--hero {
