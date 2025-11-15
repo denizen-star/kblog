@@ -9,6 +9,34 @@
   # Set Node.js version (optional, for any Node tools)
   NODE_VERSION = "18"
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/newsletter/subscribe"
+  to = "/.netlify/functions/newsletter-subscribe"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/contact/submit"
+  to = "/.netlify/functions/contact-submit"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/project-inquiries/submit"
+  to = "/.netlify/functions/project-inquiry-submit"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/analytics/event"
+  to = "/.netlify/functions/analytics-event"
+  status = 200
+  force = true
+
 # Redirect rules for SPA routing
 [[redirects]]
   from = "/articles/*"
