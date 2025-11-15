@@ -83,7 +83,9 @@
     };
 
     const initContactForm = () => {
-        const form = document.querySelector('.contact-form form');
+        const form =
+            document.querySelector('#contact-form form') ||
+            document.querySelector('.contact-form form');
         if (!form) return;
 
         const submitButton = form.querySelector('button[type="submit"]');
