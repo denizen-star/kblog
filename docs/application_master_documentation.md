@@ -34,7 +34,7 @@ Welcome to the authoritative reference for AI agents supporting the Kerv Talks-D
 
 # 2. Operational Control: Starting and Restarting
 
-Operational control is centered on orchestrating the static server (for HTML/JS/CSS), the Express API, and environment variables required for telemetry forwarding.
+Operational control is centered on orchestrating the static server (for HTML/JS/CSS), the Express API, and environment variables required for telemetry forwarding. For a concise, step-by-step runbook (install, start, restart, recovery), see `@docs/current/APPLICATION_OPERATIONS_GUIDE.md`.
 
 ## 2.1. Full Application Startup Procedure
 
@@ -121,6 +121,8 @@ Execution order for article creation: `ArticleEditor` → `ExpressApiServer` →
   - `@index.html`, `@articles/index.html`, `@articles/create/index.html`, `@contact.html`, `@about.html` inline scripts and structural markup specific to each page.
   - Page-enhancement scripts: `@assets/js/articles.js`, `@assets/js/article.js`, `@assets/js/article-editor.js`, `@assets/js/contact.js` tailor UI flows to dedicated views.
 
+For canonical data contracts, see `@docs/current/DATA_MODEL_REFERENCE.md`. API request/response formats are defined in `@docs/current/API_CONTRACTS.md`.
+
 When authoring new functionality, place cross-cutting logic under `assets/js/` shared classes or `lib/` server utilities, and limit page-specific code to DOM orchestration to maintain maintainability.
 
 # 4. Anomaly and Troubleshooting Runbook (Agent Escalation Prevention)
@@ -191,6 +193,16 @@ When authoring new functionality, place cross-cutting logic under `assets/js/` s
   - `@docs/ENVIRONMENT_CONFIGURATION.md` – content merged into Sections 1 and 3; retain only for historical context.
   - Entire `@docs/archive/` directory – legacy research and prior architecture notes; do not rely on them for current operations.
   - `@docs/DEPLOYMENT_INSTRUCTIONS.md` (root-level) – Netlify workflow now governed by `@docs/current/DEPLOYMENT_GUIDE.md`.
+  - Integration docs are now organized under `@docs/integrations/`:
+    - Google Analytics setup: `@docs/integrations/google-analytics-setup.md`
+    - Google Apps Script deployment: `@docs/integrations/google-apps-script-deployment.md`
+    - Data collection implementation: `@docs/integrations/kblog-data-collection-implementation.md`
+
+Cross-references for operations and governance:
+- Operations runbook: `@docs/current/APPLICATION_OPERATIONS_GUIDE.md`
+- Backup & Restore: `@docs/current/BACKUP_AND_RESTORE.md`
+- Security Guidelines: `@docs/current/SECURITY_GUIDELINES.md`
+ - Version Control & CI/CD: `@docs/current/VERSION_CONTROL_AND_CICD.md`
 
 - **Updating this master document.**
   1. Branch or create a workspace checkpoint.

@@ -31,6 +31,13 @@ This comprehensive documentation covers all aspects of the Kerv Talks-Data Blog 
 | [Article Management](current/ARTICLE_MANAGEMENT.md) | Guide for managing articles and content | 2025-01-27 | ✅ Current |
 | [Deployment Guide](current/DEPLOYMENT_GUIDE.md) | Production deployment instructions | 2025-01-27 | ✅ Current |
 | [Deployment Instructions](current/DEPLOYMENT_INSTRUCTIONS.md) | Quick deployment reference | 2025-01-27 | ✅ Current |
+| [Application Operations Guide](current/APPLICATION_OPERATIONS_GUIDE.md) | Install, start, restart, and recovery | 2025-11-16 | ✅ Current |
+| [Data Model Reference](current/DATA_MODEL_REFERENCE.md) | Schemas for data/ and per-article metadata | 2025-11-16 | ✅ Current |
+| [API Contracts](current/API_CONTRACTS.md) | Request/response contracts for endpoints | 2025-11-16 | ✅ Current |
+| [Backup & Restore](current/BACKUP_AND_RESTORE.md) | Procedures to back up and restore safely | 2025-11-16 | ✅ Current |
+| [Security Guidelines](current/SECURITY_GUIDELINES.md) | CORS, uploads, validation, secrets | 2025-11-16 | ✅ Current |
+| [Version Control & CI/CD](current/VERSION_CONTROL_AND_CICD.md) | Git workflow, releases, Netlify/API deploy | 2025-11-16 | ✅ Current |
+| [What’s Next (Roadmap)](current/WHATS_NEXT.md) | Prioritized recommendations and 2‑week plan | 2025-11-16 | ✅ Current |
 
 ### **📋 Inspiration & References** (`docs/`)
 **Status:** ✅ **ACTIVE** - Design and content inspiration sources
@@ -50,6 +57,15 @@ This comprehensive documentation covers all aspects of the Kerv Talks-Data Blog 
 | [Cursor AI Prompt](requirements/cursor-ai-prompt.md) | Development prompt for AI assistance | 2025-01-27 | ✅ Current |
 | [Requirements README](requirements/README.md) | Requirements documentation overview | 2025-01-27 | ✅ Current |
 
+### **📋 Integrations Documentation** (`docs/integrations/`)
+**Status:** ✅ **ACTIVE** - External integrations and data pipelines
+
+| Document | Purpose | Last Updated | Status |
+|----------|---------|--------------|--------|
+| [Google Analytics Setup](integrations/google-analytics-setup.md) | GA4 integration and verification | 2025-11-16 | ✅ Current |
+| [Google Apps Script Deployment](integrations/google-apps-script-deployment.md) | Deploy and manage Apps Script endpoint | 2025-11-16 | ✅ Current |
+| [Kblog Data Collection Implementation](integrations/kblog-data-collection-implementation.md) | Data pipeline to Google Sheets | 2025-11-16 | ✅ Current |
+
 ### **📋 Archived Documentation** (`docs/archive/`)
 **Status:** 📦 **ARCHIVED** - Historical documents for reference
 
@@ -59,6 +75,8 @@ This comprehensive documentation covers all aspects of the Kerv Talks-Data Blog 
 | [Architecture Description](archive/Architecture%20description%20-%202025-10-20_09-48-05_EST.md) | System architecture overview | 2025-01-27 | Superseded by current documentation |
 | [Enterprise Research](archive/Enterprise%20Data%20Information%20Asymmetry%20Research.md) | Research document | 2025-01-27 | Reference material |
 | [Enterprise Research PDF](archive/Enterprise%20Data%20Information%20Asymmetry%20Research.pdf) | Research document (PDF) | 2025-01-27 | Reference material |
+| [Deployment Guide](archive/DEPLOYMENT_GUIDE.md) | Superseded by current deployment docs | 2025-11-16 | Superseded |
+| [Environment Configuration](archive/ENVIRONMENT_CONFIGURATION.md) | Content merged into master doc | 2025-11-16 | Superseded |
 
 ---
 
@@ -158,10 +176,10 @@ This comprehensive documentation covers all aspects of the Kerv Talks-Data Blog 
 ## 📊 **Documentation Metrics**
 
 ### **Current Status**
-- **Total Documents:** 12 active, 4 archived
-- **Coverage:** 100% of current features documented
-- **Last Updated:** January 27, 2025
-- **Next Review:** February 27, 2025
+- **Total Documents:** 15 active, 6 archived
+- **Coverage:** 100% of current features and integrations
+- **Last Updated:** November 16, 2025
+- **Next Review:** December 16, 2025
 
 ### **Quality Assurance**
 - ✅ All current features documented

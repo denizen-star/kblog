@@ -1,3 +1,5 @@
+> Archived: This document has been superseded by `docs/current/DEPLOYMENT_GUIDE.md` and `docs/application_master_documentation.md`. Retained for historical reference only.
+
 # Deployment Guide
 
 ## Overview
@@ -212,11 +214,8 @@ This will output the current environment configuration including all feature fla
        Require all denied
    </Files>
    ```
-
 2. **Authentication system** for admin features
-
 3. **API endpoint protection** for article creation
-
 4. **Content Security Policy** headers
 
 ## Monitoring and Maintenance
@@ -246,3 +245,5 @@ For deployment issues or questions:
 2. Verify environment detection is working
 3. Review the configuration in `config.js`
 4. Test in both development and production environments
+
+

@@ -1,3 +1,5 @@
+> Archived: This document has been merged into `docs/application_master_documentation.md` (Sections 1 and 3). Retained for historical reference only.
+
 # Environment Configuration System
 
 ## Overview
@@ -137,7 +139,6 @@ if (window.blogConfig.newFeature) {
    ```bash
    python3 -m http.server 1978
    ```
-
 2. Visit `http://localhost:1978`
 3. Verify that:
    - Articles page is visible in navigation
@@ -158,9 +159,7 @@ if (window.blogConfig.newFeature) {
 ### Common Issues
 
 1. **Feature not hiding/showing**: Check that the `data-feature` attribute matches the feature flag name exactly.
-
 2. **Environment not detected**: Verify the hostname matches the detection logic in `detectEnvironment()`.
-
 3. **Debug info not showing**: Ensure `showDebugInfo` is set to `true` in the development configuration.
 
 ### Debug Mode
@@ -179,3 +178,5 @@ Enable debug mode by setting `showDebugInfo: true` in the configuration. This wi
 - A/B testing capabilities
 - Dynamic feature flag updates without deployment
 - User role-based feature access
+
+
