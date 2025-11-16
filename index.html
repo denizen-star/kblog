@@ -2174,25 +2174,28 @@
                 return;
             }
 
-            fetch('data/articles.json')
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error('Request failed');
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    const articles = Array.isArray(data?.articles) ? data.articles.slice() : [];
-                    const sorted = articles
-                        .filter((article) => article && article.id && article.title)
-                        .sort((a, b) => new Date(b.published) - new Date(a.published))
-                        .slice(0, 3);
+            let lastArticleIds = [];
+            let updateInterval = null;
 
-                    if (sorted.length === 0) {
-                        container.innerHTML = '<p class="latest-articles-empty">No articles published yet. <a href="articles/index.html">Visit the articles collection.</a></p>';
-                        return;
-                    }
+            function renderArticles(articles) {
+                const sorted = articles
+                    .filter((article) => article && article.id && article.title)
+                    .sort((a, b) => new Date(b.published) - new Date(a.published))
+                    .slice(0, 5);
 
+                if (sorted.length === 0) {
+                    container.innerHTML = '<p class="latest-articles-empty">No articles published yet. <a href="articles/index.html">Visit the articles collection.</a></p>';
+                    return;
+                }
+
+                // Check if articles have changed by comparing IDs
+                const currentIds = sorted.map(a => a.id).join(',');
+                const lastIds = lastArticleIds.join(',');
+                
+                // Only update if there are changes
+                if (currentIds !== lastIds) {
+                    lastArticleIds = sorted.map(a => a.id);
+                    
                     container.innerHTML = sorted
                         .map((article) => {
                             const publishedDate = new Date(article.published);
@@ -2234,12 +2237,48 @@
                             `;
                         })
                         .join('');
+                }
+            }
 
-                    // No click-to-navigate; use explicit Read link. Collapsible handled natively by <details>.
-                })
-                .catch(() => {
-                    container.innerHTML = '<p class="latest-articles-empty">Unable to load articles right now. <a href="articles/index.html">Browse all articles</a>.</p>';
-                });
+            function loadArticles() {
+                fetch(`data/articles.json?t=${Date.now()}`)
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error('Request failed');
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        const articles = Array.isArray(data?.articles) ? data.articles.slice() : [];
+                        renderArticles(articles);
+                    })
+                    .catch(() => {
+                        if (container.innerHTML === '') {
+                            container.innerHTML = '<p class="latest-articles-empty">Unable to load articles right now. <a href="articles/index.html">Browse all articles</a>.</p>';
+                        }
+                    });
+            }
+
+            // Initial load
+            loadArticles();
+
+            // Set up automatic updates every 60 seconds
+            updateInterval = setInterval(loadArticles, 60000);
+
+            // Clean up interval when page is hidden (optional optimization)
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    if (updateInterval) {
+                        clearInterval(updateInterval);
+                        updateInterval = null;
+                    }
+                } else {
+                    if (!updateInterval) {
+                        loadArticles(); // Immediate refresh when page becomes visible
+                        updateInterval = setInterval(loadArticles, 60000);
+                    }
+                }
+            });
         });
     </script>
 </body>
