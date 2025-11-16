@@ -137,3 +137,4 @@ Optional local store if Apps Script is down; primarily for fallback.
 - Counters are derived server-side; clients must not mutate persisted counts directly.
 
 
+

@@ -12,7 +12,7 @@ const cors = require('cors');
 const { submitToGoogleSheets } = require('./lib/googleSheetsClient');
 
 const app = express();
-const PORT = 1978; // Main server port
+const PORT = 1977; // API server port (static server runs on 1978)
 const PUBLIC_DIR = __dirname;
 
 // Middleware
