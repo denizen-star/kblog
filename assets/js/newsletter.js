@@ -141,9 +141,12 @@ class NewsletterSubscription {
         console.log('Newsletter subscription attempt started');
         const form = event.target;
         const emailInput = form.querySelector('input[type="email"]');
-        const email = emailInput.value.trim();
+        const nameInput = form.querySelector('input[type="text"][name="name"], input[name="name"]');
+        const email = emailInput ? emailInput.value.trim() : '';
+        const name = nameInput ? nameInput.value.trim() : '';
         
         console.log('Email input value:', email);
+        console.log('Name input value:', name);
         
         // Validate email
         if (!this.validateEmail(email)) {
@@ -161,6 +164,7 @@ class NewsletterSubscription {
             // Collect all data
             const subscriptionData = {
                 email: email,
+                name: name || '',
                 dataType: 'newsletter',
                 sessionId: this.sessionManager.sessionId,
                 deviceInfo: DeviceMetadataCollector.collectDeviceData(),
@@ -176,12 +180,13 @@ class NewsletterSubscription {
             // Send to server
             const response = await this.submitSubscription(subscriptionData);
             
-            if (response.success) {
+            if (response && response.success) {
                 this.showSuccess('Successfully subscribed! Check your email for confirmation.', form);
                 this.trackSubscriptionSuccess(subscriptionData);
                 form.reset(); // Clear the form
             } else {
-                this.showError(response.message || 'Subscription failed. Please try again.', form);
+                const errorMessage = response?.message || response?.error || 'Subscription failed. Please try again.';
+                this.showError(errorMessage, form);
             }
             
         } catch (error) {
@@ -194,16 +199,53 @@ class NewsletterSubscription {
     
     async submitSubscription(data) {
         const baseUrl = this.getApiBaseUrl();
-            
-        const response = await fetch(`${baseUrl}/api/newsletter/subscribe`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
+        const apiUrl = `${baseUrl}/api/newsletter/subscribe`;
         
-        return await response.json();
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            
+            // Check if response is ok
+            if (!response.ok) {
+                // Try to parse error message
+                let errorData;
+                try {
+                    errorData = await response.json();
+                } catch {
+                    errorData = { error: `Server error: ${response.status} ${response.statusText}` };
+                }
+                
+                console.error('Newsletter subscription API error:', {
+                    status: response.status,
+                    statusText: response.statusText,
+                    url: apiUrl,
+                    error: errorData
+                });
+                
+                return {
+                    success: false,
+                    message: errorData.error || errorData.message || `Failed to subscribe. Please try again. (Error ${response.status})`
+                };
+            }
+            
+            return await response.json();
+        } catch (error) {
+            console.error('Newsletter subscription network error:', {
+                error: error.message,
+                url: apiUrl,
+                baseUrl: baseUrl
+            });
+            
+            return {
+                success: false,
+                message: 'Network error. Please check your connection and try again.'
+            };
+        }
     }
     
     validateEmail(email) {

@@ -47,16 +47,25 @@ exports.handler = async (event) => {
     };
 
     let sheetsResponse = null;
+    let sheetsError = null;
     try {
       sheetsResponse = await forwardToSheets(payload);
+      console.log('Newsletter submission forwarded to Google Sheets:', sheetsResponse);
     } catch (error) {
       console.error('Newsletter Sheets submission failed:', error);
+      sheetsError = {
+        message: error.message || 'Failed to save to Google Sheets',
+        error: error.toString()
+      };
+      // Log the error but don't fail the request - user still sees success
+      // This allows the subscription to work even if Sheets is misconfigured
     }
 
     return jsonResponse(200, {
       success: true,
       message: 'Successfully subscribed to newsletter.',
       sheetsResponse,
+      sheetsError: sheetsError || null,
     });
   } catch (error) {
     console.error('Newsletter subscription error:', error);
