@@ -437,6 +437,7 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
     <title>{article_data['title']} - Kerv Talks-Data Blog</title>
     <meta name="description" content="{article_data['excerpt'] or 'Professional insights on data architecture and enterprise strategies.'}">
     <meta name="keywords" content="{', '.join(article_data['tags'])}, data architecture, information asymmetry">

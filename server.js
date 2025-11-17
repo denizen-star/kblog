@@ -586,6 +586,7 @@ function generateArticleHTML(articleData) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
     <title>${articleData.title} - Kerv Talks-Data Blog</title>
     <meta name="description" content="${articleData.excerpt || 'Professional insights on data architecture and enterprise strategies.'}">
     <meta name="keywords" content="${articleData.tags.join(', ')}, data architecture, information asymmetry">
