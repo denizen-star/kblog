@@ -118,8 +118,27 @@
         } catch {}
     };
 
+    // Helper to get article ID from element or parent
+    const getArticleIdFromElement = (el) => {
+        // Check element itself
+        let articleId = el.getAttribute('data-article-id') || el.getAttribute('data-article-slug') || '';
+        if (articleId) return articleId;
+        
+        // Check parent elements (up to 3 levels)
+        let parent = el.parentElement;
+        let depth = 0;
+        while (parent && depth < 3) {
+            articleId = parent.getAttribute('data-article-id') || parent.getAttribute('data-article-slug') || '';
+            if (articleId) return articleId;
+            parent = parent.parentElement;
+            depth++;
+        }
+        return '';
+    };
+
     const trackArticleImpressions = () => {
-        const tiles = Array.from(document.querySelectorAll('.latest-article-item, .article-card'));
+        // Include all article card selectors
+        const tiles = Array.from(document.querySelectorAll('.latest-article-item, .article-card, .article-card-grid'));
         if (tiles.length === 0) return;
 
         const seen = getImpressionSet();
@@ -127,7 +146,7 @@
             entries.forEach((entry) => {
                 if (!entry.isIntersecting) return;
                 const el = entry.target;
-                const articleId = el.getAttribute('data-article-id') || el.getAttribute('data-article-slug') || '';
+                const articleId = getArticleIdFromElement(el);
                 if (!articleId || seen.has(articleId)) return;
 
                 const listContext =
@@ -148,18 +167,25 @@
                 console.debug('[analytics] article_impression', payload);
                 observer.unobserve(el);
             });
-        }, { root: null, rootMargin: '0px', threshold: 0.4 });
+        }, { root: null, rootMargin: '0px', threshold: 0.1 }); // Lower threshold to catch more impressions
 
         tiles.forEach((t) => observer.observe(t));
     };
 
     // Track article opens (clicks on tiles)
     const bindArticleOpens = () => {
-        const tiles = Array.from(document.querySelectorAll('.latest-article-item, .article-card'));
+        // Include all article card selectors
+        const tiles = Array.from(document.querySelectorAll('.latest-article-item, .article-card, .article-card-grid'));
         if (tiles.length === 0) return;
         tiles.forEach((tile) => {
+            // Skip if already bound
+            if (tile.hasAttribute('data-analytics-bound')) return;
+            tile.setAttribute('data-analytics-bound', 'true');
+            
             tile.addEventListener('click', () => {
-                const articleId = tile.getAttribute('data-article-id') || tile.getAttribute('data-article-slug') || '';
+                const articleId = getArticleIdFromElement(tile);
+                if (!articleId) return;
+                
                 const payload = {
                     ...buildBasePayload(),
                     eventType: 'article_open',
@@ -172,7 +198,9 @@
                     } else {
                         sendEvent(payload);
                     }
-                } catch {}
+                } catch (error) {
+                    console.warn('[analytics] Failed to send article_open event:', error);
+                }
                 console.debug('[analytics] article_open', payload);
             }, { capture: true });
         });
@@ -231,12 +259,39 @@
         window.addEventListener('scroll', handler, { passive: true });
         handler();
     };
+    // Retry tracking for dynamically loaded content
+    const retryTracking = () => {
+        // Retry impressions and click bindings after a delay to catch dynamically rendered content
+        setTimeout(() => {
+            const existingTiles = document.querySelectorAll('.latest-article-item, .article-card, .article-card-grid');
+            if (existingTiles.length > 0) {
+                trackArticleImpressions();
+                bindArticleOpens();
+            }
+        }, 1000);
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
         trackPageView();
         trackArticleView();
         trackArticleImpressions();
         bindArticleOpens();
         trackArticleReadDepth();
+        
+        // Retry for dynamically loaded content
+        retryTracking();
+        
+        // Also retry when articles are loaded (for articles list page)
+        const articlesGrid = document.getElementById('articles-grid');
+        if (articlesGrid) {
+            const observer = new MutationObserver(() => {
+                setTimeout(() => {
+                    trackArticleImpressions();
+                    bindArticleOpens();
+                }, 500);
+            });
+            observer.observe(articlesGrid, { childList: true, subtree: true });
+        }
     });
 })();
 
