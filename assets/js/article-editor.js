@@ -674,6 +674,30 @@ class ArticleEditor {
                 bio: 'Expert in crafting compelling data narratives that transform complex information into actionable insights.',
                 articles: 19,
                 followers: 1156
+            },
+            'vault-master': {
+                name: 'Vault Master',
+                role: 'Data Governance Expert',
+                avatar: '⚡',
+                bio: 'The Vault Master guards the secrets of enterprise data vaults. Specializing in data discovery, quality management, and unlocking hidden insights.',
+                articles: 10,
+                followers: 756
+            },
+            'power-analyst': {
+                name: 'Power Analyst',
+                role: 'Enterprise Dynamo',
+                avatar: '💥',
+                bio: 'The Power Analyst transforms organizations with dynamic data strategies. Known for creating competitive advantages through superior data management.',
+                articles: 14,
+                followers: 1034
+            },
+            'crucible-master': {
+                name: 'Crucible Master',
+                role: 'Transformation Leader',
+                avatar: '🦸‍♀️',
+                bio: 'The Crucible Master guides data professionals through their transformation journey. Expert in managing information imbalances and enterprise microcosms.',
+                articles: 12,
+                followers: 923
             }
         };
         return authors[authorId] || authors['data-crusader'];
@@ -765,7 +789,10 @@ ${htmlContent}
         const authors = {
             'data-crusader': 'Data Crusader',
             'cosmic-analyst': 'Cosmic Analyst',
-            'web-weaver': 'Web Weaver'
+            'web-weaver': 'Web Weaver',
+            'vault-master': 'Vault Master',
+            'power-analyst': 'Power Analyst',
+            'crucible-master': 'Crucible Master'
         };
         return authors[authorId] || 'Unknown Author';
     }
