@@ -727,8 +727,11 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
     </footer>
     
     <!-- JavaScript -->
+    <script src="../../assets/js/config.js"></script>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/article.js"></script>
+    <script src="../../assets/js/newsletter.js"></script>
+    <script src="../../assets/js/analytics.js"></script>
 </body>
 </html>"""
     
