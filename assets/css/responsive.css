@@ -306,7 +306,7 @@
     }
     
     .article-image-container {
-        height: 150px;
+        height: 250px;
         font-size: 36px;
     }
     
@@ -371,7 +371,7 @@
     }
     
     .article-featured-image {
-        height: 200px;
+        height: 300px;
         font-size: 48px;
     }
     
@@ -659,7 +659,7 @@
     }
     
     .article-featured-image {
-        height: 250px;
+        height: 350px;
         font-size: 60px;
     }
     

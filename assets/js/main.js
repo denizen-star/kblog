@@ -266,12 +266,12 @@ class BlogManager {
             const imagePath = isArticlesPage ? `../assets/images/articles/${article.image}` : `assets/images/articles/${article.image}`;
             
             // Create image with error handling
-            return `<img src="${imagePath}" alt="${article.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div style="display: none; width: 100%; height: 200px; background: linear-gradient(45deg, #6A7B9A, #8B9DC3); border-radius: 8px; align-items: center; justify-content: center; color: white; font-size: 3rem;">${article.author.avatar}</div>`;
+            return `<img src="${imagePath}" alt="${article.title}" style="width: 100%; height: 350px; object-fit: cover; object-position: top; border-radius: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="display: none; width: 100%; height: 350px; background: linear-gradient(45deg, #6A7B9A, #8B9DC3); border-radius: 8px; align-items: center; justify-content: center; color: white; font-size: 3rem;">${article.author.avatar}</div>`;
         }
         
         // Return author avatar as fallback with proper styling
-        return `<div style="width: 100%; height: 200px; background: linear-gradient(45deg, #6A7B9A, #8B9DC3); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">${article.author.avatar}</div>`;
+        return `<div style="width: 100%; height: 350px; background: linear-gradient(45deg, #6A7B9A, #8B9DC3); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">${article.author.avatar}</div>`;
     }
 
 }

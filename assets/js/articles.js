@@ -130,6 +130,19 @@ class ArticlesPageManager {
         this.addArticleEventListeners();
     }
 
+    getArticleImage(article) {
+        // Check if article has a featured image and it's not a placeholder
+        if (article.image && article.image !== 'placeholder.jpg' && article.image !== '') {
+            const imagePath = `assets/images/articles/${article.image}`;
+            // Create image with error handling
+            return `<img src="${imagePath}" alt="${article.title}" style="width: 100%; height: 100%; object-fit: cover; object-position: top;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="display: none; width: 100%; height: 100%; background: linear-gradient(45deg, #6A7B9A, #8B9DC3); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; position: absolute; top: 0; left: 0;">${article.author.avatar}</div>`;
+        }
+        
+        // Return author avatar as fallback with proper styling
+        return `<div style="width: 100%; height: 100%; background: linear-gradient(45deg, #6A7B9A, #8B9DC3); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; position: absolute; top: 0; left: 0;">${article.author.avatar}</div>`;
+    }
+
     createArticleCard(article) {
         const publishedDate = new Date(article.published).toLocaleDateString('en-US', {
             year: 'numeric',
@@ -144,7 +157,7 @@ class ArticlesPageManager {
         return `
             <article class="article-card-grid" data-article-id="${article.id}">
                 <div class="article-image-container">
-                    <div class="article-image">${article.author.avatar}</div>
+                    ${this.getArticleImage(article)}
                     <div class="article-category">${article.category}</div>
                 </div>
                 

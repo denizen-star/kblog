@@ -496,7 +496,7 @@ class ArticleEditor {
                 ${articleData.featuredImage ? `
                 <!-- Article Image -->
                 <div class="article-featured-image">
-                    <img src="../../assets/images/articles/${articleData.slug}.jpg" alt="${articleData.title}" style="width: 100%; height: 300px; object-fit: cover;">
+                    <img src="../../assets/images/articles/${articleData.slug}.jpg" alt="${articleData.title}" style="width: 100%; height: 450px; object-fit: cover; object-position: top;">
                 </div>
                 ` : `
                 <div class="article-featured-image">
