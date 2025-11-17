@@ -76,29 +76,8 @@ class ArticlePageManager {
     }
 
     setupEventListeners() {
-        // Newsletter forms
-        const newsletterForms = document.querySelectorAll('.newsletter-panel__form, .newsletter-form');
-        if (newsletterForms.length > 0) {
-            newsletterForms.forEach((form) => {
-                form.addEventListener('submit', this.handleNewsletterSubmit.bind(this));
-            });
-        }
-    }
-
-
-    handleNewsletterSubmit(event) {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const email = formData.get('email');
-        
-        if (!email) {
-            this.showNotification('Please enter a valid email address.');
-            return;
-        }
-
-        // Simulate newsletter subscription
-        this.showNotification('Thank you for subscribing to our newsletter!');
-        event.target.reset();
+        // Newsletter forms are handled by newsletter.js
+        // No need to set up duplicate handlers here
     }
 
 
@@ -123,30 +102,6 @@ class ArticlePageManager {
         }
     }
 
-    showNotification(message) {
-        // Create a simple notification
-        const notification = document.createElement('div');
-        notification.className = 'notification';
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--primary-color);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 4px;
-            z-index: 1000;
-            font-size: 14px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
-    }
 }
 
 // Initialize when DOM is loaded
