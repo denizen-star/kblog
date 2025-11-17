@@ -1,7 +1,7 @@
 {
   "id": "stop-debating-silos-the-hidden-cost-killing-your-data-strategy",
   "slug": "stop-debating-silos-the-hidden-cost-killing-your-data-strategy",
-  "title": "Stop Debating Silos: The Hidden Cost Killing Your Data Strategy",
+  "title": "Fusion Blueprint - Stop Debating Silos: The Hidden Cost Killing Your Data Strategy (1/3)",
   "excerpt": "The industry debate—\"Confluence\" (specialized silos) vs. \"Consolidation\" (merged teams)—misses the strategic point. While specialization guards against skill dilution, retaining fractured organizational silos is now the single greatest impediment to velocity.\r\n\r\nThe problem isn't skill; it's coordination overhead. We are hemorrhaging time and budget on redundant hand-offs between Data Engineering, BI, and ML/AI that slow our path to market.The industry debate—\"Confluence\" (specialized silos) vs. \"Consolidation\" (merged teams)—misses the strategic point. While specialization guards against skill dilution, retaining fractured organizational silos is now the single greatest impediment to velocity.",
   "author": {
     "id": "data-crusader",
@@ -28,7 +28,7 @@
   ],
   "image": {
     "featured": "stop-debating-silos-the-hidden-cost-killing-your-data-strategy.jpeg",
-    "alt": "Stop Debating Silos: The Hidden Cost Killing Your Data Strategy featured image"
+      "alt": "Fusion Blueprint - Stop Debating Silos: The Hidden Cost Killing Your Data Strategy (1/3) featured image"
   },
   "stats": {
     "views": 0,
@@ -37,7 +37,7 @@
     "shares": 0
   },
   "seo": {
-    "metaTitle": "Stop Debating Silos: The Hidden Cost Killing Your Data Strategy - Kerv Talks-Data Blog",
+    "metaTitle": "Fusion Blueprint - Stop Debating Silos: The Hidden Cost Killing Your Data Strategy (1/3) - Kerv Talks-Data Blog",
     "metaDescription": "The industry debate—\"Confluence\" (specialized silos) vs. \"Consolidation\" (merged teams)—misses the strategic point. While specialization guards against skill dilution, retaining fractured organizational silos is now the single greatest impediment to velocity.\r\n\r\nThe problem isn't skill; it's coordination overhead. We are hemorrhaging time and budget on redundant hand-offs between Data Engineering, BI, and ML/AI that slow our path to market.The industry debate—\"Confluence\" (specialized silos) vs. \"Consolidation\" (merged teams)—misses the strategic point. While specialization guards against skill dilution, retaining fractured organizational silos is now the single greatest impediment to velocity.",
     "keywords": [
       "BI",
