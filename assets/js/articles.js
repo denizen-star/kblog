@@ -23,6 +23,8 @@ class ArticlesPageManager {
             const data = await response.json();
             this.articles = data.articles;
             this.filteredArticles = [...this.articles];
+            // Sort articles by published date (newest to oldest)
+            this.sortArticles();
             console.log('Articles loaded:', this.articles.length);
         } catch (error) {
             console.error('Error loading articles:', error);
@@ -81,7 +83,11 @@ class ArticlesPageManager {
     sortArticles() {
         switch (this.currentSort) {
             case 'date':
-                this.filteredArticles.sort((a, b) => new Date(b.published) - new Date(a.published));
+                this.filteredArticles.sort((a, b) => {
+                    const dateA = this.parseDate(a.published);
+                    const dateB = this.parseDate(b.published);
+                    return dateB - dateA; // Newest first
+                });
                 break;
             case 'popularity':
                 this.filteredArticles.sort((a, b) => (b.likes + b.views) - (a.likes + a.views));
@@ -90,6 +96,18 @@ class ArticlesPageManager {
                 this.filteredArticles.sort((a, b) => a.title.localeCompare(b.title));
                 break;
         }
+    }
+
+    parseDate(dateString) {
+        if (!dateString) return new Date(0); // Invalid dates go to epoch
+        // Handle ISO date strings with or without timezone
+        const date = new Date(dateString);
+        // Check if date is valid
+        if (isNaN(date.getTime())) {
+            console.warn('Invalid date string:', dateString);
+            return new Date(0);
+        }
+        return date;
     }
 
     handleSearch(event) {
@@ -101,6 +119,8 @@ class ArticlesPageManager {
                 article.tags.some(tag => tag.toLowerCase().includes(query)) ||
                 article.author.name.toLowerCase().includes(query)
             );
+            // Sort search results by published date (newest to oldest)
+            this.sortArticles();
         } else {
             this.filterAndSortArticles();
         }
@@ -144,7 +164,8 @@ class ArticlesPageManager {
     }
 
     createArticleCard(article) {
-        const publishedDate = new Date(article.published).toLocaleDateString('en-US', {
+        const date = this.parseDate(article.published);
+        const publishedDate = date.toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
