@@ -485,10 +485,6 @@ class ArticleEditor {
                                 <span class="stat-label">Read time</span>
                                 <span class="stat-value">${this.calculateReadingTime(articleData.content)} min</span>
                             </div>
-                            <div class="stat-item">
-                                <span class="stat-label">Views</span>
-                                <span class="stat-value">${articleData.views}</span>
-                            </div>
                         </div>
                     </div>
                 </header>
@@ -544,16 +540,6 @@ class ArticleEditor {
                             </div>
                         </div>
                         <p class="author-bio">${authorInfo.bio}</p>
-                        <div class="author-stats">
-                            <div class="author-stat">
-                                <span class="stat-number">${authorInfo.articles}</span>
-                                <span class="stat-label">Articles</span>
-                            </div>
-                            <div class="author-stat">
-                                <span class="stat-number">${authorInfo.followers}</span>
-                                <span class="stat-label">Followers</span>
-                            </div>
-                        </div>
                     </div>
                 </section>
             </article>
