@@ -302,8 +302,8 @@ class ArticleManager {
     <meta name="author" content="${metadata.author.name}">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../../assets/css/main.css">
-    <link rel="stylesheet" href="../../assets/css/responsive.css">
+    <link rel="stylesheet" href="../../assets/css/main.css?v=1.0.1">
+    <link rel="stylesheet" href="../../assets/css/responsive.css?v=1.0.1">
 </head>
 <body>
     <header class="header">
@@ -510,8 +510,8 @@ class ArticleManager {
         </div>
     </footer>
     
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/article.js"></script>
+    <script src="../../assets/js/main.js?v=1.0.1"></script>
+    <script src="../../assets/js/article.js?v=1.0.1"></script>
 </body>
 </html>`;
     }

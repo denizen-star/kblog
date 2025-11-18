@@ -76,3 +76,10 @@
   for = "*.json"
   [headers.values]
     Cache-Control = "public, max-age=3600"
+
+# HTML files - short cache with revalidation to prevent stale content
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+    Pragma = "no-cache"
