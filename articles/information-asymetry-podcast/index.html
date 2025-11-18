@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Asymetry 7 min. Podcast - Kerv Talks-Data Blog</title>
+    <meta name="description" content="Quick Information Asymmetry (IA) 7 minutes waltkthrough that explains an organizational friction point that can be actively managed, resolved and an opportunity for improved trust efficiency.">
+    <meta name="keywords" content="Strategy, Business, Data, DataCrusader, information asymmetry, podcast">
+    <meta name="author" content="Data Crusader">
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg?v=1.0.1">
-    <title>{{ARTICLE_TITLE}} - Kerv Talks-Data Blog</title>
-    <meta name="description" content="{{ARTICLE_EXCERPT}}">
-    <meta name="keywords" content="{{ARTICLE_TAGS}}">
-    <meta name="author" content="{{AUTHOR_NAME}}">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="{{ARTICLE_TITLE}}">
-    <meta property="og:description" content="{{ARTICLE_EXCERPT}}">
+    <meta property="og:title" content="Information Asymetry 7 min. Podcast">
+    <meta property="og:description" content="Quick Information Asymmetry (IA) 7 minutes waltkthrough that explains an organizational friction point that can be actively managed, resolved and an opportunity for improved trust efficiency.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="{{ARTICLE_URL}}">
+    <meta property="og:url" content="https://kblog.kervinapps.com/articles/information-asymetry-podcast/">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../../assets/css/main.css?v=1.0.1">
@@ -24,11 +24,11 @@
     {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "{{ARTICLE_TITLE}}",
+        "headline": "Information Asymetry 7 min. Podcast",
         "author": {
             "@type": "Person",
-            "name": "{{AUTHOR_NAME}}",
-            "jobTitle": "{{AUTHOR_ROLE}}"
+            "name": "Data Crusader",
+            "jobTitle": "Head of Data Strategy"
         },
         "publisher": {
             "@type": "Organization",
@@ -38,8 +38,8 @@
                 "url": "https://kblog.kervinapps.com/assets/images/logo.png"
             }
         },
-        "datePublished": "{{PUBLISHED_DATE}}",
-        "description": "{{ARTICLE_EXCERPT}}"
+        "datePublished": "2025-01-21T00:00:00.000Z",
+        "description": "Quick Information Asymmetry (IA) 7 minutes waltkthrough that explains an organizational friction point that can be actively managed, resolved and an opportunity for improved trust efficiency."
     }
     </script>
 </head>
@@ -55,8 +55,12 @@
                 <input type="text" placeholder="Search articles, authors, topics..." id="search-input">
                 <div class="search-results" id="search-results"></div>
             </div>
-            
-            <ul class="nav-menu">
+
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Toggle navigation">
+                <span class="nav-toggle-bar"></span>
+            </button>
+
+            <ul class="nav-menu" id="primary-navigation">
                 <li><a href="../../index.html">Home</a></li>
                 <li><a href="../index.html">Articles</a></li>
                 <li><a href="../../about.html">About</a></li>
@@ -72,13 +76,13 @@
             <span class="breadcrumb-separator">›</span>
             <a href="../index.html">Articles</a>
             <span class="breadcrumb-separator">›</span>
-            <span class="breadcrumb-current">{{ARTICLE_TITLE}}</span>
+            <span class="breadcrumb-current">Information Asymetry 7 min. Podcast</span>
         </nav>
 
         <section class="article-newsletter article-newsletter--top">
             <div class="newsletter-panel newsletter-panel--article">
                 <p class="newsletter-panel__headline">Join data leaders gaining hands-on human experience with my free monthly newsletter.</p>
-                <form class="newsletter-panel__form" action="#" method="post" novalidate data-source="article-template-top" data-component="article-newsletter">
+                <form class="newsletter-panel__form" action="#" method="post" novalidate data-source="article-top-panel" data-component="article-newsletter">
                     <div class="newsletter-panel__inputs">
                         <input class="newsletter-panel__input" type="text" name="name" autocomplete="name" placeholder="Name">
                         <input class="newsletter-panel__input" type="email" name="email" autocomplete="email" placeholder="Email" required>
@@ -122,30 +126,26 @@
             <article class="article-content">
                 <!-- Article Header -->
                 <header class="article-header-full">
-                    <div class="article-category-badge">{{ARTICLE_CATEGORY}}</div>
-                    <h1 class="article-title-full">{{ARTICLE_TITLE}}</h1>
+                    <div class="article-category-badge">Strategy</div>
+                    <h1 class="article-title-full">Information Asymetry 7 min. Podcast</h1>
                     
                     <div class="article-meta-full">
                         <div class="article-author-info">
-                            <div class="article-avatar-large">{{AUTHOR_AVATAR}}</div>
+                            <div class="article-avatar-large">🦸‍♂️</div>
                             <div class="author-details">
-                                <div class="author-name">{{AUTHOR_NAME}}</div>
-                                <div class="author-role">{{AUTHOR_ROLE}}</div>
+                                <div class="author-name">Data Crusader</div>
+                                <div class="author-role">Head of Data Strategy</div>
                             </div>
                         </div>
                         
                         <div class="article-stats-full">
                             <div class="stat-item">
                                 <span class="stat-label">Published</span>
-                                <span class="stat-value">{{PUBLISHED_DATE_FORMATTED}}</span>
+                                <span class="stat-value">January 21, 2025</span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Read time</span>
-                                <span class="stat-value">{{READ_TIME}} min</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-label">Views</span>
-                                <span class="stat-value">{{VIEWS}}</span>
+                                <span class="stat-value">2 min</span>
                             </div>
                         </div>
                     </div>
@@ -153,44 +153,62 @@
 
                 <!-- Article Image -->
                 <div class="article-featured-image">
-                    <img src="../../assets/images/articles/{{FEATURED_IMAGE}}" alt="{{ARTICLE_TITLE}}" style="width: 100%; height: 300px; object-fit: cover;" id="featured-image">
+                    <img src="../../assets/images/articles/information-asymetry-podcast.jpg" alt="Information Asymetry 7 min. Podcast" style="width: 100%; height: 450px; object-fit: cover; object-position: top;" id="featured-image">
                 </div>
 
                 <!-- Audio Player -->
-                {{AUDIO_PLAYER}}
+                <div class="article-audio-player" style="margin: 2rem 0; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
+                    <h3 style="margin: 0 0 1rem 0; font-size: 1.25rem; color: #333;">Listen to the Podcast</h3>
+                    <audio controls style="width: 100%; max-width: 100%;" preload="metadata">
+                        <source src="../../assets/audio/information-asymetry-podcast.mp3" type="audio/mpeg">
+                        <source src="../../assets/audio/information-asymetry-podcast.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.9rem; color: #666;"><strong>The Enterprise Lemon Problem - How Hidden Information and Action Cause Chaos Inside Your Company</strong></p>
+                </div>
 
                 <!-- Article Body -->
                 <div class="article-body">
-                    <p class="article-lead">{{ARTICLE_EXCERPT}}</p>
+                    <p class="article-lead">Quick Information Asymmetry (IA) 7 minutes waltkthrough that explains an organizational friction point that can be actively managed, resolved and an opportunity for improved trust efficiency.</p>
                     
                     <div class="article-content-html">
-                        {{ARTICLE_CONTENT}}
+                        <h2>For a complete understanding of how Information Asymmetry impacts your business, explore the article series:</h2>
+
+                        <ul>
+                            <li><a href="https://kblog.kervinapps.com/articles/information-asymmetry/">Information Asymmetry</a></li>
+                            <li><a href="https://kblog.kervinapps.com/articles/information-asymmetry-how-does-it-impact-your-business-13/">Information Asymmetry - How does it impact your business?</a></li>
+                            <li><a href="https://kblog.kervinapps.com/articles/information-asymmetry-ia-unpacking-internal-asymmetry-silos-power-and-ethics-23/">Information Asymmetry (IA) - Unpacking Internal Asymmetry: Silos, Power, and Ethics</a></li>
+                            <li><a href="https://kblog.kervinapps.com/articles/information-asymmetry-ia-4-executive-pillars-to-conquer-ia-33/">Information Asymmetry (IA) - 4 Executive Pillars to Conquer IA</a></li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Tags -->
                 <div class="article-tags-full">
-                    {{ARTICLE_TAGS_HTML}}
+                    <span class="tag">Strategy</span>
+                    <span class="tag">Business</span>
+                    <span class="tag">Data</span>
+                    <span class="tag">DataCrusader</span>
                 </div>
 
                 <!-- Author Spotlight -->
                 <section class="article-author-section">
                     <div class="card author-card">
                         <div class="author-card-header">
-                            <div class="author-avatar-sidebar">{{AUTHOR_AVATAR}}</div>
+                            <div class="author-avatar-sidebar">🦸‍♂️</div>
                             <div class="author-info-sidebar">
-                                <h3>{{AUTHOR_NAME}}</h3>
-                                <p>{{AUTHOR_ROLE}}</p>
+                                <h3>Data Crusader</h3>
+                                <p>Head of Data Strategy</p>
                             </div>
                         </div>
-                        <p class="author-bio">{{AUTHOR_BIO}}</p>
+                        <p class="author-bio">A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.</p>
                         <div class="author-stats">
                             <div class="author-stat">
-                                <span class="stat-number">{{AUTHOR_ARTICLES}}</span>
+                                <span class="stat-number">16</span>
                                 <span class="stat-label">Articles</span>
                             </div>
                             <div class="author-stat">
-                                <span class="stat-number">{{AUTHOR_FOLLOWERS}}</span>
+                                <span class="stat-number">1247</span>
                                 <span class="stat-label">Followers</span>
                             </div>
                         </div>
@@ -202,7 +220,7 @@
         <section class="article-newsletter article-newsletter--bottom">
             <div class="newsletter-panel newsletter-panel--article">
                 <p class="newsletter-panel__headline">Join data leaders gaining hands-on human experience with my free monthly newsletter.</p>
-                <form class="newsletter-panel__form" action="#" method="post" novalidate data-source="article-template-bottom" data-component="article-newsletter">
+                <form class="newsletter-panel__form" action="#" method="post" novalidate data-source="article-bottom-panel" data-component="article-newsletter">
                     <div class="newsletter-panel__inputs">
                         <input class="newsletter-panel__input" type="text" name="name" autocomplete="name" placeholder="Name">
                         <input class="newsletter-panel__input" type="email" name="email" autocomplete="email" placeholder="Email" required>
@@ -257,3 +275,4 @@
     <script src="../../assets/js/analytics.js?v=1.0.1"></script>
 </body>
 </html>
+

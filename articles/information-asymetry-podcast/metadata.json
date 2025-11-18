@@ -1,0 +1,59 @@
+{
+  "id": "information-asymetry-podcast",
+  "slug": "information-asymetry-podcast",
+  "title": "Information Asymetry 7 min. Podcast",
+  "excerpt": "Quick Information Asymmetry (IA) 7 minutes waltkthrough that explains an organizational friction point that can be actively managed, resolved and an opportunity for improved trust efficiency.",
+  "author": {
+    "id": "data-crusader",
+    "name": "Data Crusader",
+    "role": "Head of Data Strategy",
+    "avatar": "🦸‍♂️",
+    "bio": "A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.",
+    "articles": 16,
+    "followers": 1247
+  },
+  "published": "2025-01-21T00:00:00.000Z",
+  "updated": "2025-01-21T00:00:00.000Z",
+  "status": "published",
+  "readTime": 2,
+  "category": "Strategy",
+  "tags": [
+    "Strategy",
+    "Business",
+    "Data",
+    "DataCrusader"
+  ],
+  "image": {
+    "featured": "information-asymetry-podcast.jpg",
+    "alt": "Information Asymetry Podcast featured image"
+  },
+  "audio": {
+    "filename": "information-asymetry-podcast.mp3"
+  },
+  "stats": {
+    "views": 0,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0
+  },
+  "seo": {
+    "metaTitle": "Information Asymetry 7 min. Podcast - Kerv Talks-Data Blog",
+    "metaDescription": "Quick Information Asymmetry (IA) 7 minutes waltkthrough that explains an organizational friction point that can be actively managed, resolved and an opportunity for improved trust efficiency.",
+    "keywords": [
+      "Strategy",
+      "Business",
+      "Data",
+      "DataCrusader",
+      "information asymmetry",
+      "podcast"
+    ],
+    "canonical": "https://kblog.kervinapps.com/articles/information-asymetry-podcast/"
+  },
+  "settings": {
+    "featured": false,
+    "allowComments": true,
+    "notifySubscribers": false,
+    "archived": false
+  }
+}
+

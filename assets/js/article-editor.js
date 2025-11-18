@@ -500,6 +500,18 @@ class ArticleEditor {
                 </div>
                 `}
 
+                ${articleData.audio && articleData.audio.filename ? `
+                <!-- Audio Player -->
+                <div class="article-audio-player" style="margin: 2rem 0; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
+                    <h3 style="margin: 0 0 1rem 0; font-size: 1.25rem; color: #333;">Listen to the Podcast</h3>
+                    <audio controls style="width: 100%; max-width: 100%;" preload="metadata">
+                        <source src="../../assets/audio/${articleData.audio.filename}" type="audio/mpeg">
+                        <source src="../../assets/audio/${articleData.audio.filename}" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                ` : ''}
+
                 <!-- Article Body -->
                 <div class="article-body">
                     ${articleData.excerpt ? `<p class="article-lead">${articleData.excerpt}</p>` : ''}

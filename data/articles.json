@@ -1,6 +1,29 @@
 {
   "articles": [
     {
+      "id": "information-asymetry-podcast",
+      "title": "Information Asymetry 7 min. Podcast",
+      "excerpt": "Quick Information Asymmetry (IA) 7 minutes waltkthrough that explains an organizational friction point that can be actively managed, resolved and an opportunity for improved trust efficiency.",
+      "author": {
+        "name": "Data Crusader",
+        "avatar": "🦸‍♂️",
+        "role": "Head of Data Strategy"
+      },
+      "published": "2025-11-18T17:02:24.469966",
+      "readTime": 2,
+      "category": "Strategy",
+      "tags": [
+        "Strategy",
+        "Business",
+        "Data",
+        "DataCrusader"
+      ],
+      "image": "information-asymetry-podcast.jpg",
+      "likes": 0,
+      "comments": 0,
+      "views": 0
+    },
+    {
       "id": "the-hands-on-head-of-datas-the-first-90-days-strategic-acceleration-roadmap",
       "title": "The Hands-On Head of Data's (The First 90 Days): Strategic Acceleration & Roadmap",
       "excerpt": "Quarter One as Head of Data: From Diagnosis to Decisive Roadmap\r\n\r\nYou've dug the tunnels (10 Days), and you've run the queries (30 Days). \r\n\r\nYour diagnosis is complete, and your hands-on approach has given you the unimpeachable credibility required for executive leadership. The final 60 days of your first quarter are dedicated to translating that deep understanding into clear, actionable strategy and acceleration.",
