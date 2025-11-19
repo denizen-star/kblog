@@ -1,9 +1,9 @@
 {
   "articles": [
     {
-      "id": "information-asymetry-podcast",
-      "title": "Information Asymetry 7 min. Podcast",
-      "excerpt": "Quick Information Asymmetry (IA) 7 minutes waltkthrough that explains an organizational friction point that can be actively managed, resolved and an opportunity for improved trust efficiency.",
+      "id": "information-asymmetry-podcast",
+      "title": "Information Asymmetry 7 min. Podcast",
+      "excerpt": "Quick Information Asymmetry (IA) 7 minutes walkthrough that explains an organizational friction point that can be actively managed, resolved and an opportunity for improved trust efficiency.",
       "author": {
         "name": "Data Crusader",
         "avatar": "🦸‍♂️",
@@ -18,7 +18,7 @@
         "Data",
         "DataCrusader"
       ],
-      "image": "information-asymetry-podcast.jpg",
+      "image": "information-asymmetry-podcast.jpg",
       "likes": 0,
       "comments": 0,
       "views": 0
