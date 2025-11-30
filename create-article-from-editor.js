@@ -308,7 +308,7 @@ class ArticleCreator {
 
                 <!-- Article Image -->
                 <div class="article-featured-image">
-                    <img src="../../assets/images/articles/${slug}.jpg" alt="${title}" style="width: 100%; height: 300px; object-fit: cover; display: none;" id="featured-image">
+                    <img src="../../assets/images/articles/${slug}.jpg" alt="${title}" style="width: 100%; object-fit: cover; display: none;" id="featured-image">
                     <div class="featured-image-placeholder" id="image-placeholder">${authorInfo.avatar}</div>
                 </div>
 

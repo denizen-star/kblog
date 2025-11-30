@@ -737,12 +737,12 @@ function generateArticleHTML(articleData) {
                 ${articleData.image.featured ? `
                 <!-- Article Image -->
                 <div class="article-featured-image">
-                    <img src="../../assets/images/articles/${articleData.image.featured}" alt="${articleData.title}" style="width: 100%; height: 300px; object-fit: cover;" id="featured-image">
+                    <img src="../../assets/images/articles/${articleData.image.featured}" alt="${articleData.title}" style="width: 100%; object-fit: cover;" id="featured-image">
                 </div>
                 ` : `
                 <!-- Article Image -->
                 <div class="article-featured-image">
-                    <img src="../../assets/images/articles/${articleData.slug}.jpg" alt="${articleData.title}" style="width: 100%; height: 300px; object-fit: cover; display: none;" id="featured-image">
+                    <img src="../../assets/images/articles/${articleData.slug}.jpg" alt="${articleData.title}" style="width: 100%; object-fit: cover; display: none;" id="featured-image">
                     <div class="featured-image-placeholder" id="image-placeholder">${authorInfo.avatar}</div>
                 </div>
                 `}

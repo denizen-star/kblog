@@ -588,12 +588,12 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
                 {f'''
                 <!-- Article Image -->
                 <div class="article-featured-image">
-                    <img src="../../assets/images/articles/{article_data['image']['featured']}" alt="{article_data['title']}" style="width: 100%; height: 300px; object-fit: cover;" id="featured-image">
+                    <img src="../../assets/images/articles/{article_data['image']['featured']}" alt="{article_data['title']}" style="width: 100%; object-fit: cover;" id="featured-image">
                 </div>
                 ''' if article_data['image']['featured'] else f'''
                 <!-- Article Image -->
                 <div class="article-featured-image">
-                    <img src="../../assets/images/articles/{article_data['slug']}.jpg" alt="{article_data['title']}" style="width: 100%; height: 300px; object-fit: cover; display: none;" id="featured-image">
+                    <img src="../../assets/images/articles/{article_data['slug']}.jpg" alt="{article_data['title']}" style="width: 100%; object-fit: cover; display: none;" id="featured-image">
                     <div class="featured-image-placeholder" id="image-placeholder">{author_info['avatar']}</div>
                 </div>
                 '''}
