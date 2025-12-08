@@ -37,8 +37,8 @@ function generateResponsiveImageHTML(imagePath, imageName, altText) {
     // Fallback to original image
     const fallbackSrc = imagePath;
 
-    // Build inline styles
-    const inlineStyles = 'width: 100%; height: auto; max-height: 500px; display: block; object-fit: contain; object-position: center; border-radius: 8px; background: rgba(255, 255, 255, 0.6); padding: 8px;';
+    // Build inline styles - ensure white transparent background
+    const inlineStyles = 'width: 100%; height: auto; max-height: 500px; display: block; object-fit: contain; object-position: center; border-radius: 8px; background: rgba(255, 255, 255, 0.6) !important; padding: 8px;';
 
     // Generate HTML
     return `<img src="${fallbackSrc}" 

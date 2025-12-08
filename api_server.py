@@ -444,9 +444,9 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
         # Fallback to original image
         fallback_src = f"{base_path}{image_name}"
         
-        # Build inline styles
+        # Build inline styles - ensure white transparent background
         display_style = 'display: none; ' if display_none else ''
-        inline_styles = f"{display_style}width: 100%; height: auto; max-height: 500px; display: block; object-fit: contain; object-position: center; border-radius: 8px; background: rgba(255, 255, 255, 0.6); padding: 8px;"
+        inline_styles = f"{display_style}width: 100%; height: auto; max-height: 500px; display: block; object-fit: contain; object-position: center; border-radius: 8px; background: rgba(255, 255, 255, 0.6) !important; padding: 8px;"
         
         # Generate HTML
         return f'''<img 
