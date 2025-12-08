@@ -144,6 +144,12 @@ body {
     background-color: rgba(34, 52, 84, 0.08);
 }
 
+.hero-wrapper {
+    max-width: 1320px;
+    margin: 56px auto 32px;
+    padding: 0 32px;
+}
+
 .main-container {
     max-width: 1320px;
     margin: 0 auto;
@@ -159,12 +165,11 @@ body {
     padding: 64px 56px;
     color: #ffffff;
     box-shadow: 0 24px 48px rgba(34, 52, 84, 0.25);
-    margin-bottom: 40px;
+    margin: 0 0 40px 0;
     position: relative;
     overflow: hidden;
-    max-width: 1320px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    max-width: 100%;
 }
 
 .hero.hero--content-only {
