@@ -147,13 +147,13 @@ body {
 .hero-wrapper {
     max-width: 1320px;
     margin: 56px auto 0;
-    padding: 0 32px;
+    padding: 0;
 }
 
 .main-container {
     max-width: 1320px;
     margin: 0 auto;
-    padding: 40px 32px 72px;
+    padding: 40px 0 72px;
     display: block;
 }
 
@@ -163,7 +163,7 @@ body {
     align-items: center;
     background: linear-gradient(140deg, rgba(34, 52, 84, 0.95), rgba(79, 107, 150, 0.88));
     border-radius: 28px;
-    padding: 64px 56px;
+    padding: 64px 32px;
     color: #ffffff;
     box-shadow: 0 24px 48px rgba(34, 52, 84, 0.25);
     margin: 0;
