@@ -236,7 +236,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 36px;
-    max-width: 1128px;
+    max-width: 1320px;
     margin: 56px auto 32px;
     padding: 64px 56px;
     background: linear-gradient(140deg, rgba(34, 52, 84, 0.95), rgba(79, 107, 150, 0.88));
@@ -915,6 +915,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-lg);
+    width: 100%;
 }
 
 /* Create Post */
