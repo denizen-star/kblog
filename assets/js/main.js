@@ -289,13 +289,13 @@ class BlogManager {
                         alt="${article.title}" 
                         loading="lazy" 
                         decoding="async" 
-                        style="width: 100%; height: auto; max-height: 300px; display: block; object-fit: contain; object-position: center; border-radius: 8px; background: rgba(255, 255, 255, 0.6); padding: 8px;" 
+                        style="width: 100%; height: auto; max-height: 300px; display: block; object-fit: contain; object-position: center; border-radius: 8px; background: rgba(255, 255, 255, 0.3) !important; padding: 8px;" 
                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div style="display: none; width: 100%; height: 350px; background: rgba(255, 255, 255, 0.6); border-radius: 12px; align-items: center; justify-content: center; color: #6A7B9A; font-size: 3rem;">${article.author.avatar}</div>`;
+                    <div style="display: none; width: 100%; height: 350px; background: rgba(255, 255, 255, 0.3) !important; border-radius: 12px; align-items: center; justify-content: center; color: #6A7B9A; font-size: 3rem;">${article.author.avatar}</div>`;
         }
         
         // Return author avatar as fallback with proper styling
-        return `<div style="width: 100%; height: 350px; background: rgba(255, 255, 255, 0.6); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #6A7B9A; font-size: 3rem;">${article.author.avatar}</div>`;
+        return `<div style="width: 100%; height: 350px; background: rgba(255, 255, 255, 0.3) !important; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #6A7B9A; font-size: 3rem;">${article.author.avatar}</div>`;
     }
 
 }
