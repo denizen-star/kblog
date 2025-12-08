@@ -63,18 +63,6 @@ class ArticlePageManager {
         }
     }
 
-    updateArticleStats() {
-        // Simulate view count increment
-        if (this.article) {
-            const viewCountElement = document.querySelector('.stat-value');
-            if (viewCountElement && viewCountElement.textContent === '156') {
-                // In a real app, this would be sent to a server
-                const currentViews = parseInt(viewCountElement.textContent);
-                viewCountElement.textContent = currentViews + 1;
-            }
-        }
-    }
-
     setupEventListeners() {
         // Newsletter forms are handled by newsletter.js
         // No need to set up duplicate handlers here

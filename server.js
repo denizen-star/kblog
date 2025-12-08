@@ -174,7 +174,7 @@ app.post('/api/create-article', upload.single('featuredImage'), async (req, res)
             },
             seo: {
                 metaTitle: `${title} - Kerv Talks-Data Blog`,
-                metaDescription: excerpt || `Professional insights on ${title} and data architecture.`,
+                metaDescription: excerpt || '',
                 keywords: tags ? tags.split(',').map(tag => tag.trim()) : [],
                 canonical: `https://kervtalksdata.com/articles/${slug}/`
             },
@@ -552,27 +552,21 @@ function getAuthorInfo(authorId) {
             name: 'Data Crusader',
             role: 'Head of Data Strategy',
             avatar: '🦸‍♂️',
-            bio: 'A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.',
-            articles: 16,
-            followers: 1247
+            bio: 'A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.'
         },
         'cosmic-analyst': {
             id: 'cosmic-analyst',
             name: 'Cosmic Analyst',
             role: 'Data Architecture Lead',
             avatar: '🌌',
-            bio: 'Specializing in building scalable data universes that connect disparate enterprise systems across organizational boundaries.',
-            articles: 13,
-            followers: 892
+            bio: 'Specializing in building scalable data universes that connect disparate enterprise systems across organizational boundaries.'
         },
         'web-weaver': {
             id: 'web-weaver',
             name: 'Web Weaver',
             role: 'Analytics Specialist',
             avatar: '🕷️',
-            bio: 'Expert in crafting compelling data narratives that transform complex information into actionable insights.',
-            articles: 19,
-            followers: 1156
+            bio: 'Expert in crafting compelling data narratives that transform complex information into actionable insights.'
         }
     };
     return authors[authorId] || authors['data-crusader'];
@@ -588,13 +582,13 @@ function generateArticleHTML(articleData) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
     <title>${articleData.title} - Kerv Talks-Data Blog</title>
-    <meta name="description" content="${articleData.excerpt || 'Professional insights on data architecture and enterprise strategies.'}">
+    <meta name="description" content="${articleData.excerpt || ''}">
     <meta name="keywords" content="${articleData.tags.join(', ')}, data architecture, information asymmetry">
     <meta name="author" content="${authorInfo.name}">
     
     <!-- Open Graph -->
     <meta property="og:title" content="${articleData.title}">
-    <meta property="og:description" content="${articleData.excerpt || 'Professional insights on data architecture and enterprise strategies.'}">
+    <meta property="og:description" content="${articleData.excerpt || ''}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://kblog.kervinapps.com/articles/${articleData.slug}/">
     
@@ -622,7 +616,7 @@ function generateArticleHTML(articleData) {
             }
         },
         "datePublished": "${articleData.published}",
-        "description": "${articleData.excerpt || 'Professional insights on data architecture and enterprise strategies.'}"
+        "description": "${articleData.excerpt || ''}"
     }
     </script>
 </head>
@@ -726,10 +720,6 @@ function generateArticleHTML(articleData) {
                                 <span class="stat-label">Read time</span>
                                 <span class="stat-value">${articleData.readTime} min</span>
                             </div>
-                            <div class="stat-item">
-                                <span class="stat-label">Views</span>
-                                <span class="stat-value">${articleData.stats.views}</span>
-                            </div>
                         </div>
                     </div>
                 </header>
@@ -769,16 +759,6 @@ function generateArticleHTML(articleData) {
                             </div>
                         </div>
                         <p class="author-bio">${authorInfo.bio}</p>
-                        <div class="author-stats">
-                            <div class="author-stat">
-                                <span class="stat-number">${authorInfo.articles}</span>
-                                <span class="stat-label">Articles</span>
-                            </div>
-                            <div class="author-stat">
-                                <span class="stat-number">${authorInfo.followers}</span>
-                                <span class="stat-label">Followers</span>
-                            </div>
-                        </div>
                     </div>
                 </section>
             </article>

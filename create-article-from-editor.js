@@ -87,22 +87,19 @@ class ArticleCreator {
             id: slug,
             slug: slug,
             title: this.slugToTitle(slug),
-            excerpt: `A comprehensive article about ${slug.replace(/-/g, ' ')} and its impact on data architecture.`,
+            excerpt: '',
             author: {
                 id: 'data-crusader',
                 name: 'Data Crusader',
                 avatar: '🦸‍♂️',
                 role: 'Head of Data Strategy',
-                bio: 'A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.',
-                articles: 16,
-                followers: 1247
+                bio: 'A seasoned data professional with over 10 years of experience in enterprise data architecture and information asymmetry strategies.'
             },
             published: new Date().toISOString(),
             updated: new Date().toISOString(),
             status: 'published',
-            readTime: 5,
-            category: 'Technology',
-            tags: [slug, 'data-architecture', 'enterprise'],
+            category: '',
+            tags: [],
             image: {
                 featured: null,
                 alt: `${slug} featured image`
@@ -115,8 +112,8 @@ class ArticleCreator {
             },
             seo: {
                 metaTitle: `${this.slugToTitle(slug)} - Kerv Talks-Data Blog`,
-                metaDescription: `A comprehensive article about ${slug.replace(/-/g, ' ')} and its impact on data architecture.`,
-                keywords: [slug, 'data-architecture', 'enterprise'],
+                metaDescription: '',
+                keywords: [slug],
                 canonical: `https://kervtalksdata.com/articles/${slug}/`
             },
             settings: {
@@ -124,13 +121,6 @@ class ArticleCreator {
                 allowComments: true,
                 notifySubscribers: false,
                 archived: false
-            },
-            content: {
-                wordCount: 800,
-                characterCount: 4800,
-                hasImages: false,
-                hasCode: false,
-                readingLevel: 'intermediate'
             },
             htmlContent: this.generateSampleHTML(slug)
         };
@@ -160,13 +150,13 @@ class ArticleCreator {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title} - Kerv Talks-Data Blog</title>
-    <meta name="description" content="A comprehensive article about ${slug.replace(/-/g, ' ')} and its impact on data architecture.">
-    <meta name="keywords" content="${slug}, data-architecture, enterprise">
+    <meta name="description" content="">
+    <meta name="keywords" content="${slug}">
     <meta name="author" content="${authorInfo.name}">
     
     <!-- Open Graph -->
     <meta property="og:title" content="${title}">
-    <meta property="og:description" content="A comprehensive article about ${slug.replace(/-/g, ' ')} and its impact on data architecture.">
+    <meta property="og:description" content="">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://kervtalksdata.com/articles/${slug}/">
     
@@ -194,7 +184,7 @@ class ArticleCreator {
             }
         },
         "datePublished": "${new Date().toISOString()}",
-        "description": "A comprehensive article about ${slug.replace(/-/g, ' ')} and its impact on data architecture."
+        "description": ""
     }
     </script>
 </head>
@@ -277,7 +267,7 @@ class ArticleCreator {
             <article class="article-content">
                 <!-- Article Header -->
                 <header class="article-header-full">
-                    <div class="article-category-badge">Technology</div>
+                    <div class="article-category-badge"></div>
                     <h1 class="article-title-full">${title}</h1>
                     
                     <div class="article-meta-full">
@@ -298,10 +288,6 @@ class ArticleCreator {
                                 <span class="stat-label">Read time</span>
                                 <span class="stat-value">5 min</span>
                             </div>
-                            <div class="stat-item">
-                                <span class="stat-label">Views</span>
-                                <span class="stat-value">0</span>
-                            </div>
                         </div>
                     </div>
                 </header>
@@ -314,48 +300,6 @@ class ArticleCreator {
 
                 <!-- Article Body -->
                 <div class="article-body">
-                    <p class="article-lead">This is a comprehensive article about ${slug.replace(/-/g, ' ')} and its impact on modern data architecture and enterprise strategies.</p>
-
-                    <h2>Understanding ${title}</h2>
-                    <p>In today's rapidly evolving digital landscape, ${slug.replace(/-/g, ' ')} has become a critical component of successful enterprise data architecture. This article explores the key concepts, implementation strategies, and best practices that every data professional should understand.</p>
-
-                    <h3>Key Benefits</h3>
-                    <ul>
-                        <li><strong>Scalability:</strong> Enables organizations to handle growing data volumes efficiently</li>
-                        <li><strong>Flexibility:</strong> Provides adaptable solutions for changing business requirements</li>
-                        <li><strong>Performance:</strong> Optimizes data processing and retrieval operations</li>
-                        <li><strong>Integration:</strong> Seamlessly connects disparate systems and data sources</li>
-                    </ul>
-
-                    <h3>Implementation Considerations</h3>
-                    <p>When implementing ${slug.replace(/-/g, ' ')}, organizations must consider several critical factors:</p>
-
-                    <ol>
-                        <li><strong>Data Quality:</strong> Ensure data integrity and consistency across all systems</li>
-                        <li><strong>Security:</strong> Implement robust security measures to protect sensitive information</li>
-                        <li><strong>Governance:</strong> Establish clear policies and procedures for data management</li>
-                        <li><strong>Monitoring:</strong> Set up comprehensive monitoring and alerting systems</li>
-                    </ol>
-
-                    <h2>Best Practices</h2>
-                    <p>To maximize the benefits of ${slug.replace(/-/g, ' ')}, follow these proven best practices:</p>
-
-                    <blockquote>
-                        <p>"The key to successful data architecture lies not just in the technology, but in the people, processes, and governance that support it."</p>
-                        <cite>— Data Crusader, Head of Data Strategy</cite>
-                    </blockquote>
-
-                    <h3>Conclusion</h3>
-                    <p>${title} represents a fundamental shift in how organizations approach data architecture. By understanding its principles and implementing best practices, data professionals can build more resilient, scalable, and efficient systems that drive business value.</p>
-
-                    <p>As we continue to navigate the complexities of modern enterprise data, staying informed about emerging trends and technologies like ${slug.replace(/-/g, ' ')} will be crucial for long-term success.</p>
-
-                    <div class="article-tags-full">
-                        <span class="tag">${slug}</span>
-                        <span class="tag">data-architecture</span>
-                        <span class="tag">enterprise</span>
-                        <span class="tag">technology</span>
-                    </div>
                 </div>
 
                 <!-- Article Actions -->
@@ -387,16 +331,6 @@ class ArticleCreator {
                             </div>
                         </div>
                         <p class="author-bio">${authorInfo.bio}</p>
-                        <div class="author-stats">
-                            <div class="author-stat">
-                                <span class="stat-number">${authorInfo.articles}</span>
-                                <span class="stat-label">Articles</span>
-                            </div>
-                            <div class="author-stat">
-                                <span class="stat-number">${authorInfo.followers}</span>
-                                <span class="stat-label">Followers</span>
-                            </div>
-                        </div>
                     </div>
                 </section>
             </article>

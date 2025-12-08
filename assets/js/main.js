@@ -97,12 +97,8 @@ class BlogManager {
         // Update article statistics dynamically
         const statElements = document.querySelectorAll('.stat-value');
         if (statElements.length > 0) {
-            const totalViews = this.articles.reduce((sum, article) => sum + article.views, 0);
-            const totalLikes = this.articles.reduce((sum, article) => sum + article.likes, 0);
-            
             // Update stats if elements exist
             if (statElements[0]) statElements[0].textContent = this.articles.length;
-            if (statElements[1]) statElements[1].textContent = totalViews;
         }
     }
 

@@ -232,7 +232,7 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
                 },
                 'seo': {
                     'metaTitle': f'{title} - Kerv Talks-Data Blog',
-                    'metaDescription': excerpt or f'Professional insights on {title} and data architecture.',
+                    'metaDescription': excerpt or '',
                     'keywords': [tag.strip() for tag in tags.split(',') if tag.strip()] if tags else [],
                     'canonical': f'https://kervtalksdata.com/articles/{slug}/'
                 },
@@ -242,14 +242,7 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
                     'notifySubscribers': notification == 'true',
                     'archived': False
                 },
-            'content': content,  # Store the actual content
-            'contentStats': {
-                'wordCount': len(re.sub(r'<[^>]*>', '', content).split()),
-                'characterCount': len(content),
-                'hasImages': '<img' in content,
-                'hasCode': '<code' in content or '<pre' in content,
-                'readingLevel': 'intermediate'
-            }
+            'content': content  # Store the actual content
             }
             
             # Handle image upload
@@ -439,13 +432,13 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
     <title>{article_data['title']} - Kerv Talks-Data Blog</title>
-    <meta name="description" content="{article_data['excerpt'] or 'Professional insights on data architecture and enterprise strategies.'}">
+    <meta name="description" content="{article_data['excerpt'] or ''}">
     <meta name="keywords" content="{', '.join(article_data['tags'])}, data architecture, information asymmetry">
     <meta name="author" content="{author_info['name']}">
     
     <!-- Open Graph -->
     <meta property="og:title" content="{article_data['title']}">
-    <meta property="og:description" content="{article_data['excerpt'] or 'Professional insights on data architecture and enterprise strategies.'}">
+    <meta property="og:description" content="{article_data['excerpt'] or ''}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://kervtalksdata.com/articles/{article_data['slug']}/">
     
@@ -473,7 +466,7 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
             }}
         }},
         "datePublished": "{article_data['published']}",
-        "description": "{article_data['excerpt'] or 'Professional insights on data architecture and enterprise strategies.'}"
+        "description": "{article_data['excerpt'] or ''}"
     }}
     </script>
 </head>
@@ -577,10 +570,6 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
                                 <span class="stat-label">Read time</span>
                                 <span class="stat-value">{article_data['readTime']} min</span>
                             </div>
-                            <div class="stat-item">
-                                <span class="stat-label">Views</span>
-                                <span class="stat-value">{article_data['stats']['views']}</span>
-                            </div>
                         </div>
                     </div>
                 </header>
@@ -638,16 +627,6 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
                             </div>
                         </div>
                         <p class="author-bio">{author_info['bio']}</p>
-                        <div class="author-stats">
-                            <div class="author-stat">
-                                <span class="stat-number">{author_info['articles']}</span>
-                                <span class="stat-label">Articles</span>
-                            </div>
-                            <div class="author-stat">
-                                <span class="stat-number">{author_info['followers']}</span>
-                                <span class="stat-label">Followers</span>
-                            </div>
-                        </div>
                     </div>
                 </section>
             </article>

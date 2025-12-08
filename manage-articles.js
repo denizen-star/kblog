@@ -63,7 +63,7 @@ class ArticleManager {
             id: slug,
             slug: slug,
             title: title,
-            excerpt: `A new article about ${title.toLowerCase()}.`,
+            excerpt: '',
             author: {
                 id: "data-crusader",
                 name: "Data Crusader",
@@ -74,7 +74,6 @@ class ArticleManager {
             published: new Date().toISOString(),
             updated: new Date().toISOString(),
             status: "draft",
-            readTime: 5,
             category: category,
             tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag),
             image: {
@@ -89,7 +88,7 @@ class ArticleManager {
             },
             seo: {
                 metaTitle: `${title} - Kerv Talks-Data Blog`,
-                metaDescription: `Professional insights on ${title.toLowerCase()}.`,
+                metaDescription: '',
                 keywords: tags.split(',').map(tag => tag.trim()).filter(tag => tag),
                 canonical: `https://kervtalksdata.com/articles/${slug}/`
             },
@@ -98,13 +97,6 @@ class ArticleManager {
                 allowComments: true,
                 notifySubscribers: false,
                 archived: false
-            },
-            content: {
-                wordCount: 0,
-                characterCount: 0,
-                hasImages: false,
-                hasCode: false,
-                readingLevel: "intermediate"
             }
         };
 
@@ -403,10 +395,6 @@ class ArticleManager {
                             <div class="stat-item">
                                 <span class="stat-label">Read time</span>
                                 <span class="stat-value">${metadata.readTime} min</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-label">Views</span>
-                                <span class="stat-value">${metadata.stats.views}</span>
                             </div>
                         </div>
                     </div>

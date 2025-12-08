@@ -90,7 +90,7 @@ class ArticlesPageManager {
                 });
                 break;
             case 'popularity':
-                this.filteredArticles.sort((a, b) => (b.likes + b.views) - (a.likes + a.views));
+                this.filteredArticles.sort((a, b) => b.likes - a.likes);
                 break;
             case 'title':
                 this.filteredArticles.sort((a, b) => a.title.localeCompare(b.title));
