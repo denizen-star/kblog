@@ -338,6 +338,45 @@ class ArticleEditor {
         }
     }
 
+    generateResponsiveImageHTML(imagePath, imageName, altText, isArticlePage = false) {
+        // Extract image name and extension
+        const imageExt = imageName.substring(imageName.lastIndexOf('.'));
+        const imageNameWithoutExt = imageName.substring(0, imageName.lastIndexOf('.'));
+
+        // Get base path (directory part)
+        const basePath = imagePath.substring(0, imagePath.lastIndexOf('/') + 1);
+
+        // Build srcset for responsive images (400w, 600w, 900w, 1200w)
+        const sizes = [400, 600, 900, 1200];
+        const srcsetParts = sizes.map(size => {
+            const responsiveImagePath = `${basePath}${imageNameWithoutExt}-${size}w${imageExt}`;
+            return `${responsiveImagePath} ${size}w`;
+        });
+        const srcset = srcsetParts.join(', ');
+
+        // Sizes attribute for responsive image selection
+        const sizesAttr = isArticlePage 
+            ? '(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1128px'
+            : '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw';
+
+        // Fallback to original image
+        const fallbackSrc = imagePath;
+        const maxHeight = isArticlePage ? 500 : 300;
+
+        // Build inline styles
+        const inlineStyles = `width: 100%; height: auto; max-height: ${maxHeight}px; display: block; object-fit: contain; object-position: center; border-radius: 8px; background: rgba(255, 255, 255, 0.6); padding: 8px;`;
+
+        // Generate HTML
+        return `<img 
+                        src="${fallbackSrc}" 
+                        srcset="${srcset}" 
+                        sizes="${sizesAttr}" 
+                        alt="${altText}" 
+                        loading="lazy" 
+                        decoding="async" 
+                        style="${inlineStyles}">`;
+    }
+
     generateArticleHTML(articleData) {
         const authorInfo = this.getAuthorInfo(articleData.author);
         
@@ -492,7 +531,7 @@ class ArticleEditor {
                 ${articleData.featuredImage ? `
                 <!-- Article Image -->
                 <div class="article-featured-image">
-                    <img src="../../assets/images/articles/${articleData.slug}.jpg" alt="${articleData.title}" style="width: 100%; height: 450px; object-fit: cover; object-position: top;">
+                    ${this.generateResponsiveImageHTML(`../../assets/images/articles/${articleData.slug}.jpg`, `${articleData.slug}.jpg`, articleData.title, true)}
                 </div>
                 ` : `
                 <div class="article-featured-image">

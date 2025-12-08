@@ -259,15 +259,43 @@ class BlogManager {
             // Determine correct image path based on current page
             const pathname = window.location.pathname;
             const isArticlesPage = pathname.includes('/articles/');
-            const imagePath = isArticlesPage ? `../assets/images/articles/${article.image}` : `assets/images/articles/${article.image}`;
+            const basePath = isArticlesPage ? '../assets/images/articles/' : 'assets/images/articles/';
+            const baseImagePath = `${basePath}${article.image}`;
             
-            // Create image with error handling
-            return `<img src="${imagePath}" alt="${article.title}" style="width: 100%; height: 350px; object-fit: cover; object-position: top; border-radius: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div style="display: none; width: 100%; height: 350px; background: linear-gradient(45deg, #6A7B9A, #8B9DC3); border-radius: 8px; align-items: center; justify-content: center; color: white; font-size: 3rem;">${article.author.avatar}</div>`;
+            const imageName = article.image;
+            const imageExt = imageName.substring(imageName.lastIndexOf('.'));
+            const imageNameWithoutExt = imageName.substring(0, imageName.lastIndexOf('.'));
+            
+            // Build srcset for responsive images (400w, 600w, 900w, 1200w)
+            const sizes = [400, 600, 900, 1200];
+            const srcsetParts = sizes.map(size => {
+                const responsiveImagePath = `${basePath}${imageNameWithoutExt}-${size}w${imageExt}`;
+                return `${responsiveImagePath} ${size}w`;
+            });
+            const srcset = srcsetParts.join(', ');
+            
+            // Sizes attribute for responsive image selection
+            // Based on article card layout (full width on home page)
+            const sizesAttr = '(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px';
+            
+            // Fallback to original image if responsive sizes don't exist
+            const fallbackSrc = baseImagePath;
+            
+            // Create responsive image with lazy loading and error handling
+            return `<img 
+                        src="${fallbackSrc}" 
+                        srcset="${srcset}" 
+                        sizes="${sizesAttr}" 
+                        alt="${article.title}" 
+                        loading="lazy" 
+                        decoding="async" 
+                        style="width: 100%; height: auto; max-height: 300px; display: block; object-fit: contain; object-position: center; border-radius: 8px; background: rgba(255, 255, 255, 0.6); padding: 8px;" 
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="display: none; width: 100%; height: 350px; background: rgba(255, 255, 255, 0.6); border-radius: 12px; align-items: center; justify-content: center; color: #6A7B9A; font-size: 3rem;">${article.author.avatar}</div>`;
         }
         
         // Return author avatar as fallback with proper styling
-        return `<div style="width: 100%; height: 350px; background: linear-gradient(45deg, #6A7B9A, #8B9DC3); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">${article.author.avatar}</div>`;
+        return `<div style="width: 100%; height: 350px; background: rgba(255, 255, 255, 0.6); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #6A7B9A; font-size: 3rem;">${article.author.avatar}</div>`;
     }
 
 }

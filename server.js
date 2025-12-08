@@ -10,6 +10,8 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const { submitToGoogleSheets } = require('./lib/googleSheetsClient');
+const { processUploadedImage } = require('./lib/imageProcessor');
+const { generateResponsiveImageHTML } = require('./lib/imageUtils');
 
 const app = express();
 const PORT = 1977; // API server port (static server runs on 1978)
@@ -129,13 +131,37 @@ app.post('/api/create-article', upload.single('featuredImage'), async (req, res)
             const destinationPath = path.join(IMAGES_DIR, featuredImageFilename);
 
             try {
+                // Remove existing image and all its sizes if they exist
                 if (fs.existsSync(destinationPath)) {
                     fs.unlinkSync(destinationPath);
                 }
+                
+                // Remove existing responsive sizes
+                const baseName = path.parse(featuredImageFilename).name;
+                const ext = path.extname(featuredImageFilename);
+                [400, 600, 900, 1200].forEach(width => {
+                    const sizePath = path.join(IMAGES_DIR, `${baseName}-${width}w${ext}`);
+                    if (fs.existsSync(sizePath)) {
+                        fs.unlinkSync(sizePath);
+                    }
+                });
+
+                // Move uploaded file to final destination
                 fs.renameSync(currentPath, destinationPath);
                 req.file.filename = featuredImageFilename;
                 req.file.path = destinationPath;
                 console.log(`🖼️  Image saved as: ${featuredImageFilename}`);
+
+                // Generate responsive image sizes
+                try {
+                    const baseFilename = path.parse(featuredImageFilename).name;
+                    await processUploadedImage(destinationPath, baseFilename, IMAGES_DIR);
+                    console.log(`✅ Responsive image sizes generated for: ${featuredImageFilename}`);
+                } catch (imageProcessingError) {
+                    console.error('⚠️  Warning: Failed to generate responsive image sizes:', imageProcessingError.message);
+                    // Don't fail the entire request if image processing fails
+                    // The original image will still be available
+                }
             } catch (renameError) {
                 console.error('Error renaming uploaded image:', renameError);
                 try {
@@ -727,12 +753,22 @@ function generateArticleHTML(articleData) {
                 ${articleData.image.featured ? `
                 <!-- Article Image -->
                 <div class="article-featured-image">
-                    <img src="../../assets/images/articles/${articleData.image.featured}" alt="${articleData.title}" style="width: 100%; object-fit: cover;" id="featured-image">
+                    ${generateResponsiveImageHTML(
+                        `../../assets/images/articles/${articleData.image.featured}`,
+                        articleData.image.featured,
+                        articleData.title,
+                        { isArticlePage: true, maxHeight: 500 }
+                    )}
                 </div>
                 ` : `
                 <!-- Article Image -->
                 <div class="article-featured-image">
-                    <img src="../../assets/images/articles/${articleData.slug}.jpg" alt="${articleData.title}" style="width: 100%; object-fit: cover; display: none;" id="featured-image">
+                    ${generateResponsiveImageHTML(
+                        `../../assets/images/articles/${articleData.slug}.jpg`,
+                        `${articleData.slug}.jpg`,
+                        articleData.title,
+                        { isArticlePage: true, maxHeight: 500 }
+                    ).replace('id="featured-image">', 'id="featured-image" style="display: none;">')}
                     <div class="featured-image-placeholder" id="image-placeholder">${authorInfo.avatar}</div>
                 </div>
                 `}

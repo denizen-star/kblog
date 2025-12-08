@@ -149,7 +149,17 @@
 
                 <!-- Article Image -->
                 <div class="article-featured-image">
-                    <img src="../../assets/images/articles/{{FEATURED_IMAGE}}" alt="{{ARTICLE_TITLE}}" style="width: 100%; object-fit: cover;" id="featured-image">
+                    <img src="../../assets/images/articles/{{FEATURED_IMAGE}}" 
+                         srcset="../../assets/images/articles/{{FEATURED_IMAGE_BASE}}-400w{{FEATURED_IMAGE_EXT}} 400w, 
+                                 ../../assets/images/articles/{{FEATURED_IMAGE_BASE}}-600w{{FEATURED_IMAGE_EXT}} 600w, 
+                                 ../../assets/images/articles/{{FEATURED_IMAGE_BASE}}-900w{{FEATURED_IMAGE_EXT}} 900w, 
+                                 ../../assets/images/articles/{{FEATURED_IMAGE_BASE}}-1200w{{FEATURED_IMAGE_EXT}} 1200w" 
+                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1128px" 
+                         alt="{{ARTICLE_TITLE}}" 
+                         loading="lazy" 
+                         decoding="async" 
+                         style="width: 100%; height: auto; max-height: 500px; display: block; object-fit: contain; object-position: center; border-radius: 8px; background: rgba(255, 255, 255, 0.6); padding: 8px;" 
+                         id="featured-image">
                 </div>
 
                 <!-- Audio Player -->

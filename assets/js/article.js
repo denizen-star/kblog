@@ -74,7 +74,7 @@ class ArticlePageManager {
         const imagePlaceholder = document.getElementById('image-placeholder');
         
         if (featuredImage && imagePlaceholder) {
-            // Check if image exists
+            // Check if image exists (use src as fallback, browser will use srcset if available)
             const img = new Image();
             img.onload = () => {
                 // Image exists, show it
@@ -86,7 +86,17 @@ class ArticlePageManager {
                 featuredImage.style.display = 'none';
                 imagePlaceholder.style.display = 'block';
             };
-            img.src = featuredImage.src;
+            // Use the src attribute (fallback) - browser will automatically use srcset if available
+            img.src = featuredImage.src || featuredImage.getAttribute('src');
+        } else if (featuredImage && !imagePlaceholder) {
+            // If there's an image but no placeholder, just ensure it's visible
+            // The image might already be visible, but handle error case
+            const img = new Image();
+            img.onerror = () => {
+                // If image fails to load and there's no placeholder, hide the image
+                featuredImage.style.display = 'none';
+            };
+            img.src = featuredImage.src || featuredImage.getAttribute('src');
         }
     }
 

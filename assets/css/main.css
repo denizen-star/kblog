@@ -1047,9 +1047,9 @@ body {
 
 .article-image {
     width: 100%;
-    height: 350px;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    border-radius: var(--border-radius-sm);
+    max-height: 300px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1057,13 +1057,17 @@ body {
     font-size: 48px;
     margin-bottom: var(--spacing-md);
     overflow: hidden;
+    padding: 8px;
 }
 
 .article-image img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
+    height: auto;
+    max-height: 300px;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 8px;
 }
 
 
@@ -1355,24 +1359,27 @@ body {
 
 .article-image-container {
     position: relative;
-    height: 350px;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    width: 100%;
+    max-height: 300px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white);
     font-size: 48px;
     overflow: hidden;
+    padding: 8px;
 }
 
 .article-image-container img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-    position: absolute;
-    top: 0;
-    left: 0;
+    height: auto;
+    max-height: 300px;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 8px;
 }
 
 .article-image-container > div {
@@ -1681,21 +1688,26 @@ body {
 
 .article-featured-image {
     width: 100%;
-    height: 450px;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    max-height: 500px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white);
     font-size: 72px;
     overflow: hidden;
+    padding: 8px;
 }
 
 .article-featured-image img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
+    height: auto;
+    max-height: 500px;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 8px;
 }
 
 .article-body {

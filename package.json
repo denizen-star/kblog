@@ -8,6 +8,8 @@
     "dev": "nodemon server.js",
     "static": "python3 -m http.server 1978",
     "both": "concurrently \"npm run static\" \"npm start\"",
+    "generate-image-sizes": "node scripts/generate-image-sizes.js",
+    "update-article-images": "node scripts/update-article-images.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -21,14 +23,15 @@
   "author": "Kervin Leacock",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "multer": "^1.4.5-lts.1",
-    "cors": "^2.8.5",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1",
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.1"
   },
   "engines": {
     "node": ">=14.0.0"

@@ -306,7 +306,7 @@
     }
     
     .article-image-container {
-        height: 250px;
+        max-height: 250px;
         font-size: 36px;
     }
     
@@ -659,7 +659,7 @@
     }
     
     .article-featured-image {
-        height: 350px;
+        max-height: 400px;
         font-size: 60px;
     }
     

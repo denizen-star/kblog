@@ -421,6 +421,44 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
         }
         return authors.get(author_id, authors['data-crusader'])
     
+    def _generate_responsive_image_html(self, image_name, alt_text, base_path, display_none=False):
+        """Generate responsive image HTML with srcset and lazy loading"""
+        if not image_name:
+            return ''
+        
+        # Extract image name and extension
+        image_ext = os.path.splitext(image_name)[1]
+        image_name_without_ext = os.path.splitext(image_name)[0]
+        
+        # Build srcset for responsive images (400w, 600w, 900w, 1200w)
+        sizes = [400, 600, 900, 1200]
+        srcset_parts = []
+        for size in sizes:
+            responsive_image_path = f"{base_path}{image_name_without_ext}-{size}w{image_ext}"
+            srcset_parts.append(f"{responsive_image_path} {size}w")
+        srcset = ', '.join(srcset_parts)
+        
+        # Sizes attribute for article pages
+        sizes_attr = '(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1128px'
+        
+        # Fallback to original image
+        fallback_src = f"{base_path}{image_name}"
+        
+        # Build inline styles
+        display_style = 'display: none; ' if display_none else ''
+        inline_styles = f"{display_style}width: 100%; height: auto; max-height: 500px; display: block; object-fit: contain; object-position: center; border-radius: 8px; background: rgba(255, 255, 255, 0.6); padding: 8px;"
+        
+        # Generate HTML
+        return f'''<img 
+                        src="{fallback_src}" 
+                        srcset="{srcset}" 
+                        sizes="{sizes_attr}" 
+                        alt="{alt_text}" 
+                        loading="lazy" 
+                        decoding="async" 
+                        style="{inline_styles}" 
+                        id="featured-image">'''
+    
     def generate_article_html(self, article_data):
         """Generate complete HTML for article"""
         author_info = article_data['author']
@@ -577,12 +615,12 @@ class BlogAPIHandler(BaseHTTPRequestHandler):
                 {f'''
                 <!-- Article Image -->
                 <div class="article-featured-image">
-                    <img src="../../assets/images/articles/{article_data['image']['featured']}" alt="{article_data['title']}" style="width: 100%; object-fit: cover;" id="featured-image">
+                    {self._generate_responsive_image_html(article_data['image']['featured'], article_data['title'], '../../assets/images/articles/')}
                 </div>
                 ''' if article_data['image']['featured'] else f'''
                 <!-- Article Image -->
                 <div class="article-featured-image">
-                    <img src="../../assets/images/articles/{article_data['slug']}.jpg" alt="{article_data['title']}" style="width: 100%; object-fit: cover; display: none;" id="featured-image">
+                    {self._generate_responsive_image_html(f"{article_data['slug']}.jpg", article_data['title'], '../../assets/images/articles/', display_none=True)}
                     <div class="featured-image-placeholder" id="image-placeholder">{author_info['avatar']}</div>
                 </div>
                 '''}
