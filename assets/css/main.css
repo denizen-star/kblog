@@ -225,9 +225,7 @@ body {
     max-width: 1320px;
     margin: 0 auto;
     padding: var(--spacing-xxl);
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--spacing-xxl);
+    display: block;
 }
 
 /* Hero (shared with interior pages) */

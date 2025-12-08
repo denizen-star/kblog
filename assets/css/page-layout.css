@@ -146,14 +146,15 @@ body {
 
 .hero-wrapper {
     max-width: 1320px;
-    margin: 56px auto 32px;
+    margin: 56px auto 0;
     padding: 0 32px;
 }
 
 .main-container {
     max-width: 1320px;
     margin: 0 auto;
-    padding: 56px 32px 72px;
+    padding: 40px 32px 72px;
+    display: block;
 }
 
 .hero {
@@ -165,11 +166,10 @@ body {
     padding: 64px 56px;
     color: #ffffff;
     box-shadow: 0 24px 48px rgba(34, 52, 84, 0.25);
-    margin: 0 0 40px 0;
+    margin: 0;
     position: relative;
     overflow: hidden;
     width: 100%;
-    max-width: 100%;
 }
 
 .hero.hero--content-only {
