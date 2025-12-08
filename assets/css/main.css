@@ -222,11 +222,11 @@ body {
 
 /* Main Container */
 .main-container {
-    max-width: 1128px;
+    max-width: 1320px;
     margin: 0 auto;
     padding: var(--spacing-xxl);
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr;
     gap: var(--spacing-xxl);
 }
 
