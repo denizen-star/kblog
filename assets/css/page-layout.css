@@ -646,7 +646,7 @@ body {
 
 .content-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.4fr) 360px;
+    grid-template-columns: 1fr;
     gap: 40px;
     align-items: start;
     margin-top: 48px;
