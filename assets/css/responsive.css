@@ -835,9 +835,35 @@
         --border-gray: #404040;
     }
     
+    body {
+        background-color: var(--background-color);
+        color: var(--black);
+    }
+    
+    .header {
+        background-color: var(--white);
+        border-bottom-color: var(--border-gray);
+    }
+    
+    .logo {
+        color: var(--black);
+    }
+    
     .card {
         background-color: var(--white);
         border-color: var(--border-gray);
+    }
+    
+    .article-body,
+    .article-content,
+    .article-content-html {
+        background-color: var(--white);
+        color: var(--black);
+    }
+    
+    .article-header-full,
+    .article-main-container {
+        background-color: var(--white);
     }
     
     .search-bar {
@@ -889,5 +915,142 @@
     .refresh-btn:hover {
         background-color: rgba(106, 123, 154, 0.1);
         border-color: var(--primary-color);
+    }
+    
+    /* Article content HTML - override inline styles with high specificity */
+    /* Base text color for all content */
+    .article-content-html,
+    .article-content-html p,
+    .article-content-html div,
+    .article-content-html span,
+    .article-content-html li,
+    .article-content-html td,
+    .article-content-html th,
+    .article-content-html ul,
+    .article-content-html ol,
+    .article-body,
+    .article-body p,
+    .article-body div,
+    .article-body span,
+    .article-body li,
+    .article-body td,
+    .article-body th,
+    .article-body ul,
+    .article-body ol {
+        color: #e0e0e0 !important;
+    }
+    
+    /* Headings - must come after base styles for proper override */
+    .article-content-html h1,
+    .article-content-html h2,
+    .article-content-html h3,
+    .article-content-html h4,
+    .article-content-html h5,
+    .article-content-html h6,
+    .article-body h1,
+    .article-body h2,
+    .article-body h3,
+    .article-body h4,
+    .article-body h5,
+    .article-body h6 {
+        color: #ffffff !important;
+    }
+    
+    /* Headings with inline styles - even more specific */
+    .article-content-html h1[style],
+    .article-content-html h2[style],
+    .article-content-html h3[style],
+    .article-content-html h4[style],
+    .article-content-html h5[style],
+    .article-content-html h6[style] {
+        color: #ffffff !important;
+    }
+    
+    /* Paragraphs and divs with inline styles */
+    .article-content-html p[style],
+    .article-content-html div[style],
+    .article-content-html span[style] {
+        color: #e0e0e0 !important;
+    }
+    
+    /* Links in article content */
+    .article-content-html a,
+    .article-content-html a[style],
+    .article-body a,
+    .article-body a[style] {
+        color: #7ab8ff !important;
+    }
+    
+    .article-content-html a:hover,
+    .article-body a:hover {
+        color: #9ac9ff !important;
+    }
+    
+    /* Strong and bold text */
+    .article-content-html strong,
+    .article-content-html b,
+    .article-content-html strong[style],
+    .article-content-html b[style],
+    .article-body strong,
+    .article-body b,
+    .article-body strong[style],
+    .article-body b[style] {
+        color: #ffffff !important;
+    }
+    
+    /* Emphasis and italic text */
+    .article-content-html em,
+    .article-content-html i,
+    .article-content-html em[style],
+    .article-content-html i[style],
+    .article-body em,
+    .article-body i,
+    .article-body em[style],
+    .article-body i[style] {
+        color: #d0d0d0 !important;
+    }
+    
+    /* List items */
+    .article-content-html li[style],
+    .article-body li[style] {
+        color: #e0e0e0 !important;
+    }
+    
+    /* Nested spans and divs with inline styles - catch-all for deep nesting */
+    .article-content-html span[style] span,
+    .article-content-html div[style] div,
+    .article-content-html div[style] span,
+    .article-content-html span[style] div,
+    .article-body span[style] span,
+    .article-body div[style] div,
+    .article-body div[style] span,
+    .article-body span[style] div {
+        color: #e0e0e0 !important;
+    }
+    
+    /* Ultimate catch-all: any element with color in style attribute */
+    .article-content-html [style*="color: rgb"],
+    .article-content-html [style*="color:rgba"],
+    .article-content-html [style*="color:#"],
+    .article-body [style*="color: rgb"],
+    .article-body [style*="color:rgba"],
+    .article-body [style*="color:#"] {
+        color: #e0e0e0 !important;
+    }
+    
+    /* Headings with color in style attribute */
+    .article-content-html h1[style*="color"],
+    .article-content-html h2[style*="color"],
+    .article-content-html h3[style*="color"],
+    .article-content-html h4[style*="color"],
+    .article-content-html h5[style*="color"],
+    .article-content-html h6[style*="color"],
+    .article-body h1[style*="color"],
+    .article-body h2[style*="color"],
+    .article-body h3[style*="color"],
+    .article-body h4[style*="color"],
+    .article-body h5[style*="color"],
+    .article-body h6[style*="color"] {
+        color: #ffffff !important;
     }
 }
