@@ -850,4 +850,44 @@
         border-color: var(--border-gray);
         color: var(--black);
     }
+    
+    /* Article featured image background */
+    .article-featured-image {
+        background: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    .article-featured-image img {
+        background: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    /* Table hover states */
+    .article-body table tr:hover {
+        background-color: rgba(106, 123, 154, 0.15);
+    }
+    
+    /* Blockquote background */
+    .article-body blockquote {
+        background-color: rgba(106, 123, 154, 0.1);
+    }
+    
+    /* Articles header */
+    .articles-header {
+        border-bottom-color: var(--border-gray);
+    }
+    
+    .articles-header h2 {
+        color: var(--black);
+    }
+    
+    /* Refresh button */
+    .refresh-btn {
+        background: transparent;
+        color: var(--primary-color);
+        border-color: var(--border-gray);
+    }
+    
+    .refresh-btn:hover {
+        background-color: rgba(106, 123, 154, 0.1);
+        border-color: var(--primary-color);
+    }
 }
