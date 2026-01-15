@@ -12,6 +12,7 @@ const cors = require('cors');
 const { submitToGoogleSheets } = require('./lib/googleSheetsClient');
 const { processUploadedImage } = require('./lib/imageProcessor');
 const { generateResponsiveImageHTML } = require('./lib/imageUtils');
+const { db } = require('./lib/databaseClient');
 
 const app = express();
 const PORT = 1977; // API server port (static server runs on 1978)
@@ -427,6 +428,31 @@ app.post('/api/newsletter/subscribe', async (req, res) => {
             status: 'submitted'
         };
 
+        // Write to database
+        try {
+            await db.newsletterSignups.create({
+                email: subscriptionData.email,
+                name: req.body.name || null,
+                session_id: subscriptionData.sessionId,
+                source: subscriptionData.source,
+                page_url: subscriptionData.pageUrl,
+                component_id: req.body.componentId || null,
+                referrer: subscriptionData.referrer,
+                device_info: {
+                    deviceData: subscriptionData.deviceData,
+                    sessionInfo: subscriptionData.sessionInfo,
+                },
+                ip_address: submissionPayload.ipAddress,
+                user_agent: submissionPayload.userAgent,
+                status: 'active'
+            });
+            console.log('✅ Newsletter signup saved to database');
+        } catch (dbError) {
+            console.error('Database write failed (newsletter):', dbError);
+            // Don't fail the request - user still sees success
+        }
+
+        // Write to Google Sheets (optional, for transition period)
         try {
             await submitToGoogleSheets(submissionPayload);
             console.log('🧾 Newsletter submission forwarded to Google Sheets');
@@ -513,6 +539,33 @@ app.post('/api/contact/submit', async (req, res) => {
             status: 'submitted'
         };
 
+        // Write to database
+        try {
+            await db.contactMessages.create({
+                name: name.trim(),
+                email: email.toLowerCase().trim(),
+                organization: organization || null,
+                role: role || null,
+                subject: subject || null,
+                message: message.trim(),
+                session_id: submissionPayload.sessionId,
+                page_url: pageUrl || null,
+                referrer: req.body.referrer || null,
+                device_info: {
+                    deviceData: deviceInfo || null,
+                    sessionInfo: sessionInfo || null,
+                },
+                ip_address: submissionPayload.ipAddress,
+                user_agent: submissionPayload.userAgent,
+                status: 'submitted'
+            });
+            console.log('✅ Contact message saved to database');
+        } catch (dbError) {
+            console.error('Database write failed (contact):', dbError);
+            // Don't fail the request - user still sees success
+        }
+
+        // Write to Google Sheets (optional, for transition period)
         let sheetsResponse = null;
         try {
             sheetsResponse = await submitToGoogleSheets(submissionPayload);

@@ -12,6 +12,7 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+  included_files = ["server.js", "lib/**", "package.json"]
 
 [[redirects]]
   from = "/api/newsletter/subscribe"

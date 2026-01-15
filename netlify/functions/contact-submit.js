@@ -1,4 +1,5 @@
 const { forwardToSheets, jsonResponse, parseBody, extractClientMetadata } = require('./utils');
+const { db } = require('../../lib/databaseClient');
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -57,6 +58,38 @@ exports.handler = async (event) => {
       status: 'submitted',
     };
 
+    // Write to database
+    let dbError = null;
+    try {
+      await db.contactMessages.create({
+        name: name,
+        email: email,
+        organization: body.organization || null,
+        role: body.role || null,
+        subject: body.subject || null,
+        message: message,
+        session_id: sessionId,
+        page_url: body.pageUrl || null,
+        referrer: body.referrer || null,
+        device_info: {
+          deviceData: body.deviceInfo || null,
+          sessionInfo: body.sessionInfo || null,
+        },
+        ip_address: ipAddress,
+        user_agent: userAgent,
+        status: 'submitted'
+      });
+      console.log('Contact message saved to database');
+    } catch (error) {
+      console.error('Database write failed (contact):', error);
+      dbError = {
+        message: error.message || 'Failed to save to database',
+        error: error.toString()
+      };
+      // Don't fail the request - user still sees success
+    }
+
+    // Write to Google Sheets (optional, for transition period)
     let sheetsResponse = null;
     try {
       sheetsResponse = await forwardToSheets(payload);
@@ -67,6 +100,7 @@ exports.handler = async (event) => {
     return jsonResponse(200, {
       success: true,
       message: 'Message received. Thank you for contacting us!',
+      dbError: dbError || null,
       sheetsResponse,
     });
   } catch (error) {

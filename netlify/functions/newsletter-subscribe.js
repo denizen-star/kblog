@@ -1,4 +1,5 @@
 const { forwardToSheets, jsonResponse, parseBody, extractClientMetadata } = require('./utils');
+const { db } = require('../../lib/databaseClient');
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -46,6 +47,36 @@ exports.handler = async (event) => {
       status: 'submitted',
     };
 
+    // Write to database
+    let dbError = null;
+    try {
+      await db.newsletterSignups.create({
+        email: email,
+        name: body.name || null,
+        session_id: sessionId,
+        source: body.source || body.campaignTag || 'newsletter_signup',
+        page_url: body.pageUrl || null,
+        component_id: body.componentId || null,
+        referrer: body.referrer || null,
+        device_info: {
+          deviceData: body.deviceInfo || body.deviceData || null,
+          sessionInfo: body.sessionInfo || null,
+        },
+        ip_address: ipAddress,
+        user_agent: userAgent,
+        status: 'active'
+      });
+      console.log('Newsletter signup saved to database');
+    } catch (error) {
+      console.error('Database write failed (newsletter):', error);
+      dbError = {
+        message: error.message || 'Failed to save to database',
+        error: error.toString()
+      };
+      // Don't fail the request - user still sees success
+    }
+
+    // Write to Google Sheets (optional, for transition period)
     let sheetsResponse = null;
     let sheetsError = null;
     try {
@@ -64,6 +95,7 @@ exports.handler = async (event) => {
     return jsonResponse(200, {
       success: true,
       message: 'Successfully subscribed to newsletter.',
+      dbError: dbError || null,
       sheetsResponse,
       sheetsError: sheetsError || null,
     });
