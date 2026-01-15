@@ -1,96 +1,73 @@
-const { forwardToSheets, jsonResponse, parseBody, extractClientMetadata } = require('./utils');
+const {
+  jsonResponse,
+  parseBody,
+  extractClientMetadata,
+  validateHttpMethod,
+  validateEmail,
+  generateSessionId,
+  writeToDatabase,
+  writeToSheets,
+  buildDatabaseMetadata,
+} = require('./utils');
 const { db } = require('../../lib/databaseClient');
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 exports.handler = async (event) => {
-  if (event.httpMethod === 'OPTIONS') {
-    return jsonResponse(204, { success: true });
-  }
-
-  if (event.httpMethod !== 'POST') {
-    return jsonResponse(405, { success: false, error: 'Method Not Allowed' });
+  const methodCheck = validateHttpMethod(event);
+  if (!methodCheck.isValid) {
+    return methodCheck.response;
   }
 
   try {
     const body = parseBody(event);
     const { ipAddress, userAgent } = extractClientMetadata(event.headers);
 
-    const email = (body.email || '').trim().toLowerCase();
-    if (!email) {
-      return jsonResponse(400, { success: false, error: 'Email is required.' });
+    const emailValidation = validateEmail(body.email);
+    if (!emailValidation.isValid) {
+      return jsonResponse(400, { success: false, error: emailValidation.error });
     }
 
-    if (!emailRegex.test(email)) {
-      return jsonResponse(400, { success: false, error: 'Please provide a valid email address.' });
-    }
+    const email = emailValidation.email;
+    const sessionId = generateSessionId('newsletter', body.sessionId);
 
-    const timestamp = body.timestamp || new Date().toISOString();
-    const sessionId = body.sessionId || `newsletter_${Date.now()}`;
+    const source = body.source || body.campaignTag || 'newsletter_signup';
+    const metadata = buildDatabaseMetadata(body, ipAddress, userAgent, sessionId);
 
+    // Write to database
+    const dbError = await writeToDatabase(
+      (data) => db.newsletterSignups.create(data),
+      {
+        email,
+        name: body.name || null,
+        source,
+        component_id: body.componentId || null,
+        status: 'active',
+        ...metadata,
+      },
+      'Newsletter signup'
+    );
+
+    // Prepare payload for Google Sheets
     const payload = {
       dataType: 'newsletter',
-      timestamp,
+      timestamp: body.timestamp || new Date().toISOString(),
       sessionId,
       pageUrl: body.pageUrl || '',
       componentId: body.componentId || '',
       name: body.name || '',
       email,
-      source: body.source || body.campaignTag || 'newsletter_signup',
+      source,
       referrer: body.referrer || '',
-      deviceInfo: {
-        deviceData: body.deviceInfo || body.deviceData || null,
-        sessionInfo: body.sessionInfo || null,
-      },
+      deviceInfo: metadata.device_info,
       ipAddress,
       userAgent,
       status: 'submitted',
     };
 
-    // Write to database
-    let dbError = null;
-    try {
-      await db.newsletterSignups.create({
-        email: email,
-        name: body.name || null,
-        session_id: sessionId,
-        source: body.source || body.campaignTag || 'newsletter_signup',
-        page_url: body.pageUrl || null,
-        component_id: body.componentId || null,
-        referrer: body.referrer || null,
-        device_info: {
-          deviceData: body.deviceInfo || body.deviceData || null,
-          sessionInfo: body.sessionInfo || null,
-        },
-        ip_address: ipAddress,
-        user_agent: userAgent,
-        status: 'active'
-      });
-      console.log('Newsletter signup saved to database');
-    } catch (error) {
-      console.error('Database write failed (newsletter):', error);
-      dbError = {
-        message: error.message || 'Failed to save to database',
-        error: error.toString()
-      };
-      // Don't fail the request - user still sees success
-    }
-
     // Write to Google Sheets (optional, for transition period)
-    let sheetsResponse = null;
-    let sheetsError = null;
-    try {
-      sheetsResponse = await forwardToSheets(payload);
-      console.log('Newsletter submission forwarded to Google Sheets:', sheetsResponse);
-    } catch (error) {
-      console.error('Newsletter Sheets submission failed:', error);
-      sheetsError = {
-        message: error.message || 'Failed to save to Google Sheets',
-        error: error.toString()
-      };
-      // Log the error but don't fail the request - user still sees success
-      // This allows the subscription to work even if Sheets is misconfigured
-    }
+    const { response: sheetsResponse, error: sheetsError } = await writeToSheets(
+      payload,
+      'Newsletter submission'
+    );
 
     return jsonResponse(200, {
       success: true,

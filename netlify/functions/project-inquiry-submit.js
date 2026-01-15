@@ -1,15 +1,20 @@
-const { forwardToSheets, jsonResponse, parseBody, extractClientMetadata } = require('./utils');
+const {
+  jsonResponse,
+  parseBody,
+  extractClientMetadata,
+  validateHttpMethod,
+  validateEmail,
+  generateSessionId,
+  writeToDatabase,
+  writeToSheets,
+  buildDatabaseMetadata,
+} = require('./utils');
 const { db } = require('../../lib/databaseClient');
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 exports.handler = async (event) => {
-  if (event.httpMethod === 'OPTIONS') {
-    return jsonResponse(204, { success: true });
-  }
-
-  if (event.httpMethod !== 'POST') {
-    return jsonResponse(405, { success: false, error: 'Method Not Allowed' });
+  const methodCheck = validateHttpMethod(event);
+  if (!methodCheck.isValid) {
+    return methodCheck.response;
   }
 
   try {
@@ -17,29 +22,49 @@ exports.handler = async (event) => {
     const { ipAddress, userAgent } = extractClientMetadata(event.headers);
 
     const name = (body.name || '').trim();
-    const email = (body.email || '').trim().toLowerCase();
     const message = (body.message || '').trim();
 
-    if (!name || !email || !message) {
+    if (!name || !message) {
       return jsonResponse(400, {
         success: false,
         error: 'Name, email, and project details are required.',
       });
     }
 
-    if (!emailRegex.test(email)) {
+    const emailValidation = validateEmail(body.email);
+    if (!emailValidation.isValid) {
       return jsonResponse(400, {
         success: false,
         error: 'Please provide a valid work email address.',
       });
     }
 
-    const timestamp = body.timestamp || new Date().toISOString();
-    const sessionId = body.sessionId || `project_${Date.now()}`;
+    const email = emailValidation.email;
+    const sessionId = generateSessionId('project', body.sessionId);
 
+    const metadata = buildDatabaseMetadata(body, ipAddress, userAgent, sessionId);
+
+    // Write to database
+    const dbError = await writeToDatabase(
+      (data) => db.projectInquiries.create(data),
+      {
+        name,
+        email,
+        organization: body.organization || null,
+        role: body.role || null,
+        engagement_preference: body.engagementPreference || null,
+        timeline: body.timeline || null,
+        message,
+        status: 'submitted',
+        ...metadata,
+      },
+      'Project inquiry'
+    );
+
+    // Prepare payload for Google Sheets
     const payload = {
       dataType: 'projectInquiry',
-      timestamp,
+      timestamp: body.timestamp || new Date().toISOString(),
       sessionId,
       pageUrl: body.pageUrl || '',
       name,
@@ -50,54 +75,17 @@ exports.handler = async (event) => {
       timeline: body.timeline || '',
       message,
       referrer: body.referrer || '',
-      deviceInfo: {
-        deviceData: body.deviceInfo || null,
-        sessionInfo: body.sessionInfo || null,
-      },
+      deviceInfo: metadata.device_info,
       ipAddress,
       userAgent,
       status: 'submitted',
     };
 
-    // Write to database
-    let dbError = null;
-    try {
-      await db.projectInquiries.create({
-        name: name,
-        email: email,
-        organization: body.organization || null,
-        role: body.role || null,
-        engagement_preference: body.engagementPreference || null,
-        timeline: body.timeline || null,
-        message: message,
-        session_id: sessionId,
-        page_url: body.pageUrl || null,
-        referrer: body.referrer || null,
-        device_info: {
-          deviceData: body.deviceInfo || null,
-          sessionInfo: body.sessionInfo || null,
-        },
-        ip_address: ipAddress,
-        user_agent: userAgent,
-        status: 'submitted'
-      });
-      console.log('Project inquiry saved to database');
-    } catch (error) {
-      console.error('Database write failed (project inquiry):', error);
-      dbError = {
-        message: error.message || 'Failed to save to database',
-        error: error.toString()
-      };
-      // Don't fail the request - user still sees success
-    }
-
     // Write to Google Sheets (optional, for transition period)
-    let sheetsResponse = null;
-    try {
-      sheetsResponse = await forwardToSheets(payload);
-    } catch (error) {
-      console.error('Project inquiry Sheets submission failed:', error);
-    }
+    const { response: sheetsResponse } = await writeToSheets(
+      payload,
+      'Project inquiry submission'
+    );
 
     return jsonResponse(200, {
       success: true,
