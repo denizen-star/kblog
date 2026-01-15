@@ -157,6 +157,40 @@ function buildDatabaseMetadata(body, ipAddress, userAgent, sessionId) {
   };
 }
 
+// Get app name from environment variable, default to 'Kblog'
+function getAppName() {
+  return process.env.APP_NAME || 'Kblog';
+}
+
+// Build telemetry payload for database from request body
+function buildTelemetryPayload(body, ipAddress, userAgent, sessionId, appName) {
+  return {
+    app_name: appName,
+    timestamp: body.timestamp || new Date().toISOString(),
+    session_id: sessionId,
+    event_type: body.eventType,
+    page_category: body.pageCategory || null,
+    page_url: body.pageUrl || null,
+    article_id: body.articleId || null,
+    article_slug: body.articleSlug || null,
+    article_context: body.listContext || body.articleContext || null,
+    depth_percent: body.depthPercent || null,
+    referrer: body.referrer || null,
+    device_info: normalizeDeviceInfo(body),
+    ip_address: ipAddress,
+    user_agent: userAgent,
+  };
+}
+
+// Write telemetry event to database with consistent error handling
+async function writeTelemetryToDatabase(eventData, logPrefix = 'Telemetry event') {
+  return writeToDatabase(
+    (data) => db.appEvents.create(data),
+    eventData,
+    logPrefix
+  );
+}
+
 module.exports = {
   jsonResponse,
   parseBody,
@@ -170,6 +204,9 @@ module.exports = {
   writeToDatabase,
   writeToSheets,
   buildDatabaseMetadata,
+  getAppName,
+  buildTelemetryPayload,
+  writeTelemetryToDatabase,
   EMAIL_REGEX,
 };
 

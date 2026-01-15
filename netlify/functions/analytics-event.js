@@ -1,4 +1,13 @@
-const { forwardToSheets, jsonResponse, parseBody, extractClientMetadata } = require('./utils');
+const {
+  jsonResponse,
+  parseBody,
+  extractClientMetadata,
+  validateHttpMethod,
+  generateSessionId,
+  getAppName,
+  buildTelemetryPayload,
+  writeTelemetryToDatabase,
+} = require('./utils');
 
 const ALLOWED_EVENT_TYPES = new Set([
   'page_view',
@@ -9,12 +18,9 @@ const ALLOWED_EVENT_TYPES = new Set([
 ]);
 
 exports.handler = async (event) => {
-  if (event.httpMethod === 'OPTIONS') {
-    return jsonResponse(204, { success: true });
-  }
-
-  if (event.httpMethod !== 'POST') {
-    return jsonResponse(405, { success: false, error: 'Method Not Allowed' });
+  const methodCheck = validateHttpMethod(event);
+  if (!methodCheck.isValid) {
+    return methodCheck.response;
   }
 
   try {
@@ -33,24 +39,10 @@ exports.handler = async (event) => {
       });
     }
 
-    const timestamp = body.timestamp || new Date().toISOString();
-    const sessionId = body.sessionId || `event_${Date.now()}`;
+    const sessionId = generateSessionId('event', body.sessionId);
+    const appName = getAppName();
 
-    const base = {
-      dataType: 'event',
-      timestamp,
-      sessionId,
-      eventType,
-      pageUrl: body.pageUrl || '',
-      pageCategory: body.pageCategory || '',
-      referrer: body.referrer || '',
-      deviceInfo: body.deviceInfo || {},
-      ipAddress,
-      userAgent,
-    };
-
-    let payload = { ...base };
-
+    // Validate event-specific requirements
     switch (eventType) {
       case 'page_view': {
         // nothing extra required
@@ -65,7 +57,6 @@ exports.handler = async (event) => {
             error: 'article_view events require articleSlug or articleId.',
           });
         }
-        payload.articleSlug = articleSlug;
         break;
       }
 
@@ -79,8 +70,6 @@ exports.handler = async (event) => {
             error: `${eventType} events require articleId or articleSlug.`,
           });
         }
-        payload.articleId = articleId;
-        payload.listContext = body.listContext || '';
         if (eventType === 'article_read') {
           const depth = typeof body.depthPercent === 'number'
             ? body.depthPercent
@@ -91,7 +80,6 @@ exports.handler = async (event) => {
               error: 'article_read events require a numeric depthPercent.',
             });
           }
-          payload.depthPercent = Math.round(depth);
         }
         break;
       }
@@ -102,17 +90,30 @@ exports.handler = async (event) => {
       }
     }
 
-    let sheetsResponse = null;
-    try {
-      sheetsResponse = await forwardToSheets(payload);
-    } catch (error) {
-      console.error('Analytics Sheets submission failed:', error);
+    // Prepare event data for database
+    const eventData = buildTelemetryPayload(body, ipAddress, userAgent, sessionId, appName);
+    
+    // Handle article-specific fields
+    if (eventType === 'article_view') {
+      eventData.article_slug = body.articleSlug || body.articleId || null;
+    } else if (['article_impression', 'article_open', 'article_read'].includes(eventType)) {
+      eventData.article_id = body.articleId || body.articleSlug || null;
+      eventData.article_context = body.listContext || null;
+      if (eventType === 'article_read' && body.depthPercent !== undefined) {
+        const depth = typeof body.depthPercent === 'number'
+          ? body.depthPercent
+          : parseFloat(body.depthPercent);
+        eventData.depth_percent = Number.isFinite(depth) ? Math.round(depth) : null;
+      }
     }
+
+    // Write to database (DB-only strategy, no Google Sheets)
+    const dbError = await writeTelemetryToDatabase(eventData, 'Analytics event');
 
     return jsonResponse(200, {
       success: true,
       message: 'Event recorded.',
-      sheetsResponse,
+      dbError: dbError || null,
     });
   } catch (error) {
     console.error('Analytics event error:', error);

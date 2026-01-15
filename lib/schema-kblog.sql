@@ -71,3 +71,30 @@ CREATE TABLE kblog_project_inquiries (
   INDEX idx_status (status),
   INDEX idx_created_at (created_at)
 );
+
+-- App Events table: Stores telemetry/engagement events from all apps (shared table)
+-- No kblog_ prefix as this is shared across multiple applications
+CREATE TABLE app_events (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  app_name VARCHAR(100) NOT NULL,
+  timestamp TIMESTAMP NOT NULL,
+  session_id VARCHAR(255),
+  event_type VARCHAR(100) NOT NULL,
+  page_category VARCHAR(255),
+  page_url TEXT,
+  article_id VARCHAR(255),
+  article_slug VARCHAR(255),
+  article_context VARCHAR(255),
+  depth_percent INT,
+  referrer TEXT,
+  device_info JSON,
+  ip_address VARCHAR(45),
+  user_agent TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX idx_app_name (app_name),
+  INDEX idx_event_type (event_type),
+  INDEX idx_created_at (created_at),
+  INDEX idx_session_id (session_id),
+  INDEX idx_timestamp (timestamp)
+);

@@ -402,6 +402,81 @@ All existing endpoints remain the same:
 
 No frontend changes required - the migration is transparent to users.
 
+## Telemetry Migration (Site Engagement Events)
+
+The telemetry/analytics events have been migrated to a shared `app_events` table that can be used across multiple applications.
+
+### What Was Migrated
+
+- ✅ **Site Engagement Events** → `app_events` table (shared, no kblog_ prefix)
+- Table includes `app_name` column for multi-app tracking
+- Events from kblog use `APP_NAME` environment variable (defaults to "Kblog")
+
+### Database Schema
+
+The `app_events` table includes:
+- `app_name` (VARCHAR) - Required, identifies which app the event came from
+- `timestamp` (TIMESTAMP) - Event timestamp
+- `session_id` (VARCHAR) - Session identifier
+- `event_type` (VARCHAR) - Type of event (page_view, article_view, etc.)
+- `page_category` (VARCHAR) - Page category
+- `page_url` (TEXT) - Full page URL
+- `article_id` (VARCHAR) - Article ID (for article events)
+- `article_slug` (VARCHAR) - Article slug (for article events)
+- `article_context` (VARCHAR) - Article context/list position
+- `depth_percent` (INT) - Reading depth percentage (for article_read events)
+- `referrer` (TEXT) - Referrer URL
+- `device_info` (JSON) - Device and session information
+- `ip_address` (VARCHAR) - Client IP address
+- `user_agent` (TEXT) - User agent string
+- Standard timestamps: `created_at`, `updated_at`
+
+### Environment Variables
+
+Add the `APP_NAME` environment variable:
+
+**In Netlify:**
+```
+APP_NAME = Kblog
+```
+
+**Locally (for development):**
+```bash
+export APP_NAME="Kblog"
+```
+
+The `APP_NAME` variable allows the same codebase to be used across multiple apps, with each app identifying itself in the database.
+
+### Implementation Details
+
+- **Database-only writes**: Telemetry events write directly to the database (no Google Sheets)
+- **DRY utilities**: Uses shared helper functions in `netlify/functions/utils.js`:
+  - `getAppName()` - Reads APP_NAME env var, defaults to "Kblog"
+  - `buildTelemetryPayload()` - Maps request body to database schema
+  - `writeTelemetryToDatabase()` - Handles database writes with error handling
+- **Event validation**: Same validation rules as before (event types, required fields)
+- **Error handling**: Database write errors don't fail the user request
+
+### API Endpoint
+
+- `POST /api/analytics/event` → Writes to `app_events` table
+
+The endpoint behavior remains the same from the frontend perspective - no changes required.
+
+### Multi-App Usage
+
+To use this telemetry system in other apps:
+
+1. Set `APP_NAME` environment variable to your app name
+2. Use the same `app_events` table (shared database)
+3. Events will be automatically tagged with the correct `app_name`
+4. Query events by `app_name` to filter by application
+
+Example query:
+```sql
+SELECT * FROM app_events WHERE app_name = 'Kblog' ORDER BY created_at DESC;
+```
+
 ## Next Steps
 
 After successful migration:
