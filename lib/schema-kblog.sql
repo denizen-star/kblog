@@ -89,6 +89,7 @@ CREATE TABLE app_events (
   referrer TEXT,
   device_info JSON,
   ip_address VARCHAR(45),
+  ip_geolocation JSON,
   user_agent TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

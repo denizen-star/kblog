@@ -1,5 +1,6 @@
 const { submitToGoogleSheets } = require('../../lib/googleSheetsClient');
 const { db } = require('../../lib/databaseClient');
+const { getGeolocationFromIP } = require('../../lib/ipGeolocation');
 
 const SKIP_SHEETS = process.env.SKIP_SHEETS === '1';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -162,8 +163,17 @@ function getAppName() {
   return process.env.APP_NAME || 'Kblog';
 }
 
-// Build telemetry payload for database from request body
-function buildTelemetryPayload(body, ipAddress, userAgent, sessionId, appName) {
+// Build telemetry payload for database from request body (includes IP geolocation lookup)
+async function buildTelemetryPayload(body, ipAddress, userAgent, sessionId, appName) {
+  let ipGeolocation = null;
+  if (ipAddress && ipAddress !== 'unknown') {
+    try {
+      ipGeolocation = await getGeolocationFromIP(ipAddress);
+    } catch (geoError) {
+      console.warn('[ANALYTICS] IP geolocation failed:', geoError.message);
+    }
+  }
+
   return {
     app_name: appName,
     timestamp: body.timestamp || new Date().toISOString(),
@@ -178,6 +188,7 @@ function buildTelemetryPayload(body, ipAddress, userAgent, sessionId, appName) {
     referrer: body.referrer || null,
     device_info: normalizeDeviceInfo(body),
     ip_address: ipAddress,
+    ip_geolocation: ipGeolocation,
     user_agent: userAgent,
   };
 }

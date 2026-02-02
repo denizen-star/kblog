@@ -27,6 +27,7 @@ CREATE TABLE app_events (
   referrer TEXT,                             -- Referrer URL
   device_info JSON,                          -- Device and session information
   ip_address VARCHAR(45),                    -- Client IP address
+  ip_geolocation JSON,                       -- IP-derived geo (city, region, country, lat/lon)
   user_agent TEXT,                           -- User agent string
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

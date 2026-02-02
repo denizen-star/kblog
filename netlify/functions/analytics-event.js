@@ -90,8 +90,8 @@ exports.handler = async (event) => {
       }
     }
 
-    // Prepare event data for database
-    const eventData = buildTelemetryPayload(body, ipAddress, userAgent, sessionId, appName);
+    // Prepare event data for database (includes IP geolocation lookup)
+    const eventData = await buildTelemetryPayload(body, ipAddress, userAgent, sessionId, appName);
     
     // Handle article-specific fields
     if (eventType === 'article_view') {
