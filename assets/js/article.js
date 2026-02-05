@@ -22,7 +22,7 @@ class ArticlePageManager {
 
     async loadArticleData() {
         try {
-            const response = await fetch('../../data/articles.json');
+            const response = await fetch('/data/articles.json');
             const data = await response.json();
             this.article = data.articles.find(article => article.id === this.articleId);
             

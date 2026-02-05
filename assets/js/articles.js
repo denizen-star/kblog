@@ -153,7 +153,7 @@ class ArticlesPageManager {
     getArticleImage(article) {
         // Check if article has a featured image and it's not a placeholder
         if (article.image && article.image !== 'placeholder.jpg' && article.image !== '') {
-            const baseImagePath = `assets/images/articles/${article.image}`;
+            const baseImagePath = `/assets/images/articles/${article.image}`;
             const imageName = article.image;
             const imageExt = imageName.substring(imageName.lastIndexOf('.'));
             const imageNameWithoutExt = imageName.substring(0, imageName.lastIndexOf('.'));
@@ -161,7 +161,7 @@ class ArticlesPageManager {
             // Build srcset for responsive images (400w, 600w, 900w, 1200w)
             const sizes = [400, 600, 900, 1200];
             const srcsetParts = sizes.map(size => {
-                const responsiveImagePath = `assets/images/articles/${imageNameWithoutExt}-${size}w${imageExt}`;
+                const responsiveImagePath = `/assets/images/articles/${imageNameWithoutExt}-${size}w${imageExt}`;
                 return `${responsiveImagePath} ${size}w`;
             });
             const srcset = srcsetParts.join(', ');
@@ -219,7 +219,7 @@ class ArticlesPageManager {
                     </div>
                     
                     <h3 class="article-title-grid">
-                        <a href="${article.id}/">${article.title}</a>
+                        <a href="/articles/${article.id}/">${article.title}</a>
                     </h3>
                     
                     <p class="article-excerpt-grid">${article.excerpt}</p>
@@ -243,7 +243,7 @@ class ArticlesPageManager {
             card.addEventListener('click', (e) => {
                 if (!e.target.closest('a')) {
                     const articleId = card.dataset.articleId;
-                    window.location.href = `${articleId}/`;
+                    window.location.href = `/articles/${articleId}/`;
                 }
             });
         });
