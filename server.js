@@ -12,6 +12,7 @@ const cors = require('cors');
 const { submitToGoogleSheets } = require('./lib/googleSheetsClient');
 const { processUploadedImage } = require('./lib/imageProcessor');
 const { generateResponsiveImageHTML } = require('./lib/imageUtils');
+const { getArticleOgImage, formatArticleOgTitle, formatArticleOgDescription } = require('./lib/og-meta');
 const { db } = require('./lib/databaseClient');
 
 const app = express();
@@ -666,10 +667,15 @@ function generateArticleHTML(articleData) {
     <meta name="author" content="${authorInfo.name}">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="${articleData.title}">
-    <meta property="og:description" content="${articleData.excerpt || ''}">
+    <meta property="og:title" content="${(formatArticleOgTitle(articleData.title) || '').replace(/"/g, '&quot;')}">
+    <meta property="og:description" content="${(formatArticleOgDescription(articleData.excerpt) || '').replace(/"/g, '&quot;')}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://kblog.kervinapps.com/articles/${articleData.slug}/">
+    <meta property="og:image" content="${getArticleOgImage(articleData.image?.featured)}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="${getArticleOgImage(articleData.image?.featured)}">
+    <meta name="twitter:title" content="${(formatArticleOgTitle(articleData.title) || '').replace(/"/g, '&quot;')}">
+    <meta name="twitter:description" content="${(formatArticleOgDescription(articleData.excerpt) || '').replace(/"/g, '&quot;')}">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../../assets/css/main.css">

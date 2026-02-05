@@ -1,4 +1,13 @@
 // Individual article page functionality
+const OG_BASE_URL = "https://kblog.kervinapps.com";
+const OG_DEFAULT_IMAGE = `${OG_BASE_URL}/assets/images/kblog.jpg`;
+
+function getArticleOgImage(featuredImageFilename) {
+  if (!featuredImageFilename || typeof featuredImageFilename !== "string") return OG_DEFAULT_IMAGE;
+  const trimmed = String(featuredImageFilename).trim();
+  return trimmed ? `${OG_BASE_URL}/assets/images/articles/${trimmed}` : OG_DEFAULT_IMAGE;
+}
+
 class ArticlePageManager {
     constructor() {
         this.articleId = this.getArticleId();
@@ -45,21 +54,40 @@ class ArticlePageManager {
     updateMetaTags() {
         if (!this.article) return;
 
-        // Update meta description
         const metaDescription = document.querySelector('meta[name="description"]');
         if (metaDescription) {
-            metaDescription.content = this.article.excerpt;
+            metaDescription.content = this.article.excerpt || "";
         }
 
-        // Update Open Graph tags
         const ogTitle = document.querySelector('meta[property="og:title"]');
         if (ogTitle) {
-            ogTitle.content = this.article.title;
+            ogTitle.content = this.article.title || "";
         }
 
         const ogDescription = document.querySelector('meta[property="og:description"]');
         if (ogDescription) {
-            ogDescription.content = this.article.excerpt;
+            ogDescription.content = this.article.excerpt || "";
+        }
+
+        const ogImage = document.querySelector('meta[property="og:image"]');
+        if (ogImage) {
+            const imageUrl = getArticleOgImage(this.article.image);
+            ogImage.content = imageUrl;
+        }
+
+        const twitterImage = document.querySelector('meta[name="twitter:image"]');
+        if (twitterImage) {
+            twitterImage.content = getArticleOgImage(this.article.image);
+        }
+
+        const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+        if (twitterTitle) {
+            twitterTitle.content = this.article.title || "";
+        }
+
+        const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+        if (twitterDescription) {
+            twitterDescription.content = this.article.excerpt || "";
         }
     }
 

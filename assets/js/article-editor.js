@@ -1,4 +1,13 @@
 // Article Editor functionality
+const OG_BASE_URL = "https://kblog.kervinapps.com";
+const OG_DEFAULT_IMAGE = `${OG_BASE_URL}/assets/images/kblog.jpg`;
+
+function getArticleOgImage(featuredImageFilename) {
+  if (!featuredImageFilename || typeof featuredImageFilename !== "string") return OG_DEFAULT_IMAGE;
+  const trimmed = featuredImageFilename.trim();
+  return trimmed ? `${OG_BASE_URL}/assets/images/articles/${trimmed}` : OG_DEFAULT_IMAGE;
+}
+
 class ArticleEditor {
     constructor() {
         this.form = document.getElementById('article-editor-form');
@@ -392,10 +401,15 @@ class ArticleEditor {
     <meta name="author" content="${authorInfo.name}">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="${articleData.title}">
-    <meta property="og:description" content="${articleData.excerpt || 'Professional insights on data architecture and enterprise strategies.'}">
+    <meta property="og:title" content="${(articleData.title || '').replace(/"/g, '&quot;')}">
+    <meta property="og:description" content="${(articleData.excerpt || 'Professional insights on data architecture and enterprise strategies.').replace(/"/g, '&quot;')}">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://kervtalksdata.com/articles/${articleData.slug}/">
+    <meta property="og:url" content="${OG_BASE_URL}/articles/${articleData.slug}/">
+    <meta property="og:image" content="${getArticleOgImage(articleData.image?.featured || (articleData.featuredImage ? `${articleData.slug}.jpg` : null))}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="${getArticleOgImage(articleData.image?.featured || (articleData.featuredImage ? `${articleData.slug}.jpg` : null))}">
+    <meta name="twitter:title" content="${(articleData.title || '').replace(/"/g, '&quot;')}">
+    <meta name="twitter:description" content="${(articleData.excerpt || 'Professional insights on data architecture and enterprise strategies.').replace(/"/g, '&quot;')}">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../../assets/css/main.css">

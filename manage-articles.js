@@ -13,6 +13,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { getArticleOgImage, formatArticleOgTitle, formatArticleOgDescription } = require('./lib/og-meta.js');
 
 class ArticleManager {
     constructor() {
@@ -323,6 +324,11 @@ class ArticleManager {
     }
 
     generateHTMLTemplate(metadata) {
+        const ogImageUrl = getArticleOgImage(metadata.image?.featured);
+        const ogTitle = formatArticleOgTitle(metadata.title);
+        const ogDescription = formatArticleOgDescription(metadata.excerpt);
+        const canonicalUrl = `https://kblog.kervinapps.com/articles/${metadata.slug}/`;
+
         return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -332,6 +338,17 @@ class ArticleManager {
     <meta name="description" content="${metadata.seo.metaDescription}">
     <meta name="keywords" content="${metadata.seo.keywords.join(', ')}">
     <meta name="author" content="${metadata.author.name}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="${ogTitle.replace(/"/g, '&quot;')}">
+    <meta property="og:description" content="${ogDescription.replace(/"/g, '&quot;')}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="${canonicalUrl}">
+    <meta property="og:image" content="${ogImageUrl}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="${ogImageUrl}">
+    <meta name="twitter:title" content="${ogTitle.replace(/"/g, '&quot;')}">
+    <meta name="twitter:description" content="${ogDescription.replace(/"/g, '&quot;')}">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../../assets/css/main.css?v=1.0.1">
