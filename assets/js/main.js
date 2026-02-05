@@ -240,11 +240,17 @@ class BlogManager {
     }
 
     getArticleLink(articleId) {
-        return `/articles/${articleId}/`;
+        // Determine correct article link path based on current page
+        const pathname = window.location.pathname;
+        const isArticlesPage = pathname.includes('/articles/');
+        return isArticlesPage ? `${articleId}/` : `articles/${articleId}/`;
     }
 
     getCreateArticleLink() {
-        return '/articles/create/';
+        // Determine correct create article link path based on current page
+        const pathname = window.location.pathname;
+        const isArticlesPage = pathname.includes('/articles/');
+        return isArticlesPage ? 'create/' : 'articles/create/';
     }
 
     getArticleImage(article) {
@@ -253,7 +259,7 @@ class BlogManager {
             // Determine correct image path based on current page
             const pathname = window.location.pathname;
             const isArticlesPage = pathname.includes('/articles/');
-            const basePath = isArticlesPage ? '/assets/images/articles/' : 'assets/images/articles/';
+            const basePath = isArticlesPage ? '../assets/images/articles/' : 'assets/images/articles/';
             const baseImagePath = `${basePath}${article.image}`;
             
             const imageName = article.image;

@@ -47,15 +47,10 @@
   to = "/articles/:splat/metadata.json"
   status = 200
 
-# When the document is at /articles/slug/ (or /articles/slug1/slug2/), relative
-# ../assets/... can become /articles/assets/... or /articles/slug/assets/... .
-# Rewrite both to /assets/... so JS, CSS, and images load.
+# When the document is at /articles/slug/, relative links ../assets/... resolve to
+# /articles/assets/... . Rewrite those to /assets/... so JS, CSS, and images load.
 [[redirects]]
   from = "/articles/assets/*"
-  to = "/assets/:splat"
-  status = 200
-[[redirects]]
-  from = "/articles/*/assets/*"
   to = "/assets/:splat"
   status = 200
 
