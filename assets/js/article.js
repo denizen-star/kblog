@@ -45,22 +45,45 @@ class ArticlePageManager {
     updateMetaTags() {
         if (!this.article) return;
 
+        const title = (this.article.title || '').trim();
+        const excerpt = (this.article.excerpt || '').trim().replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim();
+        const description = excerpt ? `${title}: ${excerpt}` : title;
+
         // Update meta description
         const metaDescription = document.querySelector('meta[name="description"]');
         if (metaDescription) {
-            metaDescription.content = this.article.excerpt;
+            metaDescription.content = excerpt || description;
         }
 
-        // Update Open Graph tags
+        // Open Graph tags
         const ogTitle = document.querySelector('meta[property="og:title"]');
-        if (ogTitle) {
-            ogTitle.content = this.article.title;
-        }
+        if (ogTitle) ogTitle.content = title;
 
         const ogDescription = document.querySelector('meta[property="og:description"]');
-        if (ogDescription) {
-            ogDescription.content = this.article.excerpt;
+        if (ogDescription) ogDescription.content = description;
+
+        const ogImage = document.querySelector('meta[property="og:image"]');
+        if (ogImage) {
+            ogImage.content = this.getOgImageUrl();
         }
+
+        // Twitter Card tags
+        const twTitle = document.querySelector('meta[name="twitter:title"]');
+        if (twTitle) twTitle.content = title;
+        const twDescription = document.querySelector('meta[name="twitter:description"]');
+        if (twDescription) twDescription.content = description;
+        const twImage = document.querySelector('meta[name="twitter:image"]');
+        if (twImage) twImage.content = this.getOgImageUrl();
+    }
+
+    getOgImageUrl() {
+        const origin = window.location.origin;
+        const defaultImage = `${origin}/assets/images/previmgkblog.jpg`;
+        const img = this.article?.image;
+        if (img && img !== 'placeholder.jpg' && img !== '') {
+            return `${origin}/assets/images/articles/${img}`;
+        }
+        return defaultImage;
     }
 
     setupEventListeners() {
