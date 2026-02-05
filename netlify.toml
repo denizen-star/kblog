@@ -14,9 +14,6 @@
   node_bundler = "esbuild"
   included_files = ["server.js", "lib/**", "package.json"]
 
-[functions."og-article-page"]
-  included_files = ["articles/index.html"]
-
 [[redirects]]
   from = "/api/newsletter/subscribe"
   to = "/.netlify/functions/newsletter-subscribe"
@@ -41,18 +38,11 @@
   status = 200
   force = true
 
-# Serve article metadata as static so og-article-page can fetch it
-[[redirects]]
-  from = "/articles/*/metadata.json"
-  to = "/articles/:splat/metadata.json"
-  status = 200
-
-# Article URLs: serverless function injects OG meta for link previews
+# Redirect rules for SPA routing
 [[redirects]]
   from = "/articles/*"
-  to = "/.netlify/functions/og-article-page"
+  to = "/articles/index.html"
   status = 200
-  force = true
 
 [[redirects]]
   from = "/*"
