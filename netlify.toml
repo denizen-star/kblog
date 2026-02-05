@@ -47,6 +47,32 @@
   to = "/articles/:splat/metadata.json"
   status = 200
 
+# When the document is at /articles/slug/, relative links ../assets/... resolve to
+# /articles/assets/... . Rewrite those to /assets/... so JS, CSS, and images load.
+[[redirects]]
+  from = "/articles/assets/*"
+  to = "/assets/:splat"
+  status = 200
+
+# From /articles/slug/, links like ../about.html become /articles/about.html.
+# Send those to the real pages so nav works.
+[[redirects]]
+  from = "/articles/index.html"
+  to = "/articles/"
+  status = 302
+[[redirects]]
+  from = "/articles/about.html"
+  to = "/about.html"
+  status = 302
+[[redirects]]
+  from = "/articles/contact.html"
+  to = "/contact.html"
+  status = 302
+[[redirects]]
+  from = "/articles/project-inquiries.html"
+  to = "/project-inquiries.html"
+  status = 302
+
 # Article URLs: serverless function injects OG meta for link previews
 [[redirects]]
   from = "/articles/*"
